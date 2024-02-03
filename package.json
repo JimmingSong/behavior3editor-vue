@@ -10,12 +10,18 @@
   },
   "dependencies": {
     "behavior3js": "^0.2.2",
+    "createjs": "^1.0.1",
+    "less": "^4.2.0",
+    "naive-ui": "^2.35.0",
     "vue": "^3.3.11",
     "vue-router": "4"
   },
   "devDependencies": {
+    "@types/createjs": "^0.0.32",
     "@vitejs/plugin-vue": "^4.5.2",
     "typescript": "^5.2.2",
+    "unplugin-auto-import": "^0.16.7",
+    "unplugin-vue-components": "^0.25.2",
     "vite": "^5.0.8",
     "vue-tsc": "^1.8.25"
   }
