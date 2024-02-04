@@ -11,14 +11,13 @@
       <n-icon size="22px" @click="handleRedo">
         <ArrowRedoOutline/>
       </n-icon>
-      <!--<pick-file label="导入b3文件" accept=".b3" @change="handleImportFile" />-->
       <el-dropdown @command="handleEditCommand" placement="bottom-start">
         <span>编辑</span>
         <template #dropdown>
-          <el-dropdown-menu>
+          <el-dropdown-menu class="behavior-header__tool">
             <el-dropdown-item v-for="item in editMenuOption" :key="item.command" :command="item.command"
                               :divided="item.divided">
-              <div>
+              <div class="menu-label">
                 <span>{{ item.label }}</span>
                 <span>{{ item.keyboard }}</span>
               </div>
@@ -29,9 +28,9 @@
       <el-dropdown @command="handleViewCommand" placement="bottom-start">
         <span>视图</span>
         <template #dropdown>
-          <el-dropdown-menu>
+          <el-dropdown-menu class="behavior-header__tool">
             <el-dropdown-item v-for="item in viewMenuOption" :key="item.command" :command="item.command">
-              <div>
+              <div class="menu-label">
                 <span>{{ item.label }}</span>
                 <span>{{ item.keyboard }}</span>
               </div>
@@ -42,9 +41,9 @@
       <el-dropdown @command="handleSelectCommand" placement="bottom-start">
         <span>选择</span>
         <template #dropdown>
-          <el-dropdown-menu>
+          <el-dropdown-menu class="behavior-header__tool">
             <el-dropdown-item v-for="item in selectMenuOption" :key="item.command" :command="item.command">
-              <div>
+              <div class="menu-label">
                 <span>{{ item.label }}</span>
                 <span>{{ item.keyboard }}</span>
               </div>
@@ -109,15 +108,15 @@ const editMenuOption = [
   {
     divided: true,
     command: 'handleDeleteAllConns',
-    label: '删除全部conns',
+    label: '删除全部连线',
   },
   {
     command: 'handleDeleteAllInConns',
-    label: '删除全部in-conns',
+    label: '删除全部输入连线',
   },
   {
     command: 'handleDeleteAllOutConns',
-    label: '删除全部out-conns',
+    label: '删除全部输出联系',
   }
 ];
 
@@ -139,24 +138,6 @@ const viewMenuOption = [
   }
 ]
 
-
-const selectMenuOption = [
-  {
-    command: 'handleSelectAll',
-    label: '选中全部',
-    keyboard: 'ctrl+a'
-  },
-  {
-    command: 'handleSelectInverse',
-    label: '取消全部',
-    keyboard: 'ctrl+i'
-  },
-  {
-    command: 'handleSelectNone',
-    label: '反选',
-    keyboard: 'esc'
-  }
-]
 const handleEditCommand = (command: keyof Omit<typeof projectHandle, 'handleImportFile'>) => {
   projectHandle[command]?.();
 };
@@ -178,6 +159,23 @@ onBeforeUnmount(() => {
   projectHandle.unbindKeyboardEvent();
 });
 
+const selectMenuOption = [
+  {
+    command: 'onSelectAll',
+    label: '选中全部',
+    keyboard: 'ctrl+a'
+  },
+  {
+    command: 'onDeselectAll',
+    label: '取消全部',
+    keyboard: 'ctrl+i'
+  },
+  {
+    command: 'onInvertSelection',
+    label: '反选',
+    keyboard: 'esc'
+  }
+]
 const selectHook = useSelectHook(editor)
 
 const handleSelectCommand = (command: keyof typeof selectHook) => {
@@ -190,6 +188,17 @@ const handleSelectCommand = (command: keyof typeof selectHook) => {
 .behavior-header {
   & > span {
     margin-right: 10px;
+  }
+
+}
+</style>
+<style lang="less">
+.behavior-header__tool {
+  .menu-label {
+    width: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 </style>

@@ -56,7 +56,7 @@ const bindDropEvent = (editor1) => {
 };
 onMounted(() => {
   const box = behaviorBoxRef.value;
-  const editor1: any = new Editor({ container: 'behavior-box', width: box.clientWidth, height: box.clientHeight });
+  const editor1: any = new Editor({ container: 'behavior-box', width: box.clientWidth, height: box.clientHeight, background_color: '#242424' });
   editor.value = editor1;
   createProject();
   bindDropEvent(editor1);

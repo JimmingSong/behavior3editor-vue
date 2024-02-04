@@ -1,0 +1,1167 @@
+{
+  "version": "0.3.0",
+  "scope": "tree",
+  "id": "9c7673f6-25c7-4200-9609-951db5da4d68",
+  "title": "数据处理组件",
+  "description": "",
+  "root": "ed262700-94c9-46ed-9fa6-352cf1593a39",
+  "properties": {},
+  "nodes": {
+    "4496a872-5826-40b2-a715-9f61c186ade5": {
+      "id": "4496a872-5826-40b2-a715-9f61c186ade5",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.ResourceUpdateTask",
+      "category": "action",
+      "title": "ResourceUpdateTask",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 24,
+        "y": -72
+      }
+    },
+    "ed262700-94c9-46ed-9fa6-352cf1593a39": {
+      "id": "ed262700-94c9-46ed-9fa6-352cf1593a39",
+      "name": "Sequence",
+      "category": "composite",
+      "title": "Sequence",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": -180,
+        "y": -72
+      },
+      "children": [
+        "d3a578f7-c190-4bac-a7a8-b7e17465f29b",
+        "72fa150d-f338-47de-babd-518df4b821c7",
+        "4496a872-5826-40b2-a715-9f61c186ade5",
+        "b2a9430d-7817-471f-8f27-a17ed75c0221",
+        "72655968-287c-4110-81fc-e92ffe717ee9",
+        "74c1ebc8-47c9-447a-9c6e-95464a15c420"
+      ]
+    },
+    "d3a578f7-c190-4bac-a7a8-b7e17465f29b": {
+      "id": "d3a578f7-c190-4bac-a7a8-b7e17465f29b",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.DataInitTask",
+      "category": "action",
+      "title": "DataInitTask",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 24,
+        "y": -336
+      }
+    },
+    "b2a9430d-7817-471f-8f27-a17ed75c0221": {
+      "id": "b2a9430d-7817-471f-8f27-a17ed75c0221",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.InteractionToC2SimCMDTask",
+      "category": "action",
+      "title": "InteractionToC2SimCMDTask",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 24,
+        "y": 24
+      }
+    },
+    "72655968-287c-4110-81fc-e92ffe717ee9": {
+      "id": "72655968-287c-4110-81fc-e92ffe717ee9",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.C2SIMTaskInteractionToObject",
+      "category": "action",
+      "title": "C2SIMTaskInteractionToObject",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 24,
+        "y": 108
+      }
+    },
+    "74c1ebc8-47c9-447a-9c6e-95464a15c420": {
+      "id": "74c1ebc8-47c9-447a-9c6e-95464a15c420",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.UpdateEntityDateTask",
+      "category": "action",
+      "title": "更新实体状态",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 24,
+        "y": 192
+      }
+    },
+    "72fa150d-f338-47de-babd-518df4b821c7": {
+      "id": "72fa150d-f338-47de-babd-518df4b821c7",
+      "name": "平台级情报融合",
+      "category": "action",
+      "title": "com.ytzy.rtmodel.actions.dataprocess.DataProcessTask",
+      "description": "",
+      "properties": {},
+      "display": {
+        "x": 228,
+        "y": -216
+      }
+    }
+  },
+  "display": {
+    "camera_x": 769,
+    "camera_y": 423.5,
+    "camera_z": 1,
+    "x": -387,
+    "y": -64
+  },
+  "custom_nodes": [
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggJudgeMissionStageTask",
+      "category": "action",
+      "title": "判定任务进行阶段",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeMissionStartRule",
+      "category": "action",
+      "title": "判定任务开始条件",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggUpdateMissionStageTask",
+      "category": "action",
+      "title": "更新任务阶段",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeArriveDesirePositionRule",
+      "category": "action",
+      "title": "判定到达目的地",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeDamageRule",
+      "category": "action",
+      "title": "判定行动受损程度",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.actions.missions.HasRecvDesireInteraction",
+      "category": "action",
+      "title": "收到期望交互",
+      "description": "用于解决将来一些特情问题，如过程中终止行动，转换开进路线等；",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.ActionPrepareTask",
+      "category": "action",
+      "title": "行动准备",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendMotionTask",
+      "category": "action",
+      "title": "队伍开进",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.ObtainInformationTask",
+      "category": "action",
+      "title": "获取情报",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.TurnOnDeviceTask",
+      "category": "action",
+      "title": "干扰压制",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.JudgeMissionIsEndTask",
+      "category": "action",
+      "title": "判定任务撤收",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.TurnOffDeviceTask",
+      "category": "action",
+      "title": "指定设备关机",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.UnDeployTask",
+      "category": "action",
+      "title": "指定行动撤收",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.detect.AggDetectTask",
+      "category": "action",
+      "title": "基础探测组件",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.communication.AggCommunicationTask",
+      "category": "action",
+      "title": "基础通信组件",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.TrackInfoProcessTask",
+      "category": "action",
+      "title": "情报融合组件",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.MissionParameterHandle",
+      "category": "action",
+      "title": "参数解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.handle.RadarReconHandle",
+      "category": "action",
+      "title": "雷达侦察参数解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.handle.RadarJammingHandle",
+      "category": "action",
+      "title": "雷达干扰参数解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.destroy.DestroyCurrentMissionStatusTask",
+      "category": "action",
+      "title": "清除缓存中的参数",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.JudgeMotionStatusRule",
+      "category": "action",
+      "title": "判定机动状态",
+      "description": "判定机动状态，即是否可以机动",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.JudgeMotionTypeRule",
+      "category": "action",
+      "title": "判定机动方式是否匹配",
+      "description": "判定机动方式是否匹配",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.GroundObstacleModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-地面障碍",
+      "description": "速度修正规则-地面障碍",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.GroundPlateauModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-高原",
+      "description": "速度修正规则-高原",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.GroundRiverModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-水系",
+      "description": "速度修正规则-水系",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.GroundRoadModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-道路条件",
+      "description": "速度修正规则-道路条件",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.GroundSlopeModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-地面坡度",
+      "description": "速度修正规则-地面坡度",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.GroundTopographyModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-地形",
+      "description": "速度修正规则-地形",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.TimeModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-昼夜",
+      "description": "速度修正规则-昼夜",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.WeatherModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-天气",
+      "description": "速度修正规则-天气",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.SurfaceObstacleModifySpeedRule",
+      "category": "action",
+      "title": "速度修正规则-水面障碍",
+      "description": "速度修正规则-水面障碍",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.common.AggMoveByRouteTask",
+      "category": "action",
+      "title": "机动",
+      "description": "机动",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.spread.JudgeCanSpreadRule",
+      "category": "action",
+      "title": "判定是否可以展开",
+      "description": "判定是否可以展开",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.follow.JudgeFinishFollowUpRule",
+      "category": "action",
+      "title": "判定是否完成跟进任务",
+      "description": "判定是否完成跟进任务",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.rally.JudgeCanRallyRule",
+      "category": "action",
+      "title": "判定是否可以集结",
+      "description": "判定是否可以执行集结任务",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggFerryHandle",
+      "category": "action",
+      "title": "解析航渡任务参数",
+      "description": "解析航渡任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggRallyHandle",
+      "category": "action",
+      "title": "解析集结任务参数",
+      "description": "解析集结任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggOccupyPositionHandle",
+      "category": "action",
+      "title": "解析占领阵地任务参数",
+      "description": "解析占领阵地任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.AggHiddenTask",
+      "category": "action",
+      "title": "隐藏",
+      "description": "隐藏",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.AggOccupyTask",
+      "category": "action",
+      "title": "占领阵地",
+      "description": "占领阵地",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.AggSpreadTask",
+      "category": "action",
+      "title": "展开",
+      "description": "展开",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeFinishFireAssaultRule",
+      "category": "action",
+      "title": "判定完成火力突击",
+      "description": "判定是否完成火力突击任务",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AggAirFireAssaultHandle",
+      "category": "action",
+      "title": "解析空中突击任务参数",
+      "description": "解析空中突击任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.AggRetreatTask",
+      "category": "action",
+      "title": "撤退",
+      "description": "撤退",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeCanFireRuleArtillery",
+      "category": "action",
+      "title": "岸舰火力突击",
+      "description": "岸舰火力突击",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.AggWaveTask",
+      "category": "action",
+      "title": "编波",
+      "description": "编波",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendAirAttackDamageTask",
+      "category": "action",
+      "title": "空中火力突击",
+      "description": "空中火力突击",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendMotionToCaptiveEntityTask",
+      "category": "action",
+      "title": "向承载实体下发机动指令",
+      "description": "向承载实体下发机动指令",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.QBZCHandle",
+      "category": "action",
+      "title": "解析情报侦查任务参数",
+      "description": "情报侦查任务参数解析",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.TXBZHandle",
+      "category": "action",
+      "title": "解析通信保障任务",
+      "description": "解析通信保障任务",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.environment.EnvironmentServiceTask",
+      "category": "action",
+      "title": "环境服务",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.ewbattle.AggEWBattleTask",
+      "category": "action",
+      "title": "电子战规则",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AssaultLandingHandle",
+      "category": "action",
+      "title": "AssaultLandingHandle",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeCancelActionRule",
+      "category": "action",
+      "title": "JudgeCancelActionRule",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.ScoutHandle",
+      "category": "action",
+      "title": "ScoutHandle",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeEnCounterFireRule",
+      "category": "action",
+      "title": "JudgeEnCounterFireRule",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeTrackTargetRule",
+      "category": "action",
+      "title": "JudgeTrackTargetRule",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendGuideTask",
+      "category": "action",
+      "title": "AggSendGuideTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.GuideAttackHandle",
+      "category": "action",
+      "title": "GuideAttackHandle",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AntiAirCoverHandle",
+      "category": "action",
+      "title": "AntiAirCoverHandle",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeTrackAirTargetRule",
+      "category": "action",
+      "title": "JudgeTrackAirTargetRule",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeInAntiAirShootRangeRule",
+      "category": "action",
+      "title": "JudgeInAntiAirShootRangeRule",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.JudgeCanFireRuleArmy",
+      "category": "action",
+      "title": "JudgeCanFireRuleArmy",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.GenRecentlyUnitTask",
+      "category": "action",
+      "title": "GenRecentlyUnitTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.BeatBackHandle",
+      "category": "action",
+      "title": "BeatBackHandle",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.engage.AggCreateFireRelationTask",
+      "category": "action",
+      "title": "AggCreateFireRelationTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.AggDataProcessTask",
+      "category": "action",
+      "title": "AggDataProcessTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.DataInitTask",
+      "category": "action",
+      "title": "DataInitTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.ResourceUpdateTask",
+      "category": "action",
+      "title": "ResourceUpdateTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.damage.AggDamageTask",
+      "category": "action",
+      "title": "AggDamageTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.TacticalGraphicTak",
+      "category": "action",
+      "title": "TacticalGraphicTak",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.C2SIMTaskInteractionToObject",
+      "category": "action",
+      "title": "C2SIMTaskInteractionToObject",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggFlashingWaveHandle",
+      "category": "action",
+      "title": "解析泛水编波任务参数",
+      "description": "解析泛水编波任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggFollowUpHandle",
+      "category": "action",
+      "title": "解析跟进任务参数",
+      "description": "解析跟进任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggAdvanceSpreadHandle",
+      "category": "action",
+      "title": "解析开进展开任务参数",
+      "description": "解析开进展开任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AggShipFireAssaultHandle",
+      "category": "action",
+      "title": "解析岸舰火力突击任务参数",
+      "description": "解析岸舰火力突击任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.common.AggFollowUpTask",
+      "category": "action",
+      "title": "机动_跟随",
+      "description": "跟随机动",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.common.AggMissileAttackMoveTask",
+      "category": "action",
+      "title": "导弹机动动作",
+      "description": "导弹机动动作",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.chemical.AggChemicalAttackTask",
+      "category": "action",
+      "title": "化学袭击",
+      "description": "化学袭击",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.chemical.AggChemicalAreaCalcEffectTask",
+      "category": "action",
+      "title": "计算自身污染效果",
+      "description": "计算自身污染效果",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.chemical.AggRinseTask",
+      "category": "action",
+      "title": "洗消原子动作",
+      "description": "洗消原子动作",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AggChemicalAttackHandle",
+      "category": "action",
+      "title": "解析化袭任务参数",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AggRinseHandle",
+      "category": "action",
+      "title": "解析洗消任务参数",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.handle.AggAirborneHandle",
+      "category": "action",
+      "title": "解析机降任务参数",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.motion.AggAirborneTask",
+      "category": "action",
+      "title": "机降动作",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.fuming.JudgeArriveFumingEndTime",
+      "category": "action",
+      "title": "到达发烟结束时间",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.fuming.AggCreateSmokeScreenTask",
+      "category": "action",
+      "title": "创建烟幕",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.FumingHandle",
+      "category": "action",
+      "title": "发烟任务解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.PurificationHandle",
+      "category": "action",
+      "title": "洗消任务解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.purification.CalculatePurificationTimeTask",
+      "category": "action",
+      "title": "计算洗消消耗时间",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.purification.JudgeArrivePurificationEndTime",
+      "category": "action",
+      "title": "判断到达洗消结束时间",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.EquipRepairHandle",
+      "category": "action",
+      "title": "装备抢修任务解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.repair.CalculateRepairTimeTask",
+      "category": "action",
+      "title": "计算抢修时间",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.repair.JudgeArriveRepairEndTimeTask",
+      "category": "action",
+      "title": "判断是否到达抢修结束时间",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendSneakDamageTask",
+      "category": "action",
+      "title": "发送蛙人(特种兵)偷袭毁伤",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.InteractionToC2SimCMDTask",
+      "category": "action",
+      "title": "InteractionToC2SimCMDTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.rule.motion.FireRelationModifySpeedRule",
+      "category": "action",
+      "title": "基于交火关系的速度修正",
+      "description": "基于交火关系的速度修正",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AmmoSupportHandle",
+      "category": "action",
+      "title": "解析弹药保障任务参数",
+      "description": "解析弹药保障任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.DevelopAttackHandle",
+      "category": "action",
+      "title": "解析发展进攻任务参数",
+      "description": "解析发展进攻任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.FuelSupportHandle",
+      "category": "action",
+      "title": "解析油料保障任务参数",
+      "description": "解析油料保障任务参数",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.support.AmmoSupportTask",
+      "category": "action",
+      "title": "弹药保障动作",
+      "description": "弹药保障动作",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.prepare.DevelopAttackTask",
+      "category": "action",
+      "title": "发展进攻动作",
+      "description": "发展进攻动作",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.support.FuelSupportTask",
+      "category": "action",
+      "title": "油料保障动作",
+      "description": "油料保障动作",
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.dataprocess.UpdateEntityDateTask",
+      "category": "action",
+      "title": "更新实体状态",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.AggAmphibianAttackHandle",
+      "category": "action",
+      "title": "水陆两栖攻击任务解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendAmphibianDamageTask",
+      "category": "action",
+      "title": "发送两栖攻击毁伤",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.engage.AggAmbuscadeTask",
+      "category": "action",
+      "title": "AggAmbuscadeTask",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendModifyAmbuscadeTask",
+      "category": "action",
+      "title": "发送修改伏击状态",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.handle.CommonTaskArgsHandle",
+      "category": "action",
+      "title": "任务参数解析",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.impact.HandleMotionRouteTask",
+      "category": "action",
+      "title": "处理机动参数",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.impact.AggImpactPrepareTask",
+      "category": "action",
+      "title": "冲击准备",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.impact.AggImpactTask",
+      "category": "action",
+      "title": "冲击",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.engage.AggTimeInDirectTask",
+      "category": "action",
+      "title": "时间间瞄",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.AggSendFollowUpTask",
+      "category": "action",
+      "title": "发送跟随",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.base.JudgeTargetDistanceTask",
+      "category": "action",
+      "title": "判断与目标距离",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "com.ytzy.rtmodel.agg.action.engage.AggTacticalShootTask",
+      "category": "action",
+      "title": "战术间瞄",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "平台级情报融合",
+      "category": "action",
+      "title": "com.ytzy.rtmodel.actions.dataprocess.DataProcessTask",
+      "description": null,
+      "properties": {},
+      "parent": null
+    }
+  ],
+  "custom_folders": []
+}

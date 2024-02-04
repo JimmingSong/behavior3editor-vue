@@ -1,0 +1,3171 @@
+{
+  "name": "HZ",
+  "description": "",
+  "data": {
+    "version": "0.3.0",
+    "scope": "project",
+    "selectedTree": "ee8c567d-9028-49dc-92f9-43ee91f741f0",
+    "trees": [
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "816c4ec9-fbb5-4784-8cee-a77e3317cce8",
+        "title": "水面舰艇对海侦察task",
+        "description": "",
+        "root": "9b3170f7-fb0f-469b-af4c-2e90c5be1719",
+        "properties": {
+          "TaskCode": 10006
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "5720a627-4f73-4113-818f-88842a1df7b0": {
+            "id": "5720a627-4f73-4113-818f-88842a1df7b0",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -696,
+              "y": -1608
+            }
+          },
+          "aefdcb94-4283-43e9-87aa-44c674260f10": {
+            "id": "aefdcb94-4283-43e9-87aa-44c674260f10",
+            "name": "jsim.script.task.detect.SearchAction",
+            "category": "action",
+            "title": "进行侦察",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -696,
+              "y": -1260
+            }
+          },
+          "cde7c075-c260-402b-b9c7-3c0b693b3ee9": {
+            "id": "cde7c075-c260-402b-b9c7-3c0b693b3ee9",
+            "name": "jsim.script.condition.detect.CheckRadarSearchEquipCondition",
+            "category": "condition",
+            "title": "雷达设备能力校验",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -696,
+              "y": -1428
+            }
+          },
+          "6cc0d69a-456d-4067-8e10-d5b3694041fa": {
+            "id": "6cc0d69a-456d-4067-8e10-d5b3694041fa",
+            "name": "jsim.script.task.detect.TurnOnRadarAction",
+            "category": "action",
+            "title": "雷达开机",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -696,
+              "y": -1344
+            }
+          },
+          "9b3170f7-fb0f-469b-af4c-2e90c5be1719": {
+            "id": "9b3170f7-fb0f-469b-af4c-2e90c5be1719",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -900,
+              "y": -1428
+            },
+            "children": [
+              "5720a627-4f73-4113-818f-88842a1df7b0",
+              "fb7740f5-0a42-4aea-9b99-c03002580dc5",
+              "cde7c075-c260-402b-b9c7-3c0b693b3ee9",
+              "6cc0d69a-456d-4067-8e10-d5b3694041fa",
+              "aefdcb94-4283-43e9-87aa-44c674260f10"
+            ]
+          },
+          "fb7740f5-0a42-4aea-9b99-c03002580dc5": {
+            "id": "fb7740f5-0a42-4aea-9b99-c03002580dc5",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": -696,
+              "y": -1524
+            }
+          }
+        },
+        "display": {
+          "camera_x": 1305.0599999999395,
+          "camera_y": 1456.1249999999418,
+          "camera_z": 0.75,
+          "x": -1104,
+          "y": -1428
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "dcfa5a32-933d-4c3f-aa7f-f3a5b8195720",
+        "title": "计划航线机动task",
+        "description": "",
+        "root": "754afdd8-89ec-44b6-9c89-74d52dc2c3df",
+        "properties": {
+          "TaskCode": 10002
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "754afdd8-89ec-44b6-9c89-74d52dc2c3df": {
+            "id": "754afdd8-89ec-44b6-9c89-74d52dc2c3df",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -228,
+              "y": 24
+            },
+            "children": [
+              "96256ff2-0d1a-49ef-b674-744117c78575",
+              "6e072950-7501-431c-be9a-70f249de2c54",
+              "a039c469-168c-4bde-8cc3-28509f3c817d",
+              "79d3a4e7-40c4-4892-8c8b-c005685a67c0",
+              "5ab45edf-082e-4175-ac9e-0b5c88080b26"
+            ]
+          },
+          "6e072950-7501-431c-be9a-70f249de2c54": {
+            "id": "6e072950-7501-431c-be9a-70f249de2c54",
+            "name": "jsim.script.condition.mover.CheckManeuverabilityValid",
+            "category": "condition",
+            "title": "检查机动能力",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": -72
+            }
+          },
+          "a039c469-168c-4bde-8cc3-28509f3c817d": {
+            "id": "a039c469-168c-4bde-8cc3-28509f3c817d",
+            "name": "jsim.script.condition.mover.CheckBattleEnvValid",
+            "category": "condition",
+            "title": "检查战场环境是否满足机动",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 12,
+              "y": 12
+            }
+          },
+          "79d3a4e7-40c4-4892-8c8b-c005685a67c0": {
+            "id": "79d3a4e7-40c4-4892-8c8b-c005685a67c0",
+            "name": "jsim.script.task.mover.PlanRouteMove",
+            "category": "action",
+            "title": "计划航线机动",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 108
+            }
+          },
+          "96256ff2-0d1a-49ef-b674-744117c78575": {
+            "id": "96256ff2-0d1a-49ef-b674-744117c78575",
+            "name": "jsim.script.condition.mover.CheckPlanRouteMoveTaskValid",
+            "category": "condition",
+            "title": "检查计划航线机动任务参数合规性",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": -156
+            }
+          },
+          "5ab45edf-082e-4175-ac9e-0b5c88080b26": {
+            "id": "5ab45edf-082e-4175-ac9e-0b5c88080b26",
+            "name": "jsim.script.condition.mover.CheckMoverTaskStatusValid",
+            "category": "condition",
+            "title": "检查机动任务完成状态",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 192
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -432,
+          "y": 24
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "f10c4b51-ce6c-4c13-83ae-5863f0c03c7f",
+        "title": "定向定速机动task",
+        "description": "",
+        "root": "c0aa315b-f398-405e-8aa8-02fe9f9cc7de",
+        "properties": {
+          "TaskCode": 10001
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "edac685e-ac37-47e6-892c-32e19e811948": {
+            "id": "edac685e-ac37-47e6-892c-32e19e811948",
+            "name": "jsim.script.condition.mover.CheckConstantMoveTaskValid",
+            "category": "condition",
+            "title": "检查定向定速机动任务参数合规性",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -48,
+              "y": -228
+            }
+          },
+          "98aa4533-3958-4360-80fc-8be90c7e8c2d": {
+            "id": "98aa4533-3958-4360-80fc-8be90c7e8c2d",
+            "name": "jsim.script.condition.mover.CheckManeuverabilityValid",
+            "category": "condition",
+            "title": "检查机动能力",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -48,
+              "y": -144
+            }
+          },
+          "23bf2e48-1bbf-42e8-8178-7145243f1ab4": {
+            "id": "23bf2e48-1bbf-42e8-8178-7145243f1ab4",
+            "name": "jsim.script.condition.mover.CheckBattleEnvValid",
+            "category": "condition",
+            "title": "检查战场环境是否满足机动",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -48,
+              "y": -48
+            }
+          },
+          "e99a86c9-28c4-479b-bde2-a306f79182ef": {
+            "id": "e99a86c9-28c4-479b-bde2-a306f79182ef",
+            "name": "jsim.script.condition.mover.CheckMoverTaskStatusValid",
+            "category": "condition",
+            "title": "检查机动任务完成状态",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -48,
+              "y": 120
+            }
+          },
+          "2acf2fd1-726e-45ef-9cc6-d1e3aa2c66e1": {
+            "id": "2acf2fd1-726e-45ef-9cc6-d1e3aa2c66e1",
+            "name": "jsim.script.task.mover.ConstantSpeedOrientationMove",
+            "category": "action",
+            "title": "定向定速机动",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -48,
+              "y": 36
+            }
+          },
+          "c0aa315b-f398-405e-8aa8-02fe9f9cc7de": {
+            "id": "c0aa315b-f398-405e-8aa8-02fe9f9cc7de",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -252,
+              "y": -48
+            },
+            "children": [
+              "edac685e-ac37-47e6-892c-32e19e811948",
+              "98aa4533-3958-4360-80fc-8be90c7e8c2d",
+              "23bf2e48-1bbf-42e8-8178-7145243f1ab4",
+              "2acf2fd1-726e-45ef-9cc6-d1e3aa2c66e1",
+              "e99a86c9-28c4-479b-bde2-a306f79182ef"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -456,
+          "y": -48
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "213b8c44-53b9-4ebc-bede-3c05b6e19a08",
+        "title": "水面舰艇对海打击task",
+        "description": "",
+        "root": "4f081aa3-a86a-480d-a51e-6c909162d30c",
+        "properties": {
+          "TaskCode": 10009
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "4f081aa3-a86a-480d-a51e-6c909162d30c": {
+            "id": "4f081aa3-a86a-480d-a51e-6c909162d30c",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -336,
+              "y": -36
+            },
+            "children": [
+              "45cd1408-58da-45e1-8527-7f4d446db26d",
+              "10d408f0-00c9-4ccd-b41a-a2dbe36d7086",
+              "044e5ea0-421f-4320-8f0b-e245ae79cce6",
+              "ad48b50b-9a91-4b14-b55e-0a47333b54ae",
+              "eafd6132-7e09-4534-8550-e247780d2044",
+              "a924c793-0538-4ea9-a077-e7ff9ab9c3b8"
+            ]
+          },
+          "10d408f0-00c9-4ccd-b41a-a2dbe36d7086": {
+            "id": "10d408f0-00c9-4ccd-b41a-a2dbe36d7086",
+            "name": "jsim.script.condition.attack.CheckAttackEquipCondition",
+            "category": "condition",
+            "title": "检查是否具备对目标打击设备及能力",
+            "description": "CheckAttackEquipCondition",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -216
+            }
+          },
+          "ad48b50b-9a91-4b14-b55e-0a47333b54ae": {
+            "id": "ad48b50b-9a91-4b14-b55e-0a47333b54ae",
+            "name": "jsim.script.condition.attack.CheckFireCondition",
+            "category": "condition",
+            "title": "检查发射条件",
+            "description": "CheckFireCondition",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": -48
+            }
+          },
+          "45cd1408-58da-45e1-8527-7f4d446db26d": {
+            "id": "45cd1408-58da-45e1-8527-7f4d446db26d",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "CheckTaskValidCondition",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": -300
+            }
+          },
+          "044e5ea0-421f-4320-8f0b-e245ae79cce6": {
+            "id": "044e5ea0-421f-4320-8f0b-e245ae79cce6",
+            "name": "jsim.script.task.attack.ReadTargetSituationTask",
+            "category": "action",
+            "title": "读取目标状态",
+            "description": "ReadTargetSituationTask",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": -132
+            }
+          },
+          "eafd6132-7e09-4534-8550-e247780d2044": {
+            "id": "eafd6132-7e09-4534-8550-e247780d2044",
+            "name": "jsim.script.task.attack.LaunchTask",
+            "category": "action",
+            "title": "检查指定目标的发射状态",
+            "description": "LaunchTask",
+            "properties": {},
+            "display": {
+              "x": -108,
+              "y": 36
+            }
+          },
+          "a924c793-0538-4ea9-a077-e7ff9ab9c3b8": {
+            "id": "a924c793-0538-4ea9-a077-e7ff9ab9c3b8",
+            "name": "jsim.script.condition.attack.CheckTaskStatusCondition",
+            "category": "condition",
+            "title": "检查任务状态",
+            "description": "CheckTaskStatusCondition",
+            "properties": {},
+            "display": {
+              "x": -120,
+              "y": 120
+            }
+          }
+        },
+        "display": {
+          "camera_x": 1228,
+          "camera_y": 589.5,
+          "camera_z": 1,
+          "x": -540,
+          "y": -36
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "9d3cf141-15f2-4fed-ab46-5e0f6cb8971a",
+        "title": "水面舰艇对空侦察task",
+        "description": "",
+        "root": "9d3bc924-8426-4b09-833d-d4f7a0712de8",
+        "properties": {
+          "TaskCode": 10005
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "b3bca3a9-9af5-4f5b-a5cd-2a4a94fd08e2": {
+            "id": "b3bca3a9-9af5-4f5b-a5cd-2a4a94fd08e2",
+            "name": "jsim.script.task.detect.SearchAction",
+            "category": "action",
+            "title": "进行侦察",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 264
+            }
+          },
+          "9a1fdba8-bc59-43a6-83ca-d594c748b416": {
+            "id": "9a1fdba8-bc59-43a6-83ca-d594c748b416",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "CheckTaskValidCondition",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 0
+            }
+          },
+          "135c1e51-0523-404a-8b9e-5b9678578c2f": {
+            "id": "135c1e51-0523-404a-8b9e-5b9678578c2f",
+            "name": "jsim.script.condition.detect.CheckRadarSearchEquipCondition",
+            "category": "condition",
+            "title": "雷达设备能力校验",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 96
+            }
+          },
+          "3d6108e3-8443-4ca9-8661-58d95910d9b7": {
+            "id": "3d6108e3-8443-4ca9-8661-58d95910d9b7",
+            "name": "jsim.script.task.detect.TurnOnRadarAction",
+            "category": "action",
+            "title": "雷达开机",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 180
+            }
+          },
+          "9d3bc924-8426-4b09-833d-d4f7a0712de8": {
+            "id": "9d3bc924-8426-4b09-833d-d4f7a0712de8",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -228,
+              "y": 96
+            },
+            "children": [
+              "02ac0410-5eb2-400d-860e-562b84237182",
+              "9a1fdba8-bc59-43a6-83ca-d594c748b416",
+              "135c1e51-0523-404a-8b9e-5b9678578c2f",
+              "3d6108e3-8443-4ca9-8661-58d95910d9b7",
+              "b3bca3a9-9af5-4f5b-a5cd-2a4a94fd08e2"
+            ]
+          },
+          "02ac0410-5eb2-400d-860e-562b84237182": {
+            "id": "02ac0410-5eb2-400d-860e-562b84237182",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": -84
+            }
+          }
+        },
+        "display": {
+          "camera_x": 821,
+          "camera_y": 253.2950000000419,
+          "camera_z": 1,
+          "x": -432,
+          "y": 96
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "8135817a-68f4-485d-8da8-1253fef0c281",
+        "title": "航空兵对海侦察task",
+        "description": "",
+        "root": "1cbd54f5-4048-4dac-88a4-e840128273f7",
+        "properties": {
+          "TaskCode": 10031
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "95d28a63-3610-40af-9c85-1e5c9f1eed27": {
+            "id": "95d28a63-3610-40af-9c85-1e5c9f1eed27",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": -144
+            }
+          },
+          "9f06915e-1ad0-4a9e-89b7-5aa0b6d45a04": {
+            "id": "9f06915e-1ad0-4a9e-89b7-5aa0b6d45a04",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "CheckTaskValidCondition",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": -60
+            }
+          },
+          "05cc4bc8-37d1-47f6-8045-005f15d4cc49": {
+            "id": "05cc4bc8-37d1-47f6-8045-005f15d4cc49",
+            "name": "jsim.script.task.detect.SearchAction",
+            "category": "action",
+            "title": "进行侦察",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": 204
+            }
+          },
+          "c8392625-9022-4e27-8442-bac3f5cb1c2f": {
+            "id": "c8392625-9022-4e27-8442-bac3f5cb1c2f",
+            "name": "jsim.script.condition.detect.CheckRadarSearchEquipCondition",
+            "category": "condition",
+            "title": "雷达设备能力校验",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": 36
+            }
+          },
+          "f0600662-4876-4562-8877-774cdd093747": {
+            "id": "f0600662-4876-4562-8877-774cdd093747",
+            "name": "jsim.script.task.detect.TurnOnRadarAction",
+            "category": "action",
+            "title": "雷达开机",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": 120
+            }
+          },
+          "1cbd54f5-4048-4dac-88a4-e840128273f7": {
+            "id": "1cbd54f5-4048-4dac-88a4-e840128273f7",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 36
+            },
+            "children": [
+              "95d28a63-3610-40af-9c85-1e5c9f1eed27",
+              "9f06915e-1ad0-4a9e-89b7-5aa0b6d45a04",
+              "c8392625-9022-4e27-8442-bac3f5cb1c2f",
+              "f0600662-4876-4562-8877-774cdd093747",
+              "05cc4bc8-37d1-47f6-8045-005f15d4cc49"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 708.6899999997113,
+          "camera_y": 274.9350000000559,
+          "camera_z": 1,
+          "x": -228,
+          "y": 36
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "b35d3b6c-47fa-49e6-8d8d-68addc0f3a82",
+        "title": "水面舰艇对潜侦察task",
+        "description": "",
+        "root": "4df3602b-ac45-4a42-86e5-8da7cf124d70",
+        "properties": {
+          "TaskCode": 10007
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "8ab8bbe7-0274-4813-9a23-30ce670bf68f": {
+            "id": "8ab8bbe7-0274-4813-9a23-30ce670bf68f",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -72,
+              "y": -240
+            }
+          },
+          "4e11873e-78c5-4bfd-860a-9534b2998bda": {
+            "id": "4e11873e-78c5-4bfd-860a-9534b2998bda",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "CheckTaskValidCondition",
+            "properties": {},
+            "display": {
+              "x": -72,
+              "y": -156
+            }
+          },
+          "e0c0721f-68f6-4af1-8e41-09426a76cec1": {
+            "id": "e0c0721f-68f6-4af1-8e41-09426a76cec1",
+            "name": "jsim.script.condition.detect.CheckSonarSearchEquipCondition",
+            "category": "condition",
+            "title": "声呐设备能力校验",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -72,
+              "y": -60
+            }
+          },
+          "44c7cba4-b275-49a2-8ef8-62743a7c3d4d": {
+            "id": "44c7cba4-b275-49a2-8ef8-62743a7c3d4d",
+            "name": "jsim.script.task.detect.SearchAction",
+            "category": "action",
+            "title": "进行侦察",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -72,
+              "y": 108
+            }
+          },
+          "1b2d3832-f2ce-4943-9a5d-eb3fa4baa366": {
+            "id": "1b2d3832-f2ce-4943-9a5d-eb3fa4baa366",
+            "name": "jsim.script.task.detect.TurnOnSonarAction",
+            "category": "action",
+            "title": "声呐开机",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -72,
+              "y": 24
+            }
+          },
+          "4df3602b-ac45-4a42-86e5-8da7cf124d70": {
+            "id": "4df3602b-ac45-4a42-86e5-8da7cf124d70",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -276,
+              "y": -60
+            },
+            "children": [
+              "8ab8bbe7-0274-4813-9a23-30ce670bf68f",
+              "4e11873e-78c5-4bfd-860a-9534b2998bda",
+              "e0c0721f-68f6-4af1-8e41-09426a76cec1",
+              "1b2d3832-f2ce-4943-9a5d-eb3fa4baa366",
+              "44c7cba4-b275-49a2-8ef8-62743a7c3d4d"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 493.7599999998347,
+          "camera_z": 1,
+          "x": -480,
+          "y": -60
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "e5858b05-8a4f-4a47-8754-a6de08f18769",
+        "title": "航空兵对空侦察task",
+        "description": "",
+        "root": "ce054be8-4190-474b-817c-7adee77dc9a5",
+        "properties": {
+          "TaskCode": 10030
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "c945149a-466e-4f96-8d22-8db034db9e11": {
+            "id": "c945149a-466e-4f96-8d22-8db034db9e11",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": -108
+            }
+          },
+          "883db767-5197-41c9-9e8b-005493a82288": {
+            "id": "883db767-5197-41c9-9e8b-005493a82288",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "CheckTaskValidCondition",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": -24
+            }
+          },
+          "bd6738b4-82e7-4882-8cf1-d0132a67fbac": {
+            "id": "bd6738b4-82e7-4882-8cf1-d0132a67fbac",
+            "name": "jsim.script.condition.detect.CheckRadarSearchEquipCondition",
+            "category": "condition",
+            "title": "雷达设备能力校验",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": 72
+            }
+          },
+          "1fc624a1-4ab3-4089-867a-c393ed568480": {
+            "id": "1fc624a1-4ab3-4089-867a-c393ed568480",
+            "name": "jsim.script.task.detect.TurnOnRadarAction",
+            "category": "action",
+            "title": "雷达开机",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": 156
+            }
+          },
+          "1c6d6c31-296d-4c90-8b21-ae314bbae81f": {
+            "id": "1c6d6c31-296d-4c90-8b21-ae314bbae81f",
+            "name": "jsim.script.task.detect.SearchAction",
+            "category": "action",
+            "title": "进行侦察",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -132,
+              "y": 240
+            }
+          },
+          "ce054be8-4190-474b-817c-7adee77dc9a5": {
+            "id": "ce054be8-4190-474b-817c-7adee77dc9a5",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -336,
+              "y": 72
+            },
+            "children": [
+              "c945149a-466e-4f96-8d22-8db034db9e11",
+              "883db767-5197-41c9-9e8b-005493a82288",
+              "bd6738b4-82e7-4882-8cf1-d0132a67fbac",
+              "1fc624a1-4ab3-4089-867a-c393ed568480",
+              "1c6d6c31-296d-4c90-8b21-ae314bbae81f"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 1049,
+          "camera_y": 484.5,
+          "camera_z": 1,
+          "x": -540,
+          "y": 72
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "fc4b9d48-b0e8-4b92-8ee6-e4b28e95e0b5",
+        "title": "区域机动action",
+        "description": "",
+        "root": "0b99e314-908b-4683-827d-95ec0d845f21",
+        "properties": {
+          "TaskCode": 10003
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "5a6626f8-eabe-4b1d-bbce-615c83dd92da": {
+            "id": "5a6626f8-eabe-4b1d-bbce-615c83dd92da",
+            "name": "jsim.script.condition.mover.CheckAreaManeuverTaskValid",
+            "category": "condition",
+            "title": "检查区域机动任务合规性",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -84,
+              "y": -192
+            }
+          },
+          "0b99e314-908b-4683-827d-95ec0d845f21": {
+            "id": "0b99e314-908b-4683-827d-95ec0d845f21",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -288,
+              "y": 36
+            },
+            "children": [
+              "5a6626f8-eabe-4b1d-bbce-615c83dd92da",
+              "0704ffe7-e1cf-41f3-891d-2439a56f2bbc",
+              "904a12f2-4662-4a8a-96ff-ae5c6fe9b555",
+              "c1c2402f-4d9c-4059-9b20-215e009af934",
+              "3f7d8d5a-9696-4348-848f-86311604afcb",
+              "75f2f86f-3264-47ec-849e-0aebc1d5b14f"
+            ]
+          },
+          "c1c2402f-4d9c-4059-9b20-215e009af934": {
+            "id": "c1c2402f-4d9c-4059-9b20-215e009af934",
+            "name": "jsim.script.condition.mover.CheckIsInAreaValid",
+            "category": "condition",
+            "title": "检查是否在区域内",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -84,
+              "y": 72
+            }
+          },
+          "0704ffe7-e1cf-41f3-891d-2439a56f2bbc": {
+            "id": "0704ffe7-e1cf-41f3-891d-2439a56f2bbc",
+            "name": "jsim.script.condition.mover.CheckManeuverabilityValid",
+            "category": "condition",
+            "title": "检查机动能力",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -84,
+              "y": -96
+            }
+          },
+          "904a12f2-4662-4a8a-96ff-ae5c6fe9b555": {
+            "id": "904a12f2-4662-4a8a-96ff-ae5c6fe9b555",
+            "name": "jsim.script.condition.mover.CheckBattleEnvValid",
+            "category": "condition",
+            "title": "检查战场环境是否满足机动",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -84,
+              "y": -12
+            }
+          },
+          "3f7d8d5a-9696-4348-848f-86311604afcb": {
+            "id": "3f7d8d5a-9696-4348-848f-86311604afcb",
+            "name": "jsim.script.task.mover.AreaManeuver",
+            "category": "action",
+            "title": "区域机动",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -84,
+              "y": 168
+            }
+          },
+          "75f2f86f-3264-47ec-849e-0aebc1d5b14f": {
+            "id": "75f2f86f-3264-47ec-849e-0aebc1d5b14f",
+            "name": "jsim.script.condition.mover.CheckMoverTaskStatusValid",
+            "category": "condition",
+            "title": "检查机动任务完成状态",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -84,
+              "y": 252
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -492,
+          "y": 36
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "9843a589-6c56-4597-85d4-4c4a6f4c4891",
+        "title": "水面舰艇对空打击task",
+        "description": "attackMode: 分为Auto和Manual, 分别是自动和手动模式, 默认Auto\npointDefense: 点防御标识, true为点防御, false为编队协同的面防御, 默认true\nattackAreaAngelStart: 面防御的开始角度, 正北为0度, 顺时针旋转, 默认0\nattackAreaAngelEnd: 面防御的结束角度, 默认360\nsalvoes: 齐射数量, 如1拦1, 2拦1, 默认2, 区别于发射数量",
+        "root": "6c921d36-9ee3-48bb-8b4a-203b8511d9eb",
+        "properties": {
+          "TaskCode": 10008
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "d374da67-d966-46fc-8687-d281a1fa1816": {
+            "id": "d374da67-d966-46fc-8687-d281a1fa1816",
+            "name": "jsim.script.condition.attack.CheckAttackEquipCondition",
+            "category": "condition",
+            "title": "检查是否具备对目标打击设备及能力",
+            "description": "CheckAttackEquipCondition",
+            "properties": {},
+            "display": {
+              "x": 12,
+              "y": -108
+            }
+          },
+          "6c921d36-9ee3-48bb-8b4a-203b8511d9eb": {
+            "id": "6c921d36-9ee3-48bb-8b4a-203b8511d9eb",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -276,
+              "y": 84
+            },
+            "children": [
+              "646c90f6-c9fb-4870-89ef-392948b9b3ff",
+              "f095795a-f580-4de8-8565-f47b9d7375e8",
+              "d374da67-d966-46fc-8687-d281a1fa1816",
+              "089c5730-1bc4-4665-83ef-12f525cc56e7"
+            ]
+          },
+          "089c5730-1bc4-4665-83ef-12f525cc56e7": {
+            "id": "089c5730-1bc4-4665-83ef-12f525cc56e7",
+            "name": "MemPriority",
+            "category": "composite",
+            "title": "MemPriority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -120,
+              "y": 84
+            },
+            "children": [
+              "8cfd8397-0b51-43b5-8b0b-1d476d75a86f",
+              "aa0da903-b952-4fc6-80e6-8024f56a4240"
+            ]
+          },
+          "8cfd8397-0b51-43b5-8b0b-1d476d75a86f": {
+            "id": "8cfd8397-0b51-43b5-8b0b-1d476d75a86f",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 36,
+              "y": 12
+            },
+            "children": [
+              "f4efd4b6-7b17-432a-b017-88d53316b487",
+              "b54b7e61-a4f3-42cd-a359-ddd9d1e742ba",
+              "07c9986e-f691-4840-8f9c-df504f1e294e",
+              "2b6740ec-c26d-4d9a-8fc3-ef3abd5a2fc9",
+              "286239d2-640e-4fc6-ad70-822c205c6b12",
+              "61cdfda1-f830-4796-81b3-80d646a64c9f"
+            ]
+          },
+          "f4efd4b6-7b17-432a-b017-88d53316b487": {
+            "id": "f4efd4b6-7b17-432a-b017-88d53316b487",
+            "name": "jsim.script.condition.attack.CheckAttackModeCondition",
+            "category": "condition",
+            "title": "自动打击模式",
+            "description": "CheckAttackModeCondition\nattackMode: 分为Auto和Manual, 分别是自动和手动模式, 默认Auto",
+            "properties": {
+              "attackMode": "Auto"
+            },
+            "display": {
+              "x": 240,
+              "y": -48
+            }
+          },
+          "aa0da903-b952-4fc6-80e6-8024f56a4240": {
+            "id": "aa0da903-b952-4fc6-80e6-8024f56a4240",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 24,
+              "y": 384
+            },
+            "children": [
+              "5a4472bf-933d-4eb9-825c-9982005f34e0",
+              "aa658f59-b992-4b7e-ad51-380058db632b",
+              "4031cb61-616f-46e7-801c-a1fd1d3b94d8"
+            ]
+          },
+          "5a4472bf-933d-4eb9-825c-9982005f34e0": {
+            "id": "5a4472bf-933d-4eb9-825c-9982005f34e0",
+            "name": "jsim.script.condition.attack.CheckAttackModeCondition",
+            "category": "condition",
+            "title": "手动打击模式",
+            "description": "CheckAttackModeCondition\nattackMode: 分为Auto和Manual, 分别是自动和手动模式, 默认Auto",
+            "properties": {
+              "attackMode": "Manual"
+            },
+            "display": {
+              "x": 228,
+              "y": 348
+            }
+          },
+          "f095795a-f580-4de8-8565-f47b9d7375e8": {
+            "id": "f095795a-f580-4de8-8565-f47b9d7375e8",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "CheckTaskValidCondition",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -180
+            }
+          },
+          "286239d2-640e-4fc6-ad70-822c205c6b12": {
+            "id": "286239d2-640e-4fc6-ad70-822c205c6b12",
+            "name": "jsim.script.task.attack.ReadLaunchStateTask",
+            "category": "action",
+            "title": "检查发射状态",
+            "description": "ReadLaunchStateTask",
+            "properties": {},
+            "display": {
+              "x": 228,
+              "y": 216
+            }
+          },
+          "61cdfda1-f830-4796-81b3-80d646a64c9f": {
+            "id": "61cdfda1-f830-4796-81b3-80d646a64c9f",
+            "name": "jsim.script.condition.attack.CheckDefenceAreaStatusCondition",
+            "category": "condition",
+            "title": "检查区域防御任务状态",
+            "description": "CheckDefenceAreaStatusCondition",
+            "properties": {},
+            "display": {
+              "x": 252,
+              "y": 276
+            }
+          },
+          "aa658f59-b992-4b7e-ad51-380058db632b": {
+            "id": "aa658f59-b992-4b7e-ad51-380058db632b",
+            "name": "jsim.script.task.attack.GetAllWeapons",
+            "category": "action",
+            "title": "获取所有可以手动发射的武器",
+            "description": "GetAllWeapons",
+            "properties": {},
+            "display": {
+              "x": 276,
+              "y": 420
+            }
+          },
+          "4031cb61-616f-46e7-801c-a1fd1d3b94d8": {
+            "id": "4031cb61-616f-46e7-801c-a1fd1d3b94d8",
+            "name": "jsim.script.task.attack.FireSelectWeaponTask",
+            "category": "action",
+            "title": "定方位发射所选武器",
+            "description": "FireSelectWeaponTask",
+            "properties": {},
+            "display": {
+              "x": 240,
+              "y": 492
+            }
+          },
+          "646c90f6-c9fb-4870-89ef-392948b9b3ff": {
+            "id": "646c90f6-c9fb-4870-89ef-392948b9b3ff",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -252
+            }
+          },
+          "b54b7e61-a4f3-42cd-a359-ddd9d1e742ba": {
+            "id": "b54b7e61-a4f3-42cd-a359-ddd9d1e742ba",
+            "name": "jsim.script.task.attack.GetTrackListInArcTask",
+            "category": "action",
+            "title": "获取指定扇面内的目标",
+            "description": "GetTrackListInArcTask",
+            "properties": {},
+            "display": {
+              "x": 252,
+              "y": 12
+            }
+          },
+          "07c9986e-f691-4840-8f9c-df504f1e294e": {
+            "id": "07c9986e-f691-4840-8f9c-df504f1e294e",
+            "name": "jsim.script.task.attack.GetTrackListInRangeTask",
+            "category": "action",
+            "title": "获取射程内的目标",
+            "description": "GetTrackListInRangeTask",
+            "properties": {},
+            "display": {
+              "x": 240,
+              "y": 72
+            }
+          },
+          "2b6740ec-c26d-4d9a-8fc3-ef3abd5a2fc9": {
+            "id": "2b6740ec-c26d-4d9a-8fc3-ef3abd5a2fc9",
+            "name": "jsim.script.task.attack.EngageTask",
+            "category": "action",
+            "title": "发起交战",
+            "description": "EngageTask",
+            "properties": {},
+            "display": {
+              "x": 240,
+              "y": 144
+            }
+          }
+        },
+        "display": {
+          "camera_x": 921,
+          "camera_y": 429.5,
+          "camera_z": 1,
+          "x": -456,
+          "y": 84
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "f28643fd-dbbf-4e63-8870-071517deb6fb",
+        "title": "航空兵起飞",
+        "description": "",
+        "root": "271450c2-f94c-45b6-8364-aa6519ea6133",
+        "properties": {
+          "TaskCode": 10043
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "ac658d9a-9a8a-40db-8227-6a457739f0a1": {
+            "id": "ac658d9a-9a8a-40db-8227-6a457739f0a1",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": 0,
+              "y": -240
+            }
+          },
+          "2c78abe3-f7e4-40d4-a77e-f4ff9020527e": {
+            "id": "2c78abe3-f7e4-40d4-a77e-f4ff9020527e",
+            "name": "jsim.script.condition.AircraftLaunchingCondition",
+            "category": "condition",
+            "title": "检查舰船能否起飞航空兵",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 24,
+              "y": -132
+            }
+          },
+          "a2b747b5-8a10-40e3-97a7-d2abb9572792": {
+            "id": "a2b747b5-8a10-40e3-97a7-d2abb9572792",
+            "name": "jsim.script.condition.AircraftLaunchReadyCondition",
+            "category": "condition",
+            "title": "检查航空兵起飞准备是否就绪",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 168,
+              "y": -36
+            }
+          },
+          "bef30cca-3ee2-4dad-9372-279cc0247063": {
+            "id": "bef30cca-3ee2-4dad-9372-279cc0247063",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": 12
+            },
+            "children": [
+              "a2b747b5-8a10-40e3-97a7-d2abb9572792",
+              "1e736e9f-ba35-4443-b617-ba150b1f1c5b"
+            ]
+          },
+          "1e736e9f-ba35-4443-b617-ba150b1f1c5b": {
+            "id": "1e736e9f-ba35-4443-b617-ba150b1f1c5b",
+            "name": "jsim.script.task.AircraftLaunchReadyTask",
+            "category": "action",
+            "title": "航空兵起飞准备",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 132,
+              "y": 48
+            }
+          },
+          "4cdb03c3-b5a6-4b35-86ac-437fbf21510a": {
+            "id": "4cdb03c3-b5a6-4b35-86ac-437fbf21510a",
+            "name": "jsim.script.task.AircraftLaunchTask",
+            "category": "action",
+            "title": "航空兵起飞",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -12,
+              "y": 156
+            }
+          },
+          "88d5107d-3c36-4885-84a8-424a948d3832": {
+            "id": "88d5107d-3c36-4885-84a8-424a948d3832",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 0,
+              "y": 288
+            }
+          },
+          "271450c2-f94c-45b6-8364-aa6519ea6133": {
+            "id": "271450c2-f94c-45b6-8364-aa6519ea6133",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -276,
+              "y": -12
+            },
+            "children": [
+              "ac658d9a-9a8a-40db-8227-6a457739f0a1",
+              "2c78abe3-f7e4-40d4-a77e-f4ff9020527e",
+              "bef30cca-3ee2-4dad-9372-279cc0247063",
+              "4cdb03c3-b5a6-4b35-86ac-437fbf21510a",
+              "88d5107d-3c36-4885-84a8-424a948d3832"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 876,
+          "camera_y": 566.5,
+          "camera_z": 1,
+          "x": -456,
+          "y": -12
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "a9479b48-094c-48f2-812c-19596a7ca810",
+        "title": "航空兵降落",
+        "description": "",
+        "root": "2a744e90-0a1d-46c5-8257-929640d155fd",
+        "properties": {
+          "TaskCode": 10044
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "26693ed3-535d-43e3-b81b-08c707e9acb2": {
+            "id": "26693ed3-535d-43e3-b81b-08c707e9acb2",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": -96,
+              "y": -228
+            }
+          },
+          "8e4b2c1f-04f6-4031-9295-d731dcb570d5": {
+            "id": "8e4b2c1f-04f6-4031-9295-d731dcb570d5",
+            "name": "jsim.script.condition.AircraftLandingCondition",
+            "category": "condition",
+            "title": "检查舰船能否降落航空兵",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -72,
+              "y": -144
+            }
+          },
+          "1a67587e-acd2-489d-92b3-2516246be9d1": {
+            "id": "1a67587e-acd2-489d-92b3-2516246be9d1",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -96,
+              "y": 96
+            }
+          },
+          "3c7a33eb-2e4d-49ba-9170-9c0bbc84ae31": {
+            "id": "3c7a33eb-2e4d-49ba-9170-9c0bbc84ae31",
+            "name": "jsim.script.task.AircraftLandTask",
+            "category": "action",
+            "title": "航空兵降落",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -96,
+              "y": -60
+            }
+          },
+          "2a744e90-0a1d-46c5-8257-929640d155fd": {
+            "id": "2a744e90-0a1d-46c5-8257-929640d155fd",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -360,
+              "y": -60
+            },
+            "children": [
+              "26693ed3-535d-43e3-b81b-08c707e9acb2",
+              "8e4b2c1f-04f6-4031-9295-d731dcb570d5",
+              "3c7a33eb-2e4d-49ba-9170-9c0bbc84ae31",
+              "c5dfe544-93b1-47bc-b2ab-8a6b590faac2",
+              "1a67587e-acd2-489d-92b3-2516246be9d1"
+            ]
+          },
+          "c5dfe544-93b1-47bc-b2ab-8a6b590faac2": {
+            "id": "c5dfe544-93b1-47bc-b2ab-8a6b590faac2",
+            "name": "jsim.script.condition.AircraftLandCompleteCondition",
+            "category": "condition",
+            "title": "检查航空兵降落完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -96,
+              "y": 24
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 504.5,
+          "camera_z": 1,
+          "x": -528,
+          "y": -60
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "7fc24e10-ec59-419f-8109-45dd284bbe75",
+        "title": "水面舰艇进港task",
+        "description": "",
+        "root": "b9eab444-b046-4168-8fdc-f2d962f5b0a9",
+        "properties": {
+          "TaskCode": 10023
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "9cfbe92a-2326-4c5f-a195-2c33bee51691": {
+            "id": "9cfbe92a-2326-4c5f-a195-2c33bee51691",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": -36
+            }
+          },
+          "aab15d86-6464-4e42-83cd-e3b90ea25a94": {
+            "id": "aab15d86-6464-4e42-83cd-e3b90ea25a94",
+            "name": "jsim.script.task.port.IntoPortAction",
+            "category": "action",
+            "title": "进港",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": 48
+            }
+          },
+          "a6406faf-7d81-4c80-8fea-e04f500737d8": {
+            "id": "a6406faf-7d81-4c80-8fea-e04f500737d8",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": 144
+            }
+          },
+          "b9eab444-b046-4168-8fdc-f2d962f5b0a9": {
+            "id": "b9eab444-b046-4168-8fdc-f2d962f5b0a9",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 12
+            },
+            "children": [
+              "aac6d8ad-3e61-4cf7-86d6-9da31cdc8c2a",
+              "9cfbe92a-2326-4c5f-a195-2c33bee51691",
+              "aab15d86-6464-4e42-83cd-e3b90ea25a94",
+              "a6406faf-7d81-4c80-8fea-e04f500737d8"
+            ]
+          },
+          "aac6d8ad-3e61-4cf7-86d6-9da31cdc8c2a": {
+            "id": "aac6d8ad-3e61-4cf7-86d6-9da31cdc8c2a",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": 180,
+              "y": -120
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -228,
+          "y": 12
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "b8f20fd2-e254-472d-8d08-dc5853f3a17c",
+        "title": "水面舰艇出港task",
+        "description": "",
+        "root": "86c8b8d1-eef5-41f8-9674-c8b95b120715",
+        "properties": {
+          "TaskCode": 10024
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "86c8b8d1-eef5-41f8-9674-c8b95b120715": {
+            "id": "86c8b8d1-eef5-41f8-9674-c8b95b120715",
+            "name": "MemSequence",
+            "category": "composite",
+            "title": "MemSequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 60,
+              "y": 0
+            },
+            "children": [
+              "a0642e9d-50ed-4f11-9171-90d39a04190b",
+              "1cc8ecac-e03e-40ec-803c-f120ef3bfbea",
+              "401d143a-0303-4649-8e2e-cf8edbec4630",
+              "e93d1915-9b13-49e0-846d-ff12e1bc0ab3"
+            ]
+          },
+          "a0642e9d-50ed-4f11-9171-90d39a04190b": {
+            "id": "a0642e9d-50ed-4f11-9171-90d39a04190b",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": 264,
+              "y": -132
+            }
+          },
+          "1cc8ecac-e03e-40ec-803c-f120ef3bfbea": {
+            "id": "1cc8ecac-e03e-40ec-803c-f120ef3bfbea",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": 264,
+              "y": -48
+            }
+          },
+          "401d143a-0303-4649-8e2e-cf8edbec4630": {
+            "id": "401d143a-0303-4649-8e2e-cf8edbec4630",
+            "name": "jsim.script.task.port.LeavePortAction",
+            "category": "action",
+            "title": "出港",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 264,
+              "y": 36
+            }
+          },
+          "e93d1915-9b13-49e0-846d-ff12e1bc0ab3": {
+            "id": "e93d1915-9b13-49e0-846d-ff12e1bc0ab3",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 264,
+              "y": 132
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -144,
+          "y": 0
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "c3024c22-3886-41cb-af4c-3116867cb70e",
+        "title": "装载task",
+        "description": "",
+        "root": "663e7935-da9a-4e71-9315-3676f238598e",
+        "properties": {
+          "TaskCode": 10018
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "663e7935-da9a-4e71-9315-3676f238598e": {
+            "id": "663e7935-da9a-4e71-9315-3676f238598e",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -216,
+              "y": 36
+            },
+            "children": [
+              "07fe78c6-78f9-4fb2-8d9d-beafde98ba92",
+              "37183ff5-2421-4bb3-8cf8-c1d6b29b57ce",
+              "92da8eca-fcc2-454d-9429-1ce37366ecf0",
+              "dbcc05cb-8cc1-46c4-8fcc-9f32cb1b494b"
+            ]
+          },
+          "37183ff5-2421-4bb3-8cf8-c1d6b29b57ce": {
+            "id": "37183ff5-2421-4bb3-8cf8-c1d6b29b57ce",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": -12,
+              "y": -12
+            }
+          },
+          "dbcc05cb-8cc1-46c4-8fcc-9f32cb1b494b": {
+            "id": "dbcc05cb-8cc1-46c4-8fcc-9f32cb1b494b",
+            "name": "jsim.script.task.loadingAndUnLoading.Loading",
+            "category": "action",
+            "title": "装载",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -12,
+              "y": 168
+            }
+          },
+          "92da8eca-fcc2-454d-9429-1ce37366ecf0": {
+            "id": "92da8eca-fcc2-454d-9429-1ce37366ecf0",
+            "name": "jsim.script.condition.loadingAndUnLoading.CheckLoadingAbilityValid",
+            "category": "condition",
+            "title": "检查装载能力",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -12,
+              "y": 72
+            }
+          },
+          "07fe78c6-78f9-4fb2-8d9d-beafde98ba92": {
+            "id": "07fe78c6-78f9-4fb2-8d9d-beafde98ba92",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -12,
+              "y": -96
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -420,
+          "y": 36
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "cf35e88b-a6f4-4c10-8e23-08f96f098219",
+        "title": "卸载task",
+        "description": "",
+        "root": "d4858c2b-808a-457b-bce3-02162cb92e46",
+        "properties": {
+          "TaskCode": 10019
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "d4858c2b-808a-457b-bce3-02162cb92e46": {
+            "id": "d4858c2b-808a-457b-bce3-02162cb92e46",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -228,
+              "y": 60
+            },
+            "children": [
+              "e66a10c7-f11e-4237-89b4-c39ef82225ab",
+              "81349f77-567c-441e-8b7f-883fc3a3c180",
+              "9bd0d68b-9bcc-4bc4-b36e-49c4df1b33ad",
+              "e55903bb-6c3e-4efe-9090-fe1456361e1f"
+            ]
+          },
+          "e66a10c7-f11e-4237-89b4-c39ef82225ab": {
+            "id": "e66a10c7-f11e-4237-89b4-c39ef82225ab",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": -72
+            }
+          },
+          "81349f77-567c-441e-8b7f-883fc3a3c180": {
+            "id": "81349f77-567c-441e-8b7f-883fc3a3c180",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 12
+            }
+          },
+          "9bd0d68b-9bcc-4bc4-b36e-49c4df1b33ad": {
+            "id": "9bd0d68b-9bcc-4bc4-b36e-49c4df1b33ad",
+            "name": "jsim.script.condition.loadingAndUnLoading.CheckUnLoadingAbilityValid",
+            "category": "condition",
+            "title": "检查卸载能力",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 96
+            }
+          },
+          "e55903bb-6c3e-4efe-9090-fe1456361e1f": {
+            "id": "e55903bb-6c3e-4efe-9090-fe1456361e1f",
+            "name": "jsim.script.task.loadingAndUnLoading.UnLoading",
+            "category": "action",
+            "title": "卸载",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -24,
+              "y": 192
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -432,
+          "y": 60
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "97d14e8d-02ef-471b-a776-e964912b3777",
+        "title": "航空兵空战",
+        "description": "",
+        "root": "2ffb1be7-985a-491a-a5fc-25f93665f841",
+        "properties": {
+          "TaskCode": 10033
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {
+          "c5c76e5b-7998-4242-8e8c-0c9a84f7290d": {
+            "id": "c5c76e5b-7998-4242-8e8c-0c9a84f7290d",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -192
+            }
+          },
+          "2ffb1be7-985a-491a-a5fc-25f93665f841": {
+            "id": "2ffb1be7-985a-491a-a5fc-25f93665f841",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -264,
+              "y": 48
+            },
+            "children": [
+              "c5c76e5b-7998-4242-8e8c-0c9a84f7290d",
+              "471ab213-c7b0-4252-8742-e9c968325d49",
+              "742e5b60-a90b-41b7-89b4-6c2f5938d3a5",
+              "49738731-d309-4159-b1ec-43bd12352bbf",
+              "768ccb00-e3a6-4371-82ff-4e5bdc60c867"
+            ]
+          },
+          "471ab213-c7b0-4252-8742-e9c968325d49": {
+            "id": "471ab213-c7b0-4252-8742-e9c968325d49",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -108
+            }
+          },
+          "742e5b60-a90b-41b7-89b4-6c2f5938d3a5": {
+            "id": "742e5b60-a90b-41b7-89b4-6c2f5938d3a5",
+            "name": "jsim.script.condition.attack.CheckAttackEquipCondition",
+            "category": "condition",
+            "title": "检查是否具备对目标打击设备及能力",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 12,
+              "y": -24
+            }
+          },
+          "49738731-d309-4159-b1ec-43bd12352bbf": {
+            "id": "49738731-d309-4159-b1ec-43bd12352bbf",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": 120
+            },
+            "children": [
+              "45d8710e-95f6-4703-8891-f8110b2f5adf",
+              "b88681a3-8af6-4383-8515-be4cb78856a2"
+            ]
+          },
+          "45d8710e-95f6-4703-8891-f8110b2f5adf": {
+            "id": "45d8710e-95f6-4703-8891-f8110b2f5adf",
+            "name": "jsim.script.condition.AirWarfareHasTacticsCondition",
+            "category": "condition",
+            "title": "空战是否加载策略",
+            "description": "AirWarfareHasTacticsCondition",
+            "properties": {},
+            "display": {
+              "x": 156,
+              "y": 72
+            }
+          },
+          "b88681a3-8af6-4383-8515-be4cb78856a2": {
+            "id": "b88681a3-8af6-4383-8515-be4cb78856a2",
+            "name": "jsim.script.task.AirWarfareLoadingTactics",
+            "category": "action",
+            "title": "空战加载策略",
+            "description": "AirWarfareLoadingTactics",
+            "properties": {},
+            "display": {
+              "x": 156,
+              "y": 156
+            }
+          },
+          "ac5d408f-6c81-4897-a5c9-df90a019e695": {
+            "id": "ac5d408f-6c81-4897-a5c9-df90a019e695",
+            "name": "jsim.script.condition.AirWarfareEndCondition",
+            "category": "condition",
+            "title": "空战结束条件",
+            "description": "AirWarfareEndCondition",
+            "properties": {},
+            "display": {
+              "x": 360,
+              "y": 252
+            }
+          },
+          "125c4406-58a9-4b22-8d35-da55347a975e": {
+            "id": "125c4406-58a9-4b22-8d35-da55347a975e",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 156,
+              "y": 288
+            },
+            "children": [
+              "ac5d408f-6c81-4897-a5c9-df90a019e695",
+              "a781e40d-eed1-4e5d-88c5-d5141df74f67"
+            ]
+          },
+          "a781e40d-eed1-4e5d-88c5-d5141df74f67": {
+            "id": "a781e40d-eed1-4e5d-88c5-d5141df74f67",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 360,
+              "y": 336
+            }
+          },
+          "9351d46f-2951-448e-83a9-2c0a649d9a03": {
+            "id": "9351d46f-2951-448e-83a9-2c0a649d9a03",
+            "name": "jsim.script.task.AirWarfareGetTarget",
+            "category": "action",
+            "title": "空战读取目标态势",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 360,
+              "y": 420
+            }
+          },
+          "768ccb00-e3a6-4371-82ff-4e5bdc60c867": {
+            "id": "768ccb00-e3a6-4371-82ff-4e5bdc60c867",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": 408
+            },
+            "children": [
+              "125c4406-58a9-4b22-8d35-da55347a975e",
+              "075ea46e-b3ee-4030-867f-4d0fb752a5a8"
+            ]
+          },
+          "075ea46e-b3ee-4030-867f-4d0fb752a5a8": {
+            "id": "075ea46e-b3ee-4030-867f-4d0fb752a5a8",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 156,
+              "y": 528
+            },
+            "children": [
+              "9351d46f-2951-448e-83a9-2c0a649d9a03",
+              "695c57ef-11af-46f1-9442-a8b1fd0baf0e",
+              "a68014f9-979e-4dcd-96ec-8e00fc3260f6",
+              "8f56cc87-404e-426f-8593-e9f06f5f3c4d"
+            ]
+          },
+          "85cc70cd-c855-42bb-8c73-9424b4f83fc3": {
+            "id": "85cc70cd-c855-42bb-8c73-9424b4f83fc3",
+            "name": "Succeeder",
+            "category": "action",
+            "title": "Succeeder",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 564,
+              "y": 684
+            }
+          },
+          "8fd5c6fb-3420-49a7-b5f4-5a36bff63716": {
+            "id": "8fd5c6fb-3420-49a7-b5f4-5a36bff63716",
+            "name": "jsim.script.task.AirWarfareSelectWeapon",
+            "category": "action",
+            "title": "空战选择武器",
+            "description": "AirWarfareSelectWeapon",
+            "properties": {},
+            "display": {
+              "x": 780,
+              "y": 516
+            }
+          },
+          "0973f361-699b-47ce-8fd4-7524c9aa9a78": {
+            "id": "0973f361-699b-47ce-8fd4-7524c9aa9a78",
+            "name": "jsim.script.task.AirWarfareFireWeapon",
+            "category": "action",
+            "title": "空战发射武器",
+            "description": "AirWarfareFireWeapon",
+            "properties": {},
+            "display": {
+              "x": 780,
+              "y": 600
+            }
+          },
+          "a68014f9-979e-4dcd-96ec-8e00fc3260f6": {
+            "id": "a68014f9-979e-4dcd-96ec-8e00fc3260f6",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 384,
+              "y": 864
+            },
+            "children": [
+              "f15e067e-8b6c-4bd3-8d44-9f79503130e6",
+              "d8dbbe4d-0d8a-474b-8f08-a70994c4adfc"
+            ]
+          },
+          "8f56cc87-404e-426f-8593-e9f06f5f3c4d": {
+            "id": "8f56cc87-404e-426f-8593-e9f06f5f3c4d",
+            "name": "Failer",
+            "category": "action",
+            "title": "Failer",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 420,
+              "y": 1020
+            }
+          },
+          "f15e067e-8b6c-4bd3-8d44-9f79503130e6": {
+            "id": "f15e067e-8b6c-4bd3-8d44-9f79503130e6",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 540,
+              "y": 816
+            },
+            "children": [
+              "be1a7334-cce8-47d8-baef-e6720c248af2",
+              "b91df286-281b-496d-829a-f0bd3d3a947f"
+            ]
+          },
+          "d8dbbe4d-0d8a-474b-8f08-a70994c4adfc": {
+            "id": "d8dbbe4d-0d8a-474b-8f08-a70994c4adfc",
+            "name": "Succeeder",
+            "category": "action",
+            "title": "Succeeder",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 588,
+              "y": 912
+            }
+          },
+          "b91df286-281b-496d-829a-f0bd3d3a947f": {
+            "id": "b91df286-281b-496d-829a-f0bd3d3a947f",
+            "name": "jsim.script.task.ElectronicInterference",
+            "category": "action",
+            "title": "电子干扰",
+            "description": "ElectronicInterference",
+            "properties": {},
+            "display": {
+              "x": 792,
+              "y": 840
+            }
+          },
+          "be1a7334-cce8-47d8-baef-e6720c248af2": {
+            "id": "be1a7334-cce8-47d8-baef-e6720c248af2",
+            "name": "jsim.script.condition.CheckInterferenceCondition",
+            "category": "condition",
+            "title": "检查电子干扰条件",
+            "description": "CheckInterferenceCondition",
+            "properties": {},
+            "display": {
+              "x": 792,
+              "y": 768
+            }
+          },
+          "46bbac64-8543-4d69-a09e-7cce07a95e5e": {
+            "id": "46bbac64-8543-4d69-a09e-7cce07a95e5e",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 516,
+              "y": 552
+            },
+            "children": [
+              "8fd5c6fb-3420-49a7-b5f4-5a36bff63716",
+              "0973f361-699b-47ce-8fd4-7524c9aa9a78"
+            ]
+          },
+          "695c57ef-11af-46f1-9442-a8b1fd0baf0e": {
+            "id": "695c57ef-11af-46f1-9442-a8b1fd0baf0e",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 360,
+              "y": 600
+            },
+            "children": [
+              "46bbac64-8543-4d69-a09e-7cce07a95e5e",
+              "85cc70cd-c855-42bb-8c73-9424b4f83fc3"
+            ]
+          }
+        },
+        "display": {
+          "camera_x": 1098,
+          "camera_y": 380.5,
+          "camera_z": 1,
+          "x": -468,
+          "y": 48
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "e82b6d03-fc06-41d5-8958-535a91130f4b",
+        "title": "航空兵拦截",
+        "description": "",
+        "root": null,
+        "properties": {
+          "TaskCode": 10034
+        },
+        "parent": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "nodes": {},
+        "display": {
+          "camera_x": 960,
+          "camera_y": 504.5,
+          "camera_z": 1,
+          "x": -480,
+          "y": -12
+        }
+      },
+      {
+        "version": "0.3.0",
+        "scope": "tree",
+        "id": "ee8c567d-9028-49dc-92f9-43ee91f741f0",
+        "title": "潜艇充电",
+        "description": "",
+        "root": "1dfcc767-cc68-410e-8129-de9e114df152",
+        "properties": {
+          "TaskCode": 10062
+        },
+        "nodes": {
+          "738b9979-d2d7-419d-8af8-797ebaeff742": {
+            "id": "738b9979-d2d7-419d-8af8-797ebaeff742",
+            "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+            "category": "condition",
+            "title": "检查任务时间",
+            "description": "检查任务时间，是否开始，是否结束等",
+            "properties": {},
+            "display": {
+              "x": -276,
+              "y": -420
+            }
+          },
+          "1dfcc767-cc68-410e-8129-de9e114df152": {
+            "id": "1dfcc767-cc68-410e-8129-de9e114df152",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -480,
+              "y": -108
+            },
+            "children": [
+              "738b9979-d2d7-419d-8af8-797ebaeff742",
+              "8a0a3b81-f8bc-47e0-9072-a2b1d6b8c641"
+            ]
+          },
+          "8a0a3b81-f8bc-47e0-9072-a2b1d6b8c641": {
+            "id": "8a0a3b81-f8bc-47e0-9072-a2b1d6b8c641",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -276,
+              "y": 192
+            },
+            "children": [
+              "c6cfd45c-d55f-4669-8971-db471a714e43",
+              "2e491698-8208-4559-bca8-c4e43c58d9be",
+              "456976e9-8532-44af-8449-3248ae181ddb"
+            ]
+          },
+          "c6cfd45c-d55f-4669-8971-db471a714e43": {
+            "id": "c6cfd45c-d55f-4669-8971-db471a714e43",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": -144
+            },
+            "children": [
+              "04fbd4c2-d708-4147-85bc-81224288538d",
+              "51d50de4-61da-4576-9be8-a779e1abd520",
+              "d458ea04-6550-4f8d-aa4d-4ba111a715db",
+              "ed5ffae0-ee83-40cf-8aea-70a59c7b82b1",
+              "e69efef6-242a-454c-8042-f1423acd0fc6"
+            ]
+          },
+          "04fbd4c2-d708-4147-85bc-81224288538d": {
+            "id": "04fbd4c2-d708-4147-85bc-81224288538d",
+            "name": "jsim.script.condition.common.CheckTaskStepMatchCondition",
+            "category": "condition",
+            "title": "检查任务阶段是否匹配",
+            "description": "检查任务阶段是否匹配",
+            "properties": {
+              "taskStep": "start"
+            },
+            "display": {
+              "x": 144,
+              "y": -384
+            }
+          },
+          "3b834d45-1b5b-41ef-a3ef-4cd5e9286c6f": {
+            "id": "3b834d45-1b5b-41ef-a3ef-4cd5e9286c6f",
+            "name": "jsim.script.condition.charge.CheckNeedChargeCondition",
+            "category": "condition",
+            "title": "检查是否需要充电",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 348,
+              "y": -240
+            }
+          },
+          "d458ea04-6550-4f8d-aa4d-4ba111a715db": {
+            "id": "d458ea04-6550-4f8d-aa4d-4ba111a715db",
+            "name": "Priority",
+            "category": "composite",
+            "title": "Priority",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 144,
+              "y": -192
+            },
+            "children": [
+              "3b834d45-1b5b-41ef-a3ef-4cd5e9286c6f",
+              "737ead3e-cb14-41d3-8a87-f3b9ad2da7c6"
+            ]
+          },
+          "ed5ffae0-ee83-40cf-8aea-70a59c7b82b1": {
+            "id": "ed5ffae0-ee83-40cf-8aea-70a59c7b82b1",
+            "name": "jsim.script.task.mover.FloatingToWaterAction",
+            "category": "action",
+            "title": "上浮到水面",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 144,
+              "y": -60
+            }
+          },
+          "e69efef6-242a-454c-8042-f1423acd0fc6": {
+            "id": "e69efef6-242a-454c-8042-f1423acd0fc6",
+            "name": "jsim.script.task.common.UpdateTaskStepAction",
+            "category": "action",
+            "title": "更新任务阶段",
+            "description": "根据propties中的配置更新任务阶段",
+            "properties": {
+              "taskStep": "move"
+            },
+            "display": {
+              "x": 144,
+              "y": 24
+            }
+          },
+          "2e491698-8208-4559-bca8-c4e43c58d9be": {
+            "id": "2e491698-8208-4559-bca8-c4e43c58d9be",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": 204
+            },
+            "children": [
+              "a3b75a01-da44-455e-8ad3-9f147d21b4ff",
+              "444ca79d-2466-4d71-82b9-322cfa6a743c",
+              "f720047e-804b-4b68-8c79-3a023042f9b5"
+            ]
+          },
+          "a3b75a01-da44-455e-8ad3-9f147d21b4ff": {
+            "id": "a3b75a01-da44-455e-8ad3-9f147d21b4ff",
+            "name": "jsim.script.condition.common.CheckTaskStepMatchCondition",
+            "category": "condition",
+            "title": "检查任务阶段是否匹配",
+            "description": "检查任务阶段是否匹配",
+            "properties": {
+              "taskStep": "move"
+            },
+            "display": {
+              "x": 144,
+              "y": 108
+            }
+          },
+          "444ca79d-2466-4d71-82b9-322cfa6a743c": {
+            "id": "444ca79d-2466-4d71-82b9-322cfa6a743c",
+            "name": "jsim.script.condition.common.CheckArriveSpecificPositionCondition",
+            "category": "condition",
+            "title": "检查是否到达指定位置",
+            "description": "检查是否到达指定位置",
+            "properties": {},
+            "display": {
+              "x": 144,
+              "y": 204
+            }
+          },
+          "f720047e-804b-4b68-8c79-3a023042f9b5": {
+            "id": "f720047e-804b-4b68-8c79-3a023042f9b5",
+            "name": "jsim.script.task.common.UpdateTaskStepAction",
+            "category": "action",
+            "title": "更新任务阶段",
+            "description": "根据propties中的配置更新任务阶段",
+            "properties": {
+              "taskStep": "charge"
+            },
+            "display": {
+              "x": 144,
+              "y": 288
+            }
+          },
+          "456976e9-8532-44af-8449-3248ae181ddb": {
+            "id": "456976e9-8532-44af-8449-3248ae181ddb",
+            "name": "Sequence",
+            "category": "composite",
+            "title": "Sequence",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": -60,
+              "y": 504
+            },
+            "children": [
+              "742c83b5-6382-431d-9452-0adc85a3ad58",
+              "810c24b6-947e-472b-ac5f-b37db9123507",
+              "42c50392-0e1a-42da-8e94-9e044992cfdb",
+              "958c604a-d39d-4456-984b-fef877a406b4"
+            ]
+          },
+          "742c83b5-6382-431d-9452-0adc85a3ad58": {
+            "id": "742c83b5-6382-431d-9452-0adc85a3ad58",
+            "name": "jsim.script.condition.common.CheckTaskStepMatchCondition",
+            "category": "condition",
+            "title": "检查任务阶段是否匹配",
+            "description": "检查任务阶段是否匹配",
+            "properties": {
+              "taskStep": "charge"
+            },
+            "display": {
+              "x": 144,
+              "y": 372
+            }
+          },
+          "810c24b6-947e-472b-ac5f-b37db9123507": {
+            "id": "810c24b6-947e-472b-ac5f-b37db9123507",
+            "name": "jsim.script.task.charge.ChargeBatteryAction",
+            "category": "action",
+            "title": "充电",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 144,
+              "y": 468
+            }
+          },
+          "958c604a-d39d-4456-984b-fef877a406b4": {
+            "id": "958c604a-d39d-4456-984b-fef877a406b4",
+            "name": "jsim.script.task.common.UpdateTaskStepAction",
+            "category": "action",
+            "title": "更新任务阶段",
+            "description": "根据propties中的配置更新任务阶段",
+            "properties": {
+              "taskStep": "finish"
+            },
+            "display": {
+              "x": 144,
+              "y": 636
+            }
+          },
+          "42c50392-0e1a-42da-8e94-9e044992cfdb": {
+            "id": "42c50392-0e1a-42da-8e94-9e044992cfdb",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 144,
+              "y": 552
+            }
+          },
+          "737ead3e-cb14-41d3-8a87-f3b9ad2da7c6": {
+            "id": "737ead3e-cb14-41d3-8a87-f3b9ad2da7c6",
+            "name": "Inverter",
+            "category": "decorator",
+            "title": "Inverter",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 348,
+              "y": -156
+            },
+            "child": "a4b860df-b07a-4f4f-8f30-ab08f031dd9b"
+          },
+          "a4b860df-b07a-4f4f-8f30-ab08f031dd9b": {
+            "id": "a4b860df-b07a-4f4f-8f30-ab08f031dd9b",
+            "name": "jsim.script.task.SetMissionFinished",
+            "category": "action",
+            "title": "任务完成",
+            "description": "",
+            "properties": {},
+            "display": {
+              "x": 564,
+              "y": -156
+            }
+          },
+          "51d50de4-61da-4576-9be8-a779e1abd520": {
+            "id": "51d50de4-61da-4576-9be8-a779e1abd520",
+            "name": "jsim.script.condition.common.CheckTaskValidCondition",
+            "category": "condition",
+            "title": "检查任务合法性",
+            "description": "任务合法性校验",
+            "properties": {},
+            "display": {
+              "x": 168,
+              "y": -300
+            }
+          }
+        },
+        "display": {
+          "camera_x": 960,
+          "camera_y": 508.5,
+          "camera_z": 1,
+          "x": -684,
+          "y": -108
+        }
+      }
+    ],
+    "custom_nodes": [
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.common.CheckTaskValidCondition",
+        "category": "condition",
+        "title": "检查任务合法性",
+        "description": "任务合法性校验",
+        "properties": {},
+        "parent": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.common.CheckTaskStepMatchCondition",
+        "category": "condition",
+        "title": "检查任务阶段是否匹配",
+        "description": "检查任务阶段是否匹配",
+        "properties": {},
+        "parent": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.common.CheckTaskTimeCondition",
+        "category": "condition",
+        "title": "检查任务时间",
+        "description": "检查任务时间，是否开始，是否结束等",
+        "properties": {},
+        "parent": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.common.CheckArriveSpecificPositionCondition",
+        "category": "condition",
+        "title": "检查是否到达指定位置",
+        "description": "检查是否到达指定位置",
+        "properties": {},
+        "parent": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.common.CheckNeedMotionCondition",
+        "category": "condition",
+        "title": "检查是否需要机动",
+        "description": "检查是否需要机动",
+        "properties": {},
+        "parent": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.mover.PlanRouteMove",
+        "category": "action",
+        "title": "计划航线机动",
+        "description": null,
+        "properties": {},
+        "parent": "3dc371d4-1fa4-4efc-86a0-24a704e98796"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckPlanRouteMoveTaskValid",
+        "category": "condition",
+        "title": "检查计划航线机动任务参数合规性",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckManeuverabilityValid",
+        "category": "condition",
+        "title": "检查机动能力",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckMoverTaskStatusValid",
+        "category": "condition",
+        "title": "检查机动任务完成状态",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckBattleEnvValid",
+        "category": "condition",
+        "title": "检查战场环境是否满足机动",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckConstantMoveTaskValid",
+        "category": "condition",
+        "title": "检查定向定速机动任务参数合规性",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.mover.ConstantSpeedOrientationMove",
+        "category": "action",
+        "title": "定向定速机动",
+        "description": null,
+        "properties": {},
+        "parent": "3dc371d4-1fa4-4efc-86a0-24a704e98796"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.attack.CheckAttackEquipCondition",
+        "category": "condition",
+        "title": "检查是否具备对目标打击设备及能力",
+        "description": null,
+        "properties": {},
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.attack.CheckFireCondition",
+        "category": "condition",
+        "title": "检查发射条件",
+        "description": null,
+        "properties": {},
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.detect.SearchAction",
+        "category": "action",
+        "title": "进行侦察",
+        "description": null,
+        "properties": {},
+        "parent": "82bf1702-c504-4bb3-8cc2-ce73f88eb3ba"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.detect.CheckRadarSearchEquipCondition",
+        "category": "condition",
+        "title": "雷达设备能力校验",
+        "description": null,
+        "properties": {},
+        "parent": "f7a507fa-9ef3-4664-890e-bba584c88b7b"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.detect.CheckSonarSearchEquipCondition",
+        "category": "condition",
+        "title": "声呐设备能力校验",
+        "description": null,
+        "properties": {},
+        "parent": "f7a507fa-9ef3-4664-890e-bba584c88b7b"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.common.UpdateTaskStepAction",
+        "category": "action",
+        "title": "更新任务阶段",
+        "description": "根据propties中的配置更新任务阶段",
+        "properties": {},
+        "parent": "320a72e0-ee02-492d-84e3-31ad33c9e041"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.detect.TurnOnRadarAction",
+        "category": "action",
+        "title": "雷达开机",
+        "description": null,
+        "properties": {},
+        "parent": "82bf1702-c504-4bb3-8cc2-ce73f88eb3ba"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.detect.TurnOnSonarAction",
+        "category": "action",
+        "title": "声呐开机",
+        "description": null,
+        "properties": {},
+        "parent": "82bf1702-c504-4bb3-8cc2-ce73f88eb3ba"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.mover.AreaManeuver",
+        "category": "action",
+        "title": "区域机动",
+        "description": null,
+        "properties": {},
+        "parent": "3dc371d4-1fa4-4efc-86a0-24a704e98796"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckAreaManeuverTaskValid",
+        "category": "condition",
+        "title": "检查区域机动任务合规性",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.mover.CheckIsInAreaValid",
+        "category": "condition",
+        "title": "检查是否在区域内",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.GetAllWeapons",
+        "category": "action",
+        "title": "获取所有可以手动发射的武器",
+        "description": "GetAllWeapons",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.FireSelectWeaponTask",
+        "category": "action",
+        "title": "定方位发射所选武器",
+        "description": "FireSelectWeaponTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.attack.CheckAttackModeCondition",
+        "category": "condition",
+        "title": "检查打击模式",
+        "description": "CheckAttackModeCondition\nattackMode: 分为Auto和Manual, 分别是自动和手动模式, 默认Auto",
+        "properties": {
+          "attackMode": "Auto"
+        },
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.ReadLaunchStateTask",
+        "category": "action",
+        "title": "检查发射状态",
+        "description": "ReadLaunchStateTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.ReadTargetSituationTask",
+        "category": "action",
+        "title": "读取目标状态",
+        "description": "ReadTargetSituationTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.LaunchTask",
+        "category": "action",
+        "title": "检查指定目标的发射状态",
+        "description": "LaunchTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.attack.CheckDefenceAreaStatusCondition",
+        "category": "condition",
+        "title": "检查区域防御任务状态",
+        "description": "CheckDefenceAreaStatusCondition",
+        "properties": {},
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.AircraftLaunchReadyCondition",
+        "category": "condition",
+        "title": "检查航空兵起飞准备是否就绪",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.AircraftLandingCondition",
+        "category": "condition",
+        "title": "检查舰船能否降落航空兵",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.AircraftLaunchingCondition",
+        "category": "condition",
+        "title": "检查舰船能否起飞航空兵",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AircraftLandTask",
+        "category": "action",
+        "title": "航空兵降落",
+        "description": null,
+        "properties": {},
+        "parent": "3dc371d4-1fa4-4efc-86a0-24a704e98796"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AircraftLaunchTask",
+        "category": "action",
+        "title": "航空兵起飞",
+        "description": null,
+        "properties": {},
+        "parent": "3dc371d4-1fa4-4efc-86a0-24a704e98796"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AircraftLaunchReadyTask",
+        "category": "action",
+        "title": "航空兵起飞准备",
+        "description": null,
+        "properties": {},
+        "parent": "3dc371d4-1fa4-4efc-86a0-24a704e98796"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.SetMissionFinished",
+        "category": "action",
+        "title": "任务完成",
+        "description": null,
+        "properties": {},
+        "parent": "320a72e0-ee02-492d-84e3-31ad33c9e041"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.AircraftLandCompleteCondition",
+        "category": "condition",
+        "title": "检查航空兵降落完成",
+        "description": null,
+        "properties": {},
+        "parent": "238b822d-d070-4abb-a346-acfb571be018"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.port.IntoPortAction",
+        "category": "action",
+        "title": "进港",
+        "description": null,
+        "properties": {},
+        "parent": "748a6ccc-ce3c-4776-8f35-66b6e4d64fbe"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.port.LeavePortAction",
+        "category": "action",
+        "title": "出港",
+        "description": null,
+        "properties": {},
+        "parent": "748a6ccc-ce3c-4776-8f35-66b6e4d64fbe"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.loadingAndUnLoading.Loading",
+        "category": "action",
+        "title": "装载",
+        "description": null,
+        "properties": {},
+        "parent": "d1be15a3-3ba8-4b89-b352-9c8259857391"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.loadingAndUnLoading.CheckLoadingAbilityValid",
+        "category": "condition",
+        "title": "检查装载能力",
+        "description": null,
+        "properties": {},
+        "parent": "0fcb5217-4505-47fd-9e9d-f50ef6654fe5"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.loadingAndUnLoading.CheckUnLoadingAbilityValid",
+        "category": "condition",
+        "title": "检查卸载能力",
+        "description": null,
+        "properties": {},
+        "parent": "0fcb5217-4505-47fd-9e9d-f50ef6654fe5"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.loadingAndUnLoading.UnLoading",
+        "category": "action",
+        "title": "卸载",
+        "description": null,
+        "properties": {},
+        "parent": "d1be15a3-3ba8-4b89-b352-9c8259857391"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.GetTrackListInArcTask",
+        "category": "action",
+        "title": "获取指定扇面内的目标",
+        "description": "GetTrackListInArcTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.GetTrackListInRangeTask",
+        "category": "action",
+        "title": "获取射程内的目标",
+        "description": "GetTrackListInRangeTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.attack.EngageTask",
+        "category": "action",
+        "title": "发起交战",
+        "description": "EngageTask",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.AirWarfareEndCondition",
+        "category": "condition",
+        "title": "空战结束条件",
+        "description": "AirWarfareEndCondition",
+        "properties": {},
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.AirWarfareHasTacticsCondition",
+        "category": "condition",
+        "title": "空战是否加载策略",
+        "description": "AirWarfareHasTacticsCondition",
+        "properties": {},
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.CheckInterferenceCondition",
+        "category": "condition",
+        "title": "检查电子干扰条件",
+        "description": "CheckInterferenceCondition",
+        "properties": {},
+        "parent": "2802ff63-59ff-444e-95c3-56b1d7e9642f"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AirWarfareGetTarget",
+        "category": "action",
+        "title": "空战读取目标态势",
+        "description": null,
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AirWarfareFireWeapon",
+        "category": "action",
+        "title": "空战发射武器",
+        "description": "AirWarfareFireWeapon",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AirWarfareLoadingTactics",
+        "category": "action",
+        "title": "空战加载策略",
+        "description": "AirWarfareLoadingTactics",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.AirWarfareSelectWeapon",
+        "category": "action",
+        "title": "空战选择武器",
+        "description": "AirWarfareSelectWeapon",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.ElectronicInterference",
+        "category": "action",
+        "title": "电子干扰",
+        "description": "ElectronicInterference",
+        "properties": {},
+        "parent": "e9543b3c-2077-4bbb-aea0-4e694843aeeb"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.attack.CheckTaskStatusCondition",
+        "category": "condition",
+        "title": "检查任务状态",
+        "description": "CheckTaskStatusCondition",
+        "properties": {},
+        "parent": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.condition.charge.CheckNeedChargeCondition",
+        "category": "condition",
+        "title": "检查是否需要充电",
+        "description": null,
+        "properties": {},
+        "parent": "36c2c2a5-62d9-424a-8dbc-34de5aef63d0"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.mover.FloatingToWaterAction",
+        "category": "action",
+        "title": "上浮到水面",
+        "description": null,
+        "properties": {},
+        "parent": "b3b810c1-939c-45d2-8841-ad06193bcf39"
+      },
+      {
+        "version": "0.3.0",
+        "scope": "node",
+        "name": "jsim.script.task.charge.ChargeBatteryAction",
+        "category": "action",
+        "title": "充电",
+        "description": null,
+        "properties": {},
+        "parent": "b3b810c1-939c-45d2-8841-ad06193bcf39"
+      }
+    ],
+    "custom_folders": [
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "3196c6ea-de58-447b-a2d4-221589f0515e",
+        "category": "tree",
+        "title": "mission",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "99d8c677-8134-4a94-8714-7307e68511c4",
+        "category": "tree",
+        "title": "task",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "2b84f6c5-d208-4ac4-8e57-f5a7ebad6359",
+        "category": "condition",
+        "title": "common",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "3dc371d4-1fa4-4efc-86a0-24a704e98796",
+        "category": "action",
+        "title": "机动action",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "238b822d-d070-4abb-a346-acfb571be018",
+        "category": "condition",
+        "title": "机动condition",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "2802ff63-59ff-444e-95c3-56b1d7e9642f",
+        "category": "condition",
+        "title": "打击condition",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "e9543b3c-2077-4bbb-aea0-4e694843aeeb",
+        "category": "action",
+        "title": "打击action",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "82bf1702-c504-4bb3-8cc2-ce73f88eb3ba",
+        "category": "action",
+        "title": "探测action",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "f7a507fa-9ef3-4664-890e-bba584c88b7b",
+        "category": "condition",
+        "title": "探测condition",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "320a72e0-ee02-492d-84e3-31ad33c9e041",
+        "category": "action",
+        "title": "common",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "748a6ccc-ce3c-4776-8f35-66b6e4d64fbe",
+        "category": "action",
+        "title": "港口",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "d1be15a3-3ba8-4b89-b352-9c8259857391",
+        "category": "action",
+        "title": "装卸载action",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "0fcb5217-4505-47fd-9e9d-f50ef6654fe5",
+        "category": "condition",
+        "title": "装卸载condition",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "36c2c2a5-62d9-424a-8dbc-34de5aef63d0",
+        "category": "condition",
+        "title": "充电condition",
+        "description": null,
+        "parent": null
+      },
+      {
+        "version": "0.3.0",
+        "scope": "folder",
+        "name": "b3b810c1-939c-45d2-8841-ad06193bcf39",
+        "category": "action",
+        "title": "充电action",
+        "description": null,
+        "parent": null
+      }
+    ]
+  },
+  "path": "D:\\download\\jsim_model\\jsim\\jsim-extends-script\\src\\main\\resources\\behaviors\\hz.b3"
+}
