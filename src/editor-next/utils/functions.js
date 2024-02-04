@@ -5,20 +5,18 @@
 /**
  * JSON
  */
-if (!JSON3) {
-  JSON3 = JSON;
-}
+//if (!JSON3) {
+//  JSON3 = JSON;
+//}
 
 /**
  * String.format function
  */
 if (!String.prototype.format) {
-  String.prototype.format = function() {
+  String.prototype.format = function () {
     var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) { 
-      return typeof args[number] != 'undefined'?
-        args[number] : match
-      ;
+    return this.replace(/{(\d+)}/g, function (match, number) {
+      return typeof args[number] != 'undefined' ? args[number] : match;
     });
   };
 }
@@ -27,13 +25,16 @@ if (!String.prototype.format) {
  * Remove function
  */
 if (!Array.prototype.remove) {
-  Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
+  Array.prototype.remove = function () {
+    var what,
+      a = arguments,
+      L = a.length,
+      ax;
     while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-        }
+      what = a[--L];
+      while ((ax = this.indexOf(what)) !== -1) {
+        this.splice(ax, 1);
+      }
     }
     return this;
   };
@@ -41,13 +42,12 @@ if (!Array.prototype.remove) {
 
 /**
  * Array.forEach function
- * 
+ *
  * Production steps of ECMA-262, Edition 5, 15.4.4.18
  * Reference: http://es5.github.io/#x15.4.4.18
  */
 if (!Array.prototype.forEach) {
-  Array.prototype.forEach = function(callback, thisArg) {
-
+  Array.prototype.forEach = function (callback, thisArg) {
     var T, k;
 
     if (this === null) {
@@ -63,7 +63,7 @@ if (!Array.prototype.forEach) {
 
     // 4. If IsCallable(callback) is false, throw a TypeError exception.
     // See: http://es5.github.com/#x9.11
-    if (typeof callback !== "function") {
+    if (typeof callback !== 'function') {
       throw new TypeError(callback + ' is not a function');
     }
 
@@ -77,7 +77,6 @@ if (!Array.prototype.forEach) {
 
     // 7. Repeat, while k < len
     while (k < len) {
-
       var kValue;
 
       // a. Let Pk be ToString(k).
@@ -86,7 +85,6 @@ if (!Array.prototype.forEach) {
       //   This step can be combined with c
       // c. If kPresent is true, then
       if (k in O) {
-
         // i. Let kValue be the result of calling the Get internal method of O with argument Pk.
         kValue = O[k];
 
@@ -106,27 +104,21 @@ if (!Array.prototype.forEach) {
  * From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
  */
 if (!Object.keys) {
-  Object.keys = (function() {
+  Object.keys = (function () {
     'use strict';
     var hasOwnProperty = Object.prototype.hasOwnProperty,
-        hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
-        dontEnums = [
-          'toString',
-          'toLocaleString',
-          'valueOf',
-          'hasOwnProperty',
-          'isPrototypeOf',
-          'propertyIsEnumerable',
-          'constructor'
-        ],
-        dontEnumsLength = dontEnums.length;
+      hasDontEnumBug = !{ toString: null }.propertyIsEnumerable('toString'),
+      dontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'],
+      dontEnumsLength = dontEnums.length;
 
-    return function(obj) {
+    return function (obj) {
       if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
         throw new TypeError('Object.keys called on non-object');
       }
 
-      var result = [], prop, i;
+      var result = [],
+        prop,
+        i;
 
       for (prop in obj) {
         if (hasOwnProperty.call(obj, prop)) {
@@ -143,5 +135,5 @@ if (!Object.keys) {
       }
       return result;
     };
-  }());
+  })();
 }

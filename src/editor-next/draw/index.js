@@ -1,2 +1,2 @@
-export * from './shapes.js'
-export * from './symbols.js'
+export * from './shapes.js';
+export * from './symbols.js';

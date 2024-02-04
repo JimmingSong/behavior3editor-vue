@@ -1,16 +1,15 @@
-import {Command} from "../../utils/Command.js";
-import {Node} from '../../utils/Node.js'
+import { Command } from '../../utils/Command.js';
+import { Node } from '../../utils/Node.js';
 
 export function NodeManager(editor, project) {
-
   /**
    * Register a node to the node list. You can provide:
-   * 
+   *
    * - a `b3.BaseNode` instance.
    * - a `b3e.Node` instance.
    * - a generic object containing the node prototype.
    */
-  this.add = function(node, isDefault) {
+  this.add = function (node, isDefault) {
     if (node.prototype) node = node.prototype;
 
     if (project._nodes[node.name]) {
@@ -18,13 +17,13 @@ export function NodeManager(editor, project) {
     }
 
     if (!(node instanceof Node)) {
-      var n         = new Node(isDefault);
-      n.name        = node.name;
-      n.category    = node.category;
-      n.title       = node.title;
+      var n = new Node(isDefault);
+      n.name = node.name;
+      n.category = node.category;
+      n.title = node.title;
       n.description = node.description;
-      n.properties  = tine.merge({}, node.properties||node.parameters);
-      n.DMNRefs     = node.DMNRefs || [];
+      n.properties = tine.merge({}, node.properties || node.parameters);
+      n.DMNRefs = node.DMNRefs || [];
       node = n;
     }
 
@@ -39,17 +38,17 @@ export function NodeManager(editor, project) {
   };
 
   /**
-   * 
+   *
    */
-  this.get = function(node) {
+  this.get = function (node) {
     if (typeof node !== 'string') return node;
     return project._nodes[node];
   };
 
   /**
-   * 
+   *
    */
-  this.update = function(node, template) {
+  this.update = function (node, template) {
     node = this.get(node);
     var oldName = node.name;
 
@@ -57,16 +56,14 @@ export function NodeManager(editor, project) {
 
     if (node.name !== template.name && this.get(template.name)) return false;
 
-
     var _oldValues = {
-      name        : node.name,
-      title       : node.title,
-      description : node.description,
-      category    : node.category,
-      properties  : node.properties,
-      DMNRefs     : node.DMNRefs,
+      name: node.name,
+      title: node.title,
+      description: node.description,
+      category: node.category,
+      properties: node.properties,
+      DMNRefs: node.DMNRefs
     };
-
 
     if (typeof template.name !== 'undefined') {
       node.name = template.name;
@@ -81,30 +78,29 @@ export function NodeManager(editor, project) {
       node.description = template.description;
     }
     if (typeof template.properties !== 'undefined') {
-      node.properties  = tine.merge({}, template.properties);
+      node.properties = tine.merge({}, template.properties);
     }
     if (typeof template.DMNRefs !== 'undefined') {
-      node.DMNRefs  = template.DMNRefs || [];
+      node.DMNRefs = template.DMNRefs || [];
     }
 
-    
     var _newValues = {
-      name        : node.name,
-      title       : node.title,
-      description : node.description,
-      category    : node.category,
-      properties  : node.properties,
-      DMNRefs     : node.DMNRefs,
+      name: node.name,
+      title: node.title,
+      description: node.description,
+      category: node.category,
+      properties: node.properties,
+      DMNRefs: node.DMNRefs
     };
     if (typeof template.hostFOMObject !== 'undefined') {
-      node.hostFOMObject  = template.hostFOMObject || [];
+      node.hostFOMObject = template.hostFOMObject || [];
       _newValues.hostFOMObject = node.hostFOMObject;
     }
     project.history._beginBatch();
 
-    project.trees.each(function(tree) {
+    project.trees.each(function (tree) {
       var blocks = tree.blocks.getAll();
-      for (var i=blocks.length-1; i>=0; i--) {
+      for (var i = blocks.length - 1; i >= 0; i--) {
         if (blocks[i].name === oldName) {
           tree.blocks.update(blocks[i]);
         }
@@ -122,17 +118,17 @@ export function NodeManager(editor, project) {
   };
 
   /**
-   * 
+   *
    */
-  this.remove = function(node) {
+  this.remove = function (node) {
     project.history._beginBatch();
 
-    var name = node.name||node;
+    var name = node.name || node;
     delete project._nodes[name];
 
-    project.trees.each(function(tree) {
+    project.trees.each(function (tree) {
       var blocks = tree.blocks.getAll();
-      for (var i=blocks.length-1; i>=0; i--) {
+      for (var i = blocks.length - 1; i >= 0; i--) {
         if (blocks[i].name === name) {
           tree.blocks.remove(blocks[i]);
         }
@@ -151,11 +147,11 @@ export function NodeManager(editor, project) {
   /**
    * Iterates over node list.
    */
-  this.each = function(callback, thisarg) {
-    Object.keys(project._nodes).forEach(function(key) {
+  this.each = function (callback, thisarg) {
+    Object.keys(project._nodes).forEach(function (key) {
       callback.call(thisarg, project._nodes[key]);
     });
   };
 
-  this._applySettings = function(settings) {};
-};
+  this._applySettings = function (settings) {};
+}

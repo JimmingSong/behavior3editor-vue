@@ -1,15 +1,15 @@
-import {Command} from "../../utils/Command.js";
-import {Connection} from "../../utils/Connection.js";
+import { Command } from '../../utils/Command.js';
+import { Connection } from '../../utils/Connection.js';
 
 export function ConnectionManager(editor, project, tree) {
   /** Needed to history manager */
-  this._remove = function(block) {
+  this._remove = function (block) {
     project.history._lock();
     this.remove(block._inConnection);
     project.history._unlock();
   };
 
-  this.add = function(inBlock, outBlock) {
+  this.add = function (inBlock, outBlock) {
     var connection = new Connection();
 
     if (inBlock) {
@@ -19,7 +19,7 @@ export function ConnectionManager(editor, project, tree) {
       editor.trigger('blockconnected', inBlock, {
         connection: connection,
         type: 'outConnection',
-        other: outBlock,
+        other: outBlock
       });
     }
 
@@ -30,7 +30,7 @@ export function ConnectionManager(editor, project, tree) {
       editor.trigger('blockconnected', outBlock, {
         connection: connection,
         type: 'inConnection',
-        other: inBlock,
+        other: inBlock
       });
     }
 
@@ -47,7 +47,7 @@ export function ConnectionManager(editor, project, tree) {
     return connection;
   };
 
-  this.remove = function(connection) {
+  this.remove = function (connection) {
     if (connection._inBlock && connection._outBlock) {
       var _old = [this, this.add, [connection._inBlock, connection._outBlock]];
       var _new = [this, this._remove, [connection._outBlock]];
@@ -67,13 +67,13 @@ export function ConnectionManager(editor, project, tree) {
     tree._connections.removeChild(connection);
     editor.trigger('connectionremoved', connection);
   };
-  this.each = function(callback, thisarg) {
+  this.each = function (callback, thisarg) {
     tree._connections.children.forEach(callback, thisarg);
   };
 
-  this._applySettings = function(settings) {
-    this.each(function(connection) {
+  this._applySettings = function (settings) {
+    this.each(function (connection) {
       connection._applySettings(settings);
     });
   };
-};
+}

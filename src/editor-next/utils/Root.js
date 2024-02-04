@@ -1,6 +1,6 @@
 export const Root = {
-    name     : 'Root',
-    category : 'root',
-    title    : 'A behavior tree',
-    hostFOMObject:[]
+  name: 'Root',
+  category: 'root',
+  title: 'A behavior tree',
+  hostFOMObject: []
 };

@@ -1,14 +1,14 @@
-import {Command} from "../../utils/Command.js";
+import { Command } from '../../utils/Command.js';
 
 export function ConnectionSystem(editor) {
-  "use strict";
+  'use strict';
 
   var connection = null;
   var lastOutBlock = null;
 
-  this.update = function(delta) {};
+  this.update = function (delta) {};
 
-  this.onMouseDown = function(e) {
+  this.onMouseDown = function (e) {
     if (e.nativeEvent.which !== 1) return;
 
     var project = editor.project.get();
@@ -28,12 +28,10 @@ export function ConnectionSystem(editor) {
     if (block._hitOutAnchor(x, y)) {
       // if user clicked at the outAnchor
       connection = tree.connections.add(block, null);
-
     } else if (block._hitInAnchor(x, y)) {
       // if user clicked at the inAnchor
       var c = block._inConnection;
-      if (!c)
-          return;
+      if (!c) return;
 
       block._inConnection = null;
       c._outBlock = null;
@@ -43,7 +41,7 @@ export function ConnectionSystem(editor) {
     }
   };
 
-  this.onMouseMove = function(e) {
+  this.onMouseMove = function (e) {
     // if no connection, return
     if (!connection) return;
 
@@ -61,7 +59,7 @@ export function ConnectionSystem(editor) {
     connection._redraw(null, null, x, y);
   };
 
-  this.onMouseUp = function(e) {
+  this.onMouseUp = function (e) {
     if (e.nativeEvent.which !== 1) return;
 
     // if no connection, return
@@ -73,7 +71,6 @@ export function ConnectionSystem(editor) {
     var tree = project.trees.getSelected();
     if (!tree) return;
 
-
     var point = tree.view.getLocalPoint();
     var x = point.x;
     var y = point.y;
@@ -83,7 +80,7 @@ export function ConnectionSystem(editor) {
     project.history._beginBatch();
     if (!block || block === connection._inBlock || block.category === 'root') {
       if (lastOutBlock) {
-        // Add again to connection in order to create history 
+        // Add again to connection in order to create history
         lastOutBlock._inConnection = connection;
         connection._outBlock = lastOutBlock;
       }
@@ -93,16 +90,15 @@ export function ConnectionSystem(editor) {
 
       // if double parent on node
       if (block._inConnection) {
-
         c = block._inConnection;
         tree.connections.remove(c);
       }
 
       // if double children on root
-      if ((connection._inBlock.category === 'root' ||
-           connection._inBlock.category === 'decorator') &&
-           connection._inBlock._outConnections.length > 1) {
-
+      if (
+        (connection._inBlock.category === 'root' || connection._inBlock.category === 'decorator') &&
+        connection._inBlock._outConnections.length > 1
+      ) {
         c = connection._inBlock._outConnections[0];
         tree.connections.remove(c);
       }
@@ -124,4 +120,4 @@ export function ConnectionSystem(editor) {
   editor._game.stage.on('stagemousedown', this.onMouseDown, this);
   editor._game.stage.on('stagemousemove', this.onMouseMove, this);
   editor._game.stage.on('stagemouseup', this.onMouseUp, this);
-};
+}

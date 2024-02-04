@@ -1,4 +1,4 @@
-import {Commands} from "../../utils/Command.js";
+import { Commands } from '../../utils/Command.js';
 
 export function HistoryManager(editor, project) {
   var queue = [];
@@ -7,11 +7,11 @@ export function HistoryManager(editor, project) {
   var batchRequests = 0;
   var commandBuffer = [];
 
-  this.clear = function() {
+  this.clear = function () {
     queue = [];
     index = 0;
   };
-  this.undo = function() {
+  this.undo = function () {
     this._lock();
     if (this.canUndo()) {
       index--;
@@ -22,7 +22,7 @@ export function HistoryManager(editor, project) {
 
     editor._dirty--;
   };
-  this.redo = function() {
+  this.redo = function () {
     this._lock();
     if (this.canRedo()) {
       queue[index].redo();
@@ -33,11 +33,11 @@ export function HistoryManager(editor, project) {
 
     editor._dirty++;
   };
-  this.canUndo = function() {
-    return index>0;
+  this.canUndo = function () {
+    return index > 0;
   };
-  this.canRedo = function() {
-    return index<queue.length;
+  this.canRedo = function () {
+    return index < queue.length;
   };
 
   /**
@@ -45,12 +45,12 @@ export function HistoryManager(editor, project) {
    *
    *     history.add(target, command, args)
    */
-  this._add = function(command, merge) {
+  this._add = function (command, merge) {
     if (lockRequests > 0) return;
 
     // Crear all after index
     if (queue.length > index) {
-      queue.splice(index, queue.length-index);
+      queue.splice(index, queue.length - index);
     }
 
     // Add instruction
@@ -60,7 +60,7 @@ export function HistoryManager(editor, project) {
       index++;
       command.context = project.trees.getSelected();
       queue.push(command);
-      
+
       if (editor._dirty < 0) editor._dirty = 0;
       editor._dirty++;
     }
@@ -75,11 +75,11 @@ export function HistoryManager(editor, project) {
   /**
    * Lock the manager, so it can't receive more commands.
    */
-  this._lock = function() {
+  this._lock = function () {
     // if (lockRequests===0) console.log('------- LOCK -------');
     lockRequests++;
   };
-  this._unlock = function() {
+  this._unlock = function () {
     lockRequests--;
     // if (lockRequests===0) console.log('------- UNLOCK -------');
   };
@@ -87,11 +87,11 @@ export function HistoryManager(editor, project) {
   /**
    * While in batch, merges all added commands to a single command
    */
-  this._beginBatch = function() {
+  this._beginBatch = function () {
     batchRequests++;
   };
-  this._endBatch = function() {
-    batchRequests = Math.max(0, batchRequests-1);
+  this._endBatch = function () {
+    batchRequests = Math.max(0, batchRequests - 1);
 
     if (batchRequests === 0) {
       if (commandBuffer.length > 0) {
@@ -103,11 +103,10 @@ export function HistoryManager(editor, project) {
     }
   };
 
-
-  this._applySettings = function(settings) {
+  this._applySettings = function (settings) {
     var max = settings.get('max_history');
     if (queue.length > max) {
-      queue.splice(0, queue.length-max);
+      queue.splice(0, queue.length - max);
     }
   };
-};
+}

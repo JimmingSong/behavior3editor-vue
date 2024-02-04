@@ -1,16 +1,16 @@
-import {Command} from "../../utils/Command.js";
+import { Command } from '../../utils/Command.js';
 
 export function OrganizeManager(editor, project, tree) {
-
-  var lastLayout           = null;
-  var depth                = 0;
-  var leafCount            = 0;
-  var horizontalSpacing    = 208;
-  var verticalSpacing      = 88;
+  var lastLayout = null;
+  var depth = 0;
+  var leafCount = 0;
+  var horizontalSpacing = 208;
+  var verticalSpacing = 88;
   var verticalCompensation = 42;
-  var orderByIndex         = false;
-  var connections          = []; // to redraw connections
-  var blocks               = []; // to reposition blocks
+  var orderByIndex = false;
+  this.orderByIndex = false;
+  var connections = []; // to redraw connections
+  var blocks = []; // to reposition blocks
 
   function stepH(block) {
     var x, y;
@@ -21,8 +21,8 @@ export function OrganizeManager(editor, project, tree) {
       leafCount++;
 
       // leaf nodes have the position accord. to the depth and leaf cont.
-      x = depth*horizontalSpacing;
-      y = leafCount*verticalSpacing;
+      x = depth * horizontalSpacing;
+      y = leafCount * verticalSpacing;
     }
 
     // internal node
@@ -37,20 +37,20 @@ export function OrganizeManager(editor, project, tree) {
       } else {
         // get connections ordered by y position
         conns = block._outConnections.slice(0);
-        conns.sort(function(a, b) {
+        conns.sort(function (a, b) {
           return a._outBlock.y - b._outBlock.y;
         });
       }
 
-      for (var i=0; i<conns.length; i++) {
+      for (var i = 0; i < conns.length; i++) {
         depth++;
         connections.push(conns[i]);
         ySum += stepH(conns[i]._outBlock);
         depth--;
       }
 
-      x = depth*horizontalSpacing;
-      y = ySum/block._outConnections.length;
+      x = depth * horizontalSpacing;
+      y = ySum / block._outConnections.length;
     }
 
     block.x = x;
@@ -68,8 +68,8 @@ export function OrganizeManager(editor, project, tree) {
       leafCount++;
 
       // leaf nodes have the position accord. to the depth and leaf cont.
-      x = leafCount*horizontalSpacing;
-      y = depth*(verticalSpacing+verticalCompensation);
+      x = leafCount * horizontalSpacing;
+      y = depth * (verticalSpacing + verticalCompensation);
     }
 
     // internal node
@@ -84,20 +84,20 @@ export function OrganizeManager(editor, project, tree) {
       } else {
         // get connections ordered by y position
         conns = block._outConnections.slice(0);
-        conns.sort(function(a, b) {
+        conns.sort(function (a, b) {
           return a._outBlock.x - b._outBlock.x;
         });
       }
 
-      for (var i=0; i<conns.length; i++) {
+      for (var i = 0; i < conns.length; i++) {
         depth++;
         connections.push(conns[i]);
         xSum += stepV(conns[i]._outBlock);
         depth--;
       }
 
-      x = xSum/block._outConnections.length;
-      y = depth*(verticalSpacing+verticalCompensation);
+      x = xSum / block._outConnections.length;
+      y = depth * (verticalSpacing + verticalCompensation);
     }
 
     block.x = x;
@@ -106,20 +106,20 @@ export function OrganizeManager(editor, project, tree) {
     return x;
   }
 
-  this.organize = function(root, byIndex) {
+  this.organize = function (root, byIndex) {
     root = root || tree.blocks.getRoot();
 
-    depth        = 0;
-    leafCount     = 0;
-    connections  = [];
-    blocks       = [];
-    orderByIndex = orderByIndex;
+    depth = 0;
+    leafCount = 0;
+    connections = [];
+    blocks = [];
+    orderByIndex = this.orderByIndex;
 
     var offsetX = root.x;
     var offsetY = root.y;
 
     var _olds = [];
-    root.traversal(function(block) {
+    root.traversal(function (block) {
       _olds.push([block, block.x, block.y]);
     });
 
@@ -133,23 +133,23 @@ export function OrganizeManager(editor, project, tree) {
     offsetY -= root.y;
 
     var i;
-    for (i=0; i<blocks.length; i++) {
+    for (i = 0; i < blocks.length; i++) {
       blocks[i].x += offsetX;
       blocks[i].y += offsetY;
       blocks[i]._snap();
     }
 
-    for (i=0; i<connections.length; i++) {
+    for (i = 0; i < connections.length; i++) {
       connections[i]._redraw();
     }
 
     var _news = [];
-    root.traversal(function(block) {
+    root.traversal(function (block) {
       _news.push([block, block.x, block.y]);
     });
 
     project.history._beginBatch();
-    for (i=0; i<blocks.length; i++) {
+    for (i = 0; i < blocks.length; i++) {
       var _old = [tree.blocks, tree.blocks._move, _olds[i]];
       var _new = [tree.blocks, tree.blocks._move, _news[i]];
       project.history._add(new Command(_old, _new));
@@ -157,11 +157,11 @@ export function OrganizeManager(editor, project, tree) {
     project.history._endBatch();
   };
 
-  this._applySettings = function(settings) {
+  this._applySettings = function (settings) {
     var layout = settings.get('layout');
     if (lastLayout && layout !== lastLayout) {
       this.organize();
     }
     lastLayout = layout;
   };
-};
+}
