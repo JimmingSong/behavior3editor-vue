@@ -1,5 +1,5 @@
 export function ShortcutManager(editor) {
-  "use strict";
+  'use strict';
 
-  this._applySettings = function(settings) {};
-};
+  this._applySettings = function (settings) {};
+}

@@ -1,6 +1,5 @@
 export function SelectionManager(editor, project, tree) {
-
-  this.select = function(block) {
+  this.select = function (block) {
     if (block._isSelected) return;
 
     block._select();
@@ -9,7 +8,7 @@ export function SelectionManager(editor, project, tree) {
     editor.trigger('blockselected', block);
   };
 
-  this.deselect = function(block) {
+  this.deselect = function (block) {
     if (!block._isSelected) return;
 
     block._deselect();
@@ -18,22 +17,22 @@ export function SelectionManager(editor, project, tree) {
     editor.trigger('blockdeselected', block);
   };
 
-  this.selectAll = function() {
-    tree.blocks.each(function(block) {
+  this.selectAll = function () {
+    tree.blocks.each(function (block) {
       this.select(block);
     }, this);
   };
 
-  this.deselectAll = function() {
-    for (var i=tree._selectedBlocks.length-1; i>=0; i--) {
+  this.deselectAll = function () {
+    for (var i = tree._selectedBlocks.length - 1; i >= 0; i--) {
       this.deselect(tree._selectedBlocks[i]);
     }
   };
 
-  this.invertSelection = function(block) {
-    var blocks = (block)?[block]:tree.blocks.getAll();
+  this.invertSelection = function (block) {
+    var blocks = block ? [block] : tree.blocks.getAll();
 
-    blocks.forEach(function(block) {
+    blocks.forEach(function (block) {
       if (block._isSelected) {
         this.deselect(block);
       } else {
@@ -42,9 +41,9 @@ export function SelectionManager(editor, project, tree) {
     }, this);
   };
 
-  this.selectSubtree = function(block) {
-    var blocks = (block)?[block]:tree._selectedBlocks;
-    var fSelect = function(block) {
+  this.selectSubtree = function (block) {
+    var blocks = block ? [block] : tree._selectedBlocks;
+    var fSelect = function (block) {
       blocks.remove(block);
       this.select(block);
     };
@@ -54,10 +53,10 @@ export function SelectionManager(editor, project, tree) {
     }
   };
 
-  this.deselectSubtree = function(block) {
-    var blocks = (block)?[block]:tree._selectedBlocks;
+  this.deselectSubtree = function (block) {
+    var blocks = block ? [block] : tree._selectedBlocks;
 
-    var fDeselect = function(block) {
+    var fDeselect = function (block) {
       blocks.remove(block);
       this.deselect(block);
     };
@@ -67,6 +66,5 @@ export function SelectionManager(editor, project, tree) {
     }
   };
 
-  this._applySettings = function(settings) {};
-
-};
+  this._applySettings = function (settings) {};
+}

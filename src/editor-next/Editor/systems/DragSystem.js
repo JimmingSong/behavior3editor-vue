@@ -1,18 +1,16 @@
-import {Command} from "../../utils/Command.js";
+import { Command } from '../../utils/Command.js';
 
 export function DragSystem(editor) {
-  "use strict";
+  'use strict';
 
   var isDragging = false;
   var dragX0 = 0;
   var dragY0 = 0;
 
-  this.update = function(delta) {};
+  this.update = function (delta) {};
 
-  this.onMouseDown = function(e) {
-    if (e.nativeEvent.which !== 1 || 
-        e.nativeEvent.ctrlKey || 
-        isDragging) return;
+  this.onMouseDown = function (e) {
+    if (e.nativeEvent.which !== 1 || e.nativeEvent.ctrlKey || isDragging) return;
 
     var project = editor.project.get();
     if (!project) return;
@@ -39,7 +37,7 @@ export function DragSystem(editor) {
     dragX0 = x;
     dragY0 = y;
 
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
+    for (var i = 0; i < tree._selectedBlocks.length; i++) {
       block = tree._selectedBlocks[i];
       block._isDragging = true;
       block._dragOffsetX = x - block.x;
@@ -47,7 +45,7 @@ export function DragSystem(editor) {
     }
   };
 
-  this.onMouseMove = function(e) {
+  this.onMouseMove = function (e) {
     if (!isDragging) return;
 
     var project = editor.project.get();
@@ -60,7 +58,7 @@ export function DragSystem(editor) {
     var x = point.x;
     var y = point.y;
 
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
+    for (var i = 0; i < tree._selectedBlocks.length; i++) {
       var block = tree._selectedBlocks[i];
 
       var dx = x - block._dragOffsetX;
@@ -74,13 +72,13 @@ export function DragSystem(editor) {
       if (block._inConnection) {
         block._inConnection._redraw();
       }
-      for (var j=0; j<block._outConnections.length; j++) {
+      for (var j = 0; j < block._outConnections.length; j++) {
         block._outConnections[j]._redraw();
       }
     }
   };
 
-  this.onMouseUp = function(e) {
+  this.onMouseUp = function (e) {
     if (e.nativeEvent.which !== 1 || !isDragging) return;
 
     var project = editor.project.get();
@@ -94,21 +92,17 @@ export function DragSystem(editor) {
     var x = point.x;
     var y = point.y;
 
-
     project.history._beginBatch();
-    for (var i=0; i<tree._selectedBlocks.length; i++) {
+    for (var i = 0; i < tree._selectedBlocks.length; i++) {
       var block = tree._selectedBlocks[i];
       block._isDragging = false;
 
-      var _old = [block, dragX0-block._dragOffsetX, dragY0-block._dragOffsetY];
+      var _old = [block, dragX0 - block._dragOffsetX, dragY0 - block._dragOffsetY];
       var _new = [block, block.x, block.y];
 
       if (_old[1] === _new[1] && _old[2] === _new[2]) break;
 
-      project.history._add(new Command(
-        [tree.blocks, tree.blocks._move, _old],
-        [tree.blocks, tree.blocks._move, _new]
-      ));
+      project.history._add(new Command([tree.blocks, tree.blocks._move, _old], [tree.blocks, tree.blocks._move, _new]));
     }
     project.history._endBatch();
   };
@@ -116,4 +110,4 @@ export function DragSystem(editor) {
   editor._game.stage.on('stagemousedown', this.onMouseDown, this);
   editor._game.stage.on('stagemousemove', this.onMouseMove, this);
   editor._game.stage.on('stagemouseup', this.onMouseUp, this);
-};
+}

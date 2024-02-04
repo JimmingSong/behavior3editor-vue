@@ -1,7 +1,5 @@
 export function CollapseSystem(editor) {
-  "use strict";
+  'use strict';
 
-  this.update = function(delta) {
-
-  };
-};
+  this.update = function (delta) {};
+}

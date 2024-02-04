@@ -1,11 +1,11 @@
 export function CameraSystem(editor) {
-  "use strict";
+  'use strict';
 
   var isDragging = false;
   var offsetX = 0;
   var offsetY = 0;
 
-  this.update = function(delta) {
+  this.update = function (delta) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -21,9 +21,7 @@ export function CameraSystem(editor) {
       } else if (kb.isPressed(k.DOWN)) {
         tree.view.zoomOut();
       }
-    }
-
-    else {
+    } else {
       if (kb.isDown(k.LEFT)) {
         tree.x += delta;
       } else if (kb.isDown(k.RIGHT)) {
@@ -38,7 +36,7 @@ export function CameraSystem(editor) {
     }
   };
 
-  this.onMouseDown = function(e) {
+  this.onMouseDown = function (e) {
     if (e.nativeEvent.which !== 2) return;
 
     var project = editor.project.get();
@@ -47,13 +45,13 @@ export function CameraSystem(editor) {
     var tree = project.trees.getSelected();
     if (!tree) return;
 
-    editor._game.canvas.className += " grabbing";
+    editor._game.canvas.className += ' grabbing';
 
     isDragging = true;
     offsetX = editor._game.mouse.x - tree.x;
     offsetY = editor._game.mouse.y - tree.y;
   };
-  this.onMouseMove = function(e) {
+  this.onMouseMove = function (e) {
     if (!isDragging) return;
 
     var project = editor.project.get();
@@ -65,7 +63,7 @@ export function CameraSystem(editor) {
     tree.x = editor._game.mouse.x - offsetX;
     tree.y = editor._game.mouse.y - offsetY;
   };
-  this.onMouseUp = function(e) {
+  this.onMouseUp = function (e) {
     if (e.nativeEvent.which !== 2) return;
 
     var project = editor.project.get();
@@ -80,7 +78,7 @@ export function CameraSystem(editor) {
     offsetX = 0;
     offsetY = 0;
   };
-  this.onMouseWheel = function(e) {
+  this.onMouseWheel = function (e) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -88,7 +86,7 @@ export function CameraSystem(editor) {
     if (!tree) return;
 
     if (e.ctrlKey) {
-      if ((e.wheelDeltaY||e.deltaY) > 0) {
+      if ((e.wheelDeltaY || e.deltaY) > 0) {
         tree.view.zoomIn();
       } else {
         tree.view.zoomOut();
@@ -96,18 +94,29 @@ export function CameraSystem(editor) {
     }
   };
 
-
   var self = this;
   editor._game.stage.on('stagemousedown', this.onMouseDown, this);
   editor._game.stage.on('stagemousemove', this.onMouseMove, this);
   editor._game.stage.on('stagemouseup', this.onMouseUp, this);
-  editor._game.canvas.addEventListener('wheel', function(e) {
-    self.onMouseWheel(e);
-  }, false);
-  editor._game.canvas.addEventListener('mousewheel', function(e) {
-    self.onMouseWheel(e);
-  }, false);
-  editor._game.canvas.addEventListener('DOMMouseScroll ', function(e) {
-    self.onMouseWheel(e);
-  }, false);
-};
+  editor._game.canvas.addEventListener(
+    'wheel',
+    function (e) {
+      self.onMouseWheel(e);
+    },
+    false
+  );
+  editor._game.canvas.addEventListener(
+    'mousewheel',
+    function (e) {
+      self.onMouseWheel(e);
+    },
+    false
+  );
+  editor._game.canvas.addEventListener(
+    'DOMMouseScroll ',
+    function (e) {
+      self.onMouseWheel(e);
+    },
+    false
+  );
+}

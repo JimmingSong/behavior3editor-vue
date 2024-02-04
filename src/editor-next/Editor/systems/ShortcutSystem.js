@@ -1,7 +1,7 @@
 export function ShortcutSystem(editor) {
-  "use strict";
+  'use strict';
 
-  this.update = function(delta) {
+  this.update = function (delta) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -11,4 +11,4 @@ export function ShortcutSystem(editor) {
     var kb = editor._game.keyboard;
     var k = tine.keys;
   };
-};
+}

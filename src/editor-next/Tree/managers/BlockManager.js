@@ -1,8 +1,8 @@
-import {Command} from "../../utils/Command.js";
-import {Block} from "../../utils/Block.js";
+import { Command } from '../../utils/Command.js';
+import { Block } from '../../utils/Block.js';
 
-export function BlockManager (editor, project, tree) {
-  this._move = function(block, x, y) {
+export function BlockManager(editor, project, tree) {
+  this._move = function (block, x, y) {
     block.x = x;
     block.y = y;
     block._redraw();
@@ -11,7 +11,7 @@ export function BlockManager (editor, project, tree) {
     if (block._inConnection) {
       block._inConnection._redraw();
     }
-    for (var j=0; j<block._outConnections.length; j++) {
+    for (var j = 0; j < block._outConnections.length; j++) {
       block._outConnections[j]._redraw();
     }
   };
@@ -19,7 +19,7 @@ export function BlockManager (editor, project, tree) {
   /**
    * Add a block.
    */
-  this.add = function(name, x, y) {
+  this.add = function (name, x, y) {
     // If name is a block
     var block;
 
@@ -28,12 +28,12 @@ export function BlockManager (editor, project, tree) {
       block._snap();
       tree._blocks.addChild(block);
       editor.trigger('blockadded', block);
-
     }
 
     // Otherwise
     else {
-      x = x||0; y = y||0;
+      x = x || 0;
+      y = y || 0;
 
       var node = name;
       if (typeof name === 'string') {
@@ -60,10 +60,10 @@ export function BlockManager (editor, project, tree) {
     return block;
   };
 
-  this.get = function(block) {
+  this.get = function (block) {
     if (typeof block === 'string') {
       var blocks = tree._blocks.children;
-      for (var i=0; i<blocks.length; i++) {
+      for (var i = 0; i < blocks.length; i++) {
         if (blocks[i].id === block) {
           return blocks[i];
         }
@@ -73,39 +73,40 @@ export function BlockManager (editor, project, tree) {
 
     return block;
   };
-  this.getUnderPoint = function(x, y) {
+  this.getUnderPoint = function (x, y) {
     if (!x || !y) {
       var point = tree.view.getLocalPoint();
-      x = point.x; y = point.y;
+      x = point.x;
+      y = point.y;
     }
 
     // Get block under the mouse
     var blocks = this.getAll();
-    for (var i=blocks.length-1; i>=0; i--) {
+    for (var i = blocks.length - 1; i >= 0; i--) {
       var block = blocks[i];
 
       if (block._hitTest(x, y)) return block;
     }
   };
-  this.getSelected = function() {
+  this.getSelected = function () {
     return tree._selectedBlocks.slice();
   };
-  this.getAll = function() {
+  this.getAll = function () {
     return tree._blocks.children;
   };
-  this.getRoot = function() {
+  this.getRoot = function () {
     return tree._root;
   };
-  this.update = function(block, template, merge) {
+  this.update = function (block, template, merge) {
     var mustSave = !!template;
 
     var _oldValues = {
-      name        : block.name,
-      title       : block.title,
-      description : block.description,
-      properties  : block.properties,
-      hostFOMObject:block.hostFOMObject,
-      DMNRefs    : block.DMNRefs,
+      name: block.name,
+      title: block.title,
+      description: block.description,
+      properties: block.properties,
+      hostFOMObject: block.hostFOMObject,
+      DMNRefs: block.DMNRefs
     };
 
     template = template || {};
@@ -133,57 +134,57 @@ export function BlockManager (editor, project, tree) {
     /**
      * 拓展字段
      */
-    if(template.hostFOMObject && template.hostFOMObject instanceof Array) {
+    if (template.hostFOMObject && template.hostFOMObject instanceof Array) {
       block.hostFOMObject = template.hostFOMObject;
-    }else{
+    } else {
       block.hostFOMObject = node.hostFOMObject;
     }
 
     /**
      * 拓展字段
      */
-    if(template.DMNRefs && template.DMNRefs instanceof Array) {
+    if (template.DMNRefs && template.DMNRefs instanceof Array) {
       block.DMNRefs = template.DMNRefs;
-    }else{
+    } else {
       block.DMNRefs = node.DMNRefs;
     }
-    
+
     block._redraw();
 
     var _newValues = {
-      name        : block.name,
-      title       : block.title,
-      description : block.description,
-      properties  : block.properties,
-      hostFOMObject:block.hostFOMObject,
+      name: block.name,
+      title: block.title,
+      description: block.description,
+      properties: block.properties,
+      hostFOMObject: block.hostFOMObject
     };
 
     // redraw connections linked to the entity
     if (block._inConnection) {
       block._inConnection._redraw();
     }
-    for (var j=0; j<block._outConnections.length; j++) {
+    for (var j = 0; j < block._outConnections.length; j++) {
       block._outConnections[j]._redraw();
     }
-    
+
     if (!mustSave) project.history._lock();
 
     project.history._beginBatch();
 
     if (block.category === 'root') {
-      project.nodes.update(tree._id, {title: block.title||'A behavior tree'});
+      project.nodes.update(tree._id, { title: block.title || 'A behavior tree' });
     }
 
     var _old = [this, this.update, [block, _oldValues]];
     var _new = [this, this.update, [block, _newValues]];
     project.history._add(new Command(_old, _new));
     project.history._endBatch();
-    
+
     if (!mustSave) project.history._unlock();
 
     editor.trigger('blockchanged', block);
   };
-  this.remove = function(block) {
+  this.remove = function (block) {
     project.history._beginBatch();
     tree._blocks.removeChild(block);
 
@@ -192,7 +193,7 @@ export function BlockManager (editor, project, tree) {
     }
 
     if (block._outConnections.length > 0) {
-      for (var i=block._outConnections.length-1; i>=0; i--) {
+      for (var i = block._outConnections.length - 1; i >= 0; i--) {
         tree.connections.remove(block._outConnections[i]);
       }
     }
@@ -208,7 +209,7 @@ export function BlockManager (editor, project, tree) {
     project.history._endBatch();
     editor.trigger('blockremoved', block);
   };
-  this.cut = function(block) {
+  this.cut = function (block) {
     project.history._beginBatch();
     tree._blocks.removeChild(block);
 
@@ -221,7 +222,7 @@ export function BlockManager (editor, project, tree) {
     }
 
     if (block._outConnections.length > 0) {
-      for (var i=block._outConnections.length-1; i>=0; i--) {
+      for (var i = block._outConnections.length - 1; i >= 0; i--) {
         if (!block._outConnections[i]._inBlock._isSelected) {
           tree.connections.remove(block._outConnections[i]);
         } else {
@@ -237,13 +238,13 @@ export function BlockManager (editor, project, tree) {
     editor.trigger('blockremoved', block);
     project.history._endBatch();
   };
-  this.each = function(callback, thisarg) {
+  this.each = function (callback, thisarg) {
     tree._blocks.children.forEach(callback, thisarg);
   };
 
-  this._applySettings = function(settings) {
-    this.each(function(block) {
+  this._applySettings = function (settings) {
+    this.each(function (block) {
       block._applySettings(settings);
     });
   };
-};
+}

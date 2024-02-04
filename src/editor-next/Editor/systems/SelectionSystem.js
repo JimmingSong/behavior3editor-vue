@@ -1,5 +1,5 @@
 export function SelectionSystem(editor) {
-  "use strict";
+  'use strict';
 
   var isSelecting = false;
   var ctrl = false;
@@ -8,9 +8,9 @@ export function SelectionSystem(editor) {
   var x0 = 0;
   var y0 = 0;
 
-  this.update = function(delta) {};
+  this.update = function (delta) {};
 
-  this.onMouseDown = function(e) {
+  this.onMouseDown = function (e) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -35,23 +35,18 @@ export function SelectionSystem(editor) {
       } else {
         tree.selection.deselect(block);
       }
-    }
-
-    else if (block && !block._isSelected && block._hitBody(x, y)) {
+    } else if (block && !block._isSelected && block._hitBody(x, y)) {
       if (!ctrl) tree.selection.deselectAll();
       if (alt) {
         tree.selection.selectSubtree(block);
       } else {
         tree.selection.select(block);
       }
-    }
-    else if (block && block._hitBody(x, y)) {
+    } else if (block && block._hitBody(x, y)) {
       if (alt) {
         tree.selection.selectSubtree(block);
       }
-    }
-
-    else if (!block) {
+    } else if (!block) {
       isSelecting = true;
       x0 = x;
       y0 = y;
@@ -60,7 +55,7 @@ export function SelectionSystem(editor) {
     }
   };
 
-  this.onMouseMove = function(e) {
+  this.onMouseMove = function (e) {
     if (!isSelecting) return;
 
     var project = editor.project.get();
@@ -77,7 +72,7 @@ export function SelectionSystem(editor) {
     tree._selectionBox._redraw(x0, y0, x, y);
   };
 
-  this.onMouseUp = function(e) {
+  this.onMouseUp = function (e) {
     if (e.nativeEvent.which !== 1 || !isSelecting) return;
 
     var project = editor.project.get();
@@ -95,7 +90,7 @@ export function SelectionSystem(editor) {
     var x2 = Math.max(x0, x);
     var y2 = Math.max(y0, y);
 
-    tree.blocks.each(function(block) {
+    tree.blocks.each(function (block) {
       if (block._isContainedIn(x1, y1, x2, y2)) {
         tree.selection.select(block);
       }
@@ -108,4 +103,4 @@ export function SelectionSystem(editor) {
   editor._game.stage.on('stagemousedown', this.onMouseDown, this);
   editor._game.stage.on('stagemousemove', this.onMouseMove, this);
   editor._game.stage.on('stagemouseup', this.onMouseUp, this);
-};
+}
