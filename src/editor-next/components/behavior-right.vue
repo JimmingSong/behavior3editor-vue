@@ -10,21 +10,29 @@
     <div v-if="block">
       <div>标题</div>
       <div>
-        <el-input v-model="block.title"/>
+        <el-input v-model="block.title" @change="update"/>
       </div>
       <div>描述</div>
       <div>
-        <el-input type="textarea" v-model="block.description"/>
+        <el-input type="textarea" v-model="block.description" @change="update"/>
       </div>
       <div>
         <span>属性</span>
         <span @click="addProperty('', '', false)">+</span>
       </div>
-      <div v-for="item in properties" :key="item.key">
-        <el-input v-model="item.key"/>
-        <el-input v-model="item.value"/>
-        <span>-</span>
-      </div>
+      <el-form>
+        <el-form-item v-for="(item, index) in properties" :key="index">
+          <el-col :span="10">
+            <el-input v-model="item.key" @change="changePropertyKey" />
+          </el-col>
+          <el-col :span="10" :offset="1">
+            <el-input v-model="item.value" @change="changePropertyValue"/>
+          </el-col>
+          <el-col :span="1" :offset="1">
+            <span @click="removeProperty(index)">-</span>
+          </el-col>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -47,12 +55,12 @@ const properties = ref<any[]>([]);
 const addProperty = (key: string, value: string, fixed: boolean) => {
   properties.value.push({key, value, fixed});
 }
-const parseProperties = (properties?: any) => {
-  if (!properties) {
+const parseProperties = (property?: any) => {
+  if (!property) {
     return;
   }
-  for (const propertiesKey in properties) {
-    addProperty(propertiesKey, properties[propertiesKey], false)
+  for (const propertiesKey in property) {
+    addProperty(propertiesKey, property[propertiesKey], false)
   }
 }
 const _active = () => {
@@ -67,23 +75,45 @@ const _active = () => {
       title: _original.title,
       description: _original.description,
       //@ts-ignore
-      properties: tine.merge({name: '111'}, _original.properties)
+      // properties: tine.merge({name: '111'}, _original.properties)
     }
     parseProperties(properties)
-    console.log(block)
     return
   }
   block.value = null
 }
 
+const parsePropertiesToObject = () => {
+  return toValue(properties).reduce((acc: any, cur: any) => {
+    acc[cur.key] = cur.value;
+    return acc;
+  }, {} as any)
+}
 const update = () => {
   const p = editor.value.project.get();
   const t = p.trees.getSelected();
-  t.blocks.update(toValue(original), toValue(block))
+  t.blocks.update(toValue(original), {
+    ...toValue(block),
+    properties: parsePropertiesToObject()
+  })
+}
+
+const changePropertyKey = (propertyKey: string) => {
+  console.log(propertyKey)
+  update()
+}
+const changePropertyValue = (propertyValue: string) => {
+  console.log(propertyValue)
+  update()
+}
+
+const removeProperty = (index: number) => {
+  properties.value.splice(index, 1);
 }
 
 const _events = () => {
   setTimeout(() => {
+    properties.value = []
     _active();
   }, 0)
 }
@@ -119,5 +149,9 @@ onBeforeUnmount(() => {
 <style scoped lang="less">
 .behavior-right {
   width: var(--b3-right-width, 300px);
+  &__properties {
+    display: flex;
+
+  }
 }
 </style>
