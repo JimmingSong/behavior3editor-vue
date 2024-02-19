@@ -149,6 +149,7 @@ onBeforeUnmount(() => {
 <style scoped lang="less">
 .behavior-right {
   width: var(--b3-right-width, 300px);
+  height: 100%;
   &__properties {
     display: flex;
 
