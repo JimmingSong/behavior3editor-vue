@@ -2,13 +2,13 @@
   <div class="behavior-header">
     <span>Behavior3 Editor</span>
     <n-space align="center">
-      <n-icon @click="handleSaveProject" size="22px">
+      <n-icon @click="projectHandle.handleSaveProject" size="22px">
         <SaveOutline/>
       </n-icon>
-      <n-icon size="22px" @click="handleUndo">
+      <n-icon size="22px" @click="projectHandle.handleUndo">
         <ArrowUndoOutline/>
       </n-icon>
-      <n-icon size="22px" @click="handleRedo">
+      <n-icon size="22px" @click="projectHandle.handleRedo">
         <ArrowRedoOutline/>
       </n-icon>
       <el-dropdown @command="handleEditCommand" placement="bottom-start">
@@ -70,7 +70,6 @@ const {editor} = useEditorHook();
 
 const projectHandle = useCreateProject(editor);
 
-const {handleSaveProject, handleUndo, handleRedo} = projectHandle;
 projectHandle.bindKeyboardEvent();
 
 const editMenuOption = [

@@ -21,6 +21,7 @@ import { Root } from '../utils/Root.js';
 import { TreeManager } from './managers/TreeManager.js';
 import { NodeManager } from './managers/NodeManager.js';
 import { HistoryManager } from './managers/HistoryManager.js';
+import {FolderManager} from "./managers/FolderManager.js";
 export class Project extends createjs.Container {
   constructor(editor) {
     super();
@@ -30,10 +31,12 @@ export class Project extends createjs.Container {
     this._selectedTree = null;
     this._clipboard = null;
     this._nodes = {};
+    this._folders = {};
 
     // Managers
     this.trees = null;
     this.nodes = null;
+    this.folders = null;
     this.history = null;
     this.DMNRefs = [];
     this.hostFOMObject = [];
@@ -43,6 +46,7 @@ export class Project extends createjs.Container {
   _initialize = function () {
     this.trees = new TreeManager(this._editor, this);
     this.nodes = new NodeManager(this._editor, this);
+    this.folders = new FolderManager(this._editor, this);
     this.history = new HistoryManager(this._editor, this);
 
     this.nodes.add(Root, true);
@@ -70,5 +74,6 @@ export class Project extends createjs.Container {
     this.trees._applySettings(settings);
     this.nodes._applySettings(settings);
     this.history._applySettings(settings);
+    this.folders._applySettings(settings);
   };
 }

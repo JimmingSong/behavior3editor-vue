@@ -31,7 +31,8 @@ export function ExportManager(editor) {
       scope: 'project',
       selectedTree: tree ? tree._id : null,
       trees: [],
-      custom_nodes: this.nodesToData()
+      custom_nodes: this.nodesToData(),
+      custom_folders : this.foldersToData(),
     };
 
     project.trees.each(function (tree) {
@@ -77,6 +78,7 @@ export function ExportManager(editor) {
 
     if (!ignoreNodes) {
       data.custom_nodes = this.nodesToData();
+      data.custom_folders = this.foldersToData();
     }
 
     tree.blocks.each(function (block) {
@@ -127,7 +129,27 @@ export function ExportManager(editor) {
 
     return data;
   };
+  this.foldersToData = function() {
+    var project = editor.project.get();
+    if (!project) return;
 
+    var data = [];
+    project.folders.each(function(folder) {
+      if (!folder.isDefault) {
+        data.push({
+          version     : VERSION,
+          scope       : 'folder',
+          name        : folder.name,
+          category    : folder.category,
+          title       : folder.title,
+          description : folder.description,
+          parent      : folder.parent,
+        });
+      }
+    });
+
+    return data;
+  };
   this.nodesToJavascript = function () {};
 
   this._applySettings = function (settings) {};

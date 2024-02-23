@@ -1,40 +1,79 @@
 <template>
   <div class="behavior-left">
-    <template v-for="(item, key) in nodesData" :key="key">
-      <div class="behavior-left__category">{{ key }}</div>
-      <div v-for="it in item" :key="it.id" draggable="true" @dragover.prevent @dragstart="handleDragStart($event, it)">{{ it.title }}</div>
+    <div class="behavior-left__header">
+      <span>编辑</span>
+      <span>
+        <el-button text type="primary" size="small">Tree</el-button>
+        <el-button text type="primary" size="small" @click="nodeDialogShow = true">Node</el-button>
+        <el-button text type="primary" size="small" @click="folderDialogShow = true">Folder</el-button>
+      </span>
+    </div>
+    <template v-for="(item) in listDataComputed" :key="item.id">
+      <div class="behavior-left__category">{{ item.name }}</div>
+      <div v-for="it in item.children" :key="it.id" draggable="true" @dragover.prevent @dragstart="handleDragStart($event, it)">
+        <el-icon v-if="it.type === 'folder'"><Folder /></el-icon>
+        <span>{{ it.title }}</span>
+      </div>
     </template>
+    <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" />
+    <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditorHook } from '../use-editor-hook.ts';
+import {useCreateFolder} from "./use-create-folder.ts";
+import CreateFolder from "./create-folder.vue";
+import CreateNode from "./create-node.vue";
+import { Folder } from '@element-plus/icons-vue'
+import { nanoid } from 'nanoid'
 
 defineOptions({
   name: 'BehaviorLeft'
 });
 const { editor } = useEditorHook();
-const nodesData = ref<Record<string, any>>({
-  composite: [],
-  decorator: [],
-  action: [],
-  condition: []
-});
 
+const listData = ref<any[]>([])
+
+const listDataToTreeData = (data: any[]) => {
+  const typeMap: Record<string, any> = {}
+  data.forEach(item => {
+    if (!typeMap[item.category]) {
+      typeMap[item.category] = {
+        name:   item.category,
+        id: nanoid(),
+        children: [item]
+      }
+      return
+    }
+    typeMap[item.category].children.push(item)
+  })
+  return Object.values(typeMap).sort(item => {
+    if (item.name === 'Tree') {
+      return 1
+    }
+    return -1
+  })
+}
+
+const listDataComputed = computed(() => {
+  return listDataToTreeData(listData.value)
+})
+
+watchEffect(() => {
+  console.log(listDataComputed.value);
+})
+
+const { folderDialogShow } = useCreateFolder()
+const nodeDialogShow = ref(false)
 function _getTitle(node: any) {
   let title = node.title || node.name;
   title = title.replace(/(<\w+>)/g, () => '@');
   return title;
 }
-const trees = ref<any[]>([]);
 
 const _activate = () => {
-  nodesData.value = {
-    composite: [],
-    decorator: [],
-    action: [],
-    condition: []
-  };
+  const result: any[] = []
   const p = toValue(editor).project.get();
   if (!p) {
     return;
@@ -43,32 +82,43 @@ const _activate = () => {
     if (node.category === 'tree') {
       return;
     }
-
-    var list = toValue(nodesData)[node.category];
-    if (!list) {
-      return;
-    }
-    list.push({
+    result.push({
       name: node.name,
+      category: node.category,
       title: _getTitle(node),
       isDefault: node.isDefault
-    });
+    })
+
   });
 
   var selected = p.trees.getSelected();
   p.trees.each(function (tree: any) {
     const root = tree.blocks.getRoot();
-    trees.value.push({
+    result.push({
       id: tree._id,
       name: root.title || 'A behavior tree',
+      category: 'tree',
       active: tree === selected,
       hostFOMObject: root.hostFOMObject
-    });
+    })
   });
+
+  p.folders.each((folder: any) => {
+    result.push({
+      name: folder.name,
+      title: _getTitle(folder),
+      category: folder.category,
+      parent: folder.parent,
+      type: 'folder',
+      index: result.length,
+      isDefault: folder.isDefault
+    })
+  })
+  listData.value = result
 };
 
 const handleDragStart = (e: DragEvent, attrs: any) => {
-  var canvas = toValue(editor).preview(attrs.name);
+  var canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
   var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
   if (isChrome) {
@@ -82,6 +132,7 @@ const handleDragStart = (e: DragEvent, attrs: any) => {
     while (time < delay) {
       time = new Date().getTime();
     }
+    //@ts-ignore
     canvas = img;
   }
 
@@ -89,7 +140,7 @@ const handleDragStart = (e: DragEvent, attrs: any) => {
   e.dataTransfer!.setDragImage(canvas, canvas.width / 2, canvas.height / 2);
 };
 
-const _event = (e: any) => {
+const _event = () => {
   setTimeout(function () {
     _activate();
   }, 0);
@@ -105,6 +156,10 @@ const _create = () => {
   edit.on('treeselected', _event);
   edit.on('treeremoved', _event);
   edit.on('treeimported', _event);
+
+  edit.on('folderremoved', _event)
+  edit.on('folderadded', _event)
+  edit.on('folderchanged', _event)
 };
 
 function _destroy() {
@@ -117,6 +172,10 @@ function _destroy() {
   edit.off('treeselected', _event);
   edit.off('treeremoved', _event);
   edit.off('treeimported', _event);
+
+  edit.off('folderremoved', _event)
+  edit.off('folderadded', _event)
+  edit.off('folderchanged', _event)
 }
 
 nextTick(() => {
@@ -133,6 +192,15 @@ onBeforeUnmount(() => {
 .behavior-left {
   width: var(--b3-left-width);
   overflow-y: auto;
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    border-bottom: 1px solid #7d7d7d;
+    padding: 3px 0;
+    box-sizing: border-box;
+  }
   &__category {
     cursor: pointer;
     display: block;

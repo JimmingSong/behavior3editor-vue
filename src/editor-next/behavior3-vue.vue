@@ -17,6 +17,7 @@ import BehaviorRight from './components/behavior-right.vue';
 import { useCreateProject } from './use-create-project.ts';
 import './utils/functions';
 import BehaviorHeader from './components/behavior-header.vue';
+import {EditorInstance} from "./use-editor-hook.ts";
 
 defineOptions({
   name: 'Behavior3Vue'
@@ -31,7 +32,7 @@ const { createProject } = useCreateProject(editor);
  * 绑定拖拽事件
  * @param editor1
  */
-const bindDropEvent = (editor1) => {
+const bindDropEvent = (editor1: EditorInstance) => {
   editor1._game.canvas.addEventListener('drop', (e: DragEvent) => {
     if (e.preventDefault) {
       e.preventDefault();

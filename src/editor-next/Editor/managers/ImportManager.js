@@ -4,6 +4,7 @@ export function ImportManager(editor) {
     if (!project) return;
 
     if (data.custom_nodes) this.nodesAsData(data.custom_nodes);
+    if (data.custom_folders) this.foldersAsData(data.custom_folders);
     if (data.trees) this.treesAsData(data.trees);
     if (data.selectedTree) {
       project.trees.select(data.selectedTree);
@@ -37,6 +38,8 @@ export function ImportManager(editor) {
 
     // Custom nodes
     if (data.custom_nodes) this.nodesAsData(data.custom_nodes);
+    // Custom folders
+    if (data.custom_folders) this.foldersAsData(data.custom_folders);
 
     var id, spec;
 
@@ -109,6 +112,17 @@ export function ImportManager(editor) {
       project.nodes.add(template);
     }
     editor.trigger('nodeimported');
+  };
+
+  this.foldersAsData = function(data) {
+    var project = editor.project.get();
+    if (!project) return;
+
+    for (var i=0; i<data.length; i++) {
+      var template = data[i];
+      project.folders.add(template);
+    }
+    editor.trigger('folderimported');
   };
   this._applySettings = function (settings) {};
 }
