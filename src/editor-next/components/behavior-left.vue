@@ -10,10 +10,7 @@
     </div>
     <template v-for="(item) in listDataComputed" :key="item.id">
       <div class="behavior-left__category">{{ item.name }}</div>
-      <div v-for="it in item.children" :key="it.id" draggable="true" @dragover.prevent @dragstart="handleDragStart($event, it)">
-        <el-icon v-if="it.type === 'folder'"><Folder /></el-icon>
-        <span>{{ it.title }}</span>
-      </div>
+      <el-tree :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="() => false"></el-tree>
     </template>
     <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" />
     <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" />
@@ -25,7 +22,6 @@ import { useEditorHook } from '../use-editor-hook.ts';
 import {useCreateFolder} from "./use-create-folder.ts";
 import CreateFolder from "./create-folder.vue";
 import CreateNode from "./create-node.vue";
-import { Folder } from '@element-plus/icons-vue'
 import { nanoid } from 'nanoid'
 
 defineOptions({
@@ -60,10 +56,6 @@ const listDataComputed = computed(() => {
   return listDataToTreeData(listData.value)
 })
 
-watchEffect(() => {
-  console.log(listDataComputed.value);
-})
-
 const { folderDialogShow } = useCreateFolder()
 const nodeDialogShow = ref(false)
 function _getTitle(node: any) {
@@ -79,7 +71,7 @@ const _activate = () => {
     return;
   }
   p.nodes.each(function (node: any) {
-    if (node.category === 'tree') {
+    if (['tree', 'root'].includes(node.category)) {
       return;
     }
     result.push({
@@ -91,7 +83,7 @@ const _activate = () => {
 
   });
 
-  var selected = p.trees.getSelected();
+  const selected = p.trees.getSelected();
   p.trees.each(function (tree: any) {
     const root = tree.blocks.getRoot();
     result.push({
@@ -117,18 +109,19 @@ const _activate = () => {
   listData.value = result
 };
 
-const handleDragStart = (e: DragEvent, attrs: any) => {
-  var canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
-  var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+const handleDragStart = (node: any, e: DragEvent) => {
+  const attrs = node.data;
+  let canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
+  const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
   if (isChrome) {
-    var img = document.createElement('img');
+    const img = document.createElement('img');
     img.src = canvas.toDataURL();
 
     // 10ms delay in order to proper create the image object
     // ugly hack =(
-    var time = new Date().getTime();
-    var delay = time + 10;
+    let time = new Date().getTime();
+    const delay = time + 10;
     while (time < delay) {
       time = new Date().getTime();
     }

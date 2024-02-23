@@ -1,10 +1,10 @@
 <template>
   <el-select v-bind="$attrs">
     <el-option value="tree">Tree</el-option>
-    <el-option value="composite">Composite</el-option>
-    <el-option value="decorator">Decorator</el-option>
-    <el-option value="action">Action</el-option>
-    <el-option value="condition">Condition</el-option>
+    <el-option value="composite" label="Composite"/>
+    <el-option value="decorator" label="Decorator"/>
+    <el-option value="action" label="Action"/>
+    <el-option value="condition" label="Condition"/>
   </el-select>
 </template>
 

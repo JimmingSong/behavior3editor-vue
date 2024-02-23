@@ -1,6 +1,6 @@
 <template>
   <el-dialog model-value title="新建Node" @close="handleClose" width="600px">
-    <el-form :model="nodeForm" label-width="100px">
+    <el-form :model="nodeForm" label-width="100px" label-position="top">
       <el-form-item label="名称">
         <el-input v-model="nodeForm.name" />
       </el-form-item>
@@ -11,7 +11,7 @@
         <behavior-category v-model="nodeForm.category" />
       </el-form-item>
       <el-form-item label="描述">
-        <el-input type="textarea" :rows="5" />
+        <el-input type="textarea" :rows="5" v-model="nodeForm.description" />
       </el-form-item>
       <el-form-item label="属性">
         <template #label>
@@ -60,6 +60,7 @@ const active = () => {
     nodeForm.value = nodeData.value?.copy()
     return
   }
+  nodeForm.value.category = 'condition'
 }
 
 active()
@@ -76,7 +77,7 @@ const handleSure = () => {
   }
   p.nodes.add(formValue)
   nodeData.value = null
-
+  handleClose()
 }
 </script>
 
