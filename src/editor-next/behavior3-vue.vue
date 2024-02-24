@@ -62,6 +62,7 @@ onMounted(() => {
   createProject();
   bindDropEvent(editor1);
 });
+
 </script>
 
 <style scoped lang="less">

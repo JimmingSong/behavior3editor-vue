@@ -10,7 +10,15 @@
     </div>
     <template v-for="(item) in listDataComputed" :key="item.id">
       <div class="behavior-left__category">{{ item.name }}</div>
-      <el-tree :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="() => false"></el-tree>
+      <el-tree v-if="item.id === 'tree'" :data="item.children" :props="{ label: 'name' }" node-key="id" :current-node-key="selectedTreeId" highlight-current></el-tree>
+      <el-tree v-else :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="nodeAllowDrop" empty-text="空" @node-drop="handleNodeDrop" @node-drag-leave="handleDragStart">
+        <template #default="{ data }">
+          <el-icon v-if="data.type === 'folder'" class="folder-icon">
+            <Folder />
+          </el-icon>
+          <span>{{data.name}}</span>
+        </template>
+      </el-tree>
     </template>
     <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" />
     <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" />
@@ -22,38 +30,78 @@ import { useEditorHook } from '../use-editor-hook.ts';
 import {useCreateFolder} from "./use-create-folder.ts";
 import CreateFolder from "./create-folder.vue";
 import CreateNode from "./create-node.vue";
-import { nanoid } from 'nanoid'
+import { Folder } from '@element-plus/icons-vue'
+import { cloneFnJSON } from '@vueuse/core'
 
 defineOptions({
   name: 'BehaviorLeft'
 });
 const { editor } = useEditorHook();
 
-const listData = ref<any[]>([])
+interface ListDataType {
+  id: string;
+  name: string;
+  title: string;
+  category: string;
+  isDefault: boolean;
+  type?: string;
+  index?: number;
+  parent?: string;
+  hostFOMObject?: any
+}
+const listData = ref<ListDataType[]>([])
 
 const listDataToTreeData = (data: any[]) => {
-  const typeMap: Record<string, any> = {}
+  const dataMap: Record<string, any> = {}
   data.forEach(item => {
-    if (!typeMap[item.category]) {
-      typeMap[item.category] = {
-        name:   item.category,
-        id: nanoid(),
-        children: [item]
+    dataMap[item.id] = item;
+  })
+  const typeMap: Record<string, any> = {
+    tree: {
+      name: 'tree',
+      id: 'tree',
+      children: []
+    },
+    condition: {
+      name: 'condition',
+      id: 'condition',
+      children: []
+    },
+    action: {
+      name: 'action',
+      id: 'action',
+      children: []
+    },
+    decorator: {
+      name: 'decorator',
+      id: 'decorator',
+      children: []
+    },
+    composite: {
+      name: 'composite',
+      id: 'composite',
+      children: []
+    }
+  }
+  data.forEach(item => {
+    if (item.parent) {
+      const parent = dataMap[item.parent]
+      if (!parent.children) {
+        parent.children = []
       }
+      parent.children.push(item)
+      return;
+    }
+    if (item.type === 'folder') {
+      typeMap[item.category].children.unshift(item);
       return
     }
     typeMap[item.category].children.push(item)
   })
-  return Object.values(typeMap).sort(item => {
-    if (item.name === 'Tree') {
-      return 1
-    }
-    return -1
-  })
+  return Object.values(typeMap)
 }
-
 const listDataComputed = computed(() => {
-  return listDataToTreeData(listData.value)
+  return listDataToTreeData(cloneFnJSON(listData.value))
 })
 
 const { folderDialogShow } = useCreateFolder()
@@ -64,8 +112,10 @@ function _getTitle(node: any) {
   return title;
 }
 
+const selectedTreeId = ref('')
+
 const _activate = () => {
-  const result: any[] = []
+  const result: ListDataType[] = []
   const p = toValue(editor).project.get();
   if (!p) {
     return;
@@ -75,29 +125,36 @@ const _activate = () => {
       return;
     }
     result.push({
+      id: node.name,
       name: node.name,
-      category: node.category,
       title: _getTitle(node),
+      category: node.category,
+      parent: node.parent,
       isDefault: node.isDefault
     })
 
   });
 
   const selected = p.trees.getSelected();
+
+  selectedTreeId.value = selected._id
+
   p.trees.each(function (tree: any) {
     const root = tree.blocks.getRoot();
     result.push({
       id: tree._id,
       name: root.title || 'A behavior tree',
+      title: root.title,
       category: 'tree',
-      active: tree === selected,
-      hostFOMObject: root.hostFOMObject
+      hostFOMObject: root.hostFOMObject,
+      isDefault: false
     })
   });
 
   p.folders.each((folder: any) => {
     result.push({
-      name: folder.name,
+      id: folder.name,
+      name: _getTitle(folder),
       title: _getTitle(folder),
       category: folder.category,
       parent: folder.parent,
@@ -108,30 +165,43 @@ const _activate = () => {
   })
   listData.value = result
 };
-
+const nodeAllowDrop = (draggingNode: any, dropNode: any, type: string) => {
+  if (['prev','next'].includes(type)) return false
+  if (dropNode.type === 'folder') return true;
+  if (draggingNode.isDefault || dropNode.isDefault) {
+    return false
+  }
+}
 const handleDragStart = (node: any, e: DragEvent) => {
   const attrs = node.data;
-  let canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
-  const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+  if (attrs.type !== 'folder') {
+    let canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
+    const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+    if (isChrome) {
+      const img = document.createElement('img');
+      img.src = canvas.toDataURL();
 
-  if (isChrome) {
-    const img = document.createElement('img');
-    img.src = canvas.toDataURL();
-
-    // 10ms delay in order to proper create the image object
-    // ugly hack =(
-    let time = new Date().getTime();
-    const delay = time + 10;
-    while (time < delay) {
-      time = new Date().getTime();
+      // 10ms delay in order to proper create the image object
+      // ugly hack =(
+      let time = new Date().getTime();
+      const delay = time + 10;
+      while (time < delay) {
+        time = new Date().getTime();
+      }
+      //@ts-ignore
+      canvas = img;
     }
-    //@ts-ignore
-    canvas = img;
+    e.dataTransfer!.setDragImage(canvas, canvas.width / 2, canvas.height / 2);
   }
 
   e.dataTransfer!.setData('name', attrs.name);
-  e.dataTransfer!.setDragImage(canvas, canvas.width / 2, canvas.height / 2);
+  e.dataTransfer!.setData('type', attrs.type);
 };
+
+
+const handleNodeDrop = (dragNode: any, node: any) => {
+  dragNode.data.parent = node.data.parent
+}
 
 const _event = () => {
   setTimeout(function () {
@@ -185,6 +255,10 @@ onBeforeUnmount(() => {
 .behavior-left {
   width: var(--b3-left-width);
   overflow-y: auto;
+  --el-color-primary-light-9: #00c1fa;
+  .folder-icon {
+    margin-right: 6px;
+  }
   &__header{
     display: flex;
     justify-content: space-between;

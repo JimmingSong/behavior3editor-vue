@@ -7,8 +7,11 @@
       <el-form-item label="标题">
         <el-input v-model="nodeForm.title" />
       </el-form-item>
-      <el-form-item label="分类">
+      <el-form-item label="类型">
         <behavior-category v-model="nodeForm.category" />
+      </el-form-item>
+      <el-form-item label="所属分类">
+        <behavior-folder-select :category="nodeForm.category" v-model="nodeForm.parent" />
       </el-form-item>
       <el-form-item label="描述">
         <el-input type="textarea" :rows="5" v-model="nodeForm.description" />
@@ -36,6 +39,7 @@ import BehaviorProperty from "./behavior-propert.vue";
 import {Plus} from "@element-plus/icons-vue";
 import {useEditorHook} from "../use-editor-hook.ts";
 import { Node } from '../utils/Node'
+import BehaviorFolderSelect from "./behavior-folder-select.vue";
 
 defineOptions({
   name: "CreateNode"
