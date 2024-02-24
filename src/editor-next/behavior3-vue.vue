@@ -6,7 +6,7 @@
       <div id="behavior-box" @dragover.prevent></div>
       <behavior-right />
     </div>
-    <behavior-export v-if="exportDialogShow" :type="exportType" v-model:is-show="exportDialogShow"  />
+    <behavior-export :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow"  />
     <behavior-import :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow" />
   </div>
 </template>

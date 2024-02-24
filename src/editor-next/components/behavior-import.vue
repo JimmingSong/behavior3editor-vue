@@ -30,26 +30,7 @@ const isShow = defineModel('isShow', {default: false})
 
 const importData = ref('')
 const { editor } = useEditorHook()
-const handleImport = () => {
-  try {
-    const data = JSON.parse(importData.value);
 
-    const i = toValue(editor).import;
-
-    if (props.type === 'project') {
-      i.projectAsData(data.data)
-      return
-    }
-    if (props.type === 'tree') {
-      i.treeAsData(data)
-      return;
-    }
-    i.nodesAsData(data)
-  } catch (e) {
-    ElMessage.error('导入失败，请检查数据格式')
-  }
-
-}
 
 const fileInputRef =ref<HTMLInputElement>()
 
@@ -65,16 +46,30 @@ const fileChange = (e: Event) => {
   reader.readAsText(file)
 }
 
-const handleOpen = () => {
-  isShow.value = true
-}
-
 const handleClose = () => {
   isShow.value = false
 }
 
 const handleLoadLocalFile = () => {
   fileInputRef.value?.click()
+}
+const handleImport = () => {
+  try {
+    const data = JSON.parse(importData.value);
+
+    const i = toValue(editor).import;
+
+    if (props.type === 'project') {
+      i.projectAsData(data.data)
+    } else if (props.type === 'tree') {
+      i.treeAsData(data)
+    } else {
+      i.nodesAsData(data)
+    }
+    handleClose()
+  } catch (e) {
+    ElMessage.error('导入失败，请检查数据格式')
+  }
 }
 </script>
 

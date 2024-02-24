@@ -14,7 +14,7 @@
       <el-tree v-else :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="nodeAllowDrop" empty-text="空" @node-drop="handleNodeDrop" @node-drag-leave="handleDragStart">
         <template #default="{ data }">
           <el-icon v-if="data.type === 'folder'" class="folder-icon">
-            <Folder />
+            <FolderOpened />
           </el-icon>
           <span>{{data.name}}</span>
         </template>
@@ -30,7 +30,7 @@ import { useEditorHook } from '../use-editor-hook.ts';
 import {useCreateFolder} from "./use-create-folder.ts";
 import CreateFolder from "./create-folder.vue";
 import CreateNode from "./create-node.vue";
-import { Folder } from '@element-plus/icons-vue'
+import { FolderOpened } from '@element-plus/icons-vue'
 import { cloneFnJSON } from '@vueuse/core'
 
 defineOptions({
