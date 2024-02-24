@@ -22,6 +22,7 @@ export function NodeManager(editor, project) {
       n.category = node.category;
       n.title = node.title;
       n.description = node.description;
+      n.parent = node.parent;
       n.properties = tine.merge({}, node.properties || node.parameters);
       n.DMNRefs = node.DMNRefs || [];
       node = n;
@@ -60,6 +61,7 @@ export function NodeManager(editor, project) {
       name: node.name,
       title: node.title,
       description: node.description,
+      parent: node.parent,
       category: node.category,
       properties: node.properties,
       DMNRefs: node.DMNRefs
@@ -73,6 +75,9 @@ export function NodeManager(editor, project) {
     }
     if (typeof template.category !== 'undefined') {
       node.category = template.category;
+    }
+    if (typeof template.parent !== 'undefined') {
+      node.parent = template.parent;
     }
     if (typeof template.description !== 'undefined') {
       node.description = template.description;
@@ -89,6 +94,7 @@ export function NodeManager(editor, project) {
       title: node.title,
       description: node.description,
       category: node.category,
+      parent: node.parent,
       properties: node.properties,
       DMNRefs: node.DMNRefs
     };

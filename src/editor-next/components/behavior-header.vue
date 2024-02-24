@@ -11,6 +11,7 @@
       <n-icon size="22px" @click="projectHandle.handleRedo">
         <ArrowRedoOutline/>
       </n-icon>
+      <n-dropdown :options="projectOptions">项目</n-dropdown>
       <el-dropdown @command="handleEditCommand" placement="bottom-start">
         <span>编辑</span>
         <template #dropdown>
@@ -61,6 +62,7 @@ import {SaveOutline, ArrowUndoOutline, ArrowRedoOutline} from '@vicons/ionicons5
 import {useCreateProject} from '../use-create-project.ts';
 import {useViewHook} from "../use-view-hook.ts";
 import {useSelectHook} from "../use-select-hook.ts";
+import {DropdownDividerOption, DropdownOption} from "naive-ui";
 
 defineOptions({
   name: 'BehaviorHeader'
@@ -181,6 +183,78 @@ const handleSelectCommand = (command: keyof typeof selectHook) => {
   selectHook[command]?.()
 }
 
+
+const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
+  {
+    key: 'allProject',
+    label: '所有项目'
+  },
+  {
+    key: 'closeProject',
+    label: '关闭项目'
+  },
+  {
+    key: 'saveProject',
+    label: '保存项目',
+    props: {
+      onClick(){
+        const p = toValue(editor).project.get();
+      }
+    }
+  },
+  {
+    key: 'exportDivider',
+    type: 'divider'
+  },
+  {
+    key: 'export',
+    label: '导出',
+    children: [
+      {
+        key: 'exportProjectJson',
+        label: 'Project as Json'
+      },
+      {
+        key: 'exportTreeJson',
+        label: 'Tree as Json'
+      },
+      {
+        key: 'exportNodeJson',
+        label: 'Node as Json'
+      }
+    ]
+  },
+  {
+    key: 'import',
+    label: '导入',
+    children: [
+      {
+        key: 'importProjectJson',
+        label: 'Project as Json'
+      },
+      {
+        key: 'importTreeJson',
+        label: 'Tree as Json'
+      },
+      {
+        key: 'importNodeJson',
+        label: 'Node as Json'
+      }
+    ]
+  },
+  {
+    key: 'importDivider',
+    type: 'divider'
+  },
+  {
+    key: 'newTree',
+    label: 'new Tree',
+  },
+  {
+    key: 'nodeNode',
+    label: 'new Node',
+  },
+]
 </script>
 
 <style scoped lang="less">

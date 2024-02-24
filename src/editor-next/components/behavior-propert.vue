@@ -8,7 +8,9 @@
         <el-input v-model="item.value" placeholder="属性名" @change="change" />
       </el-col>
       <el-col :span="4" :offset="1">
-        <el-icon @click="removeProperty(dex)"><Minus /></el-icon>
+        <span class="behavior-property__handle">
+          <el-icon @click="removeProperty(dex)"><Minus /></el-icon>
+        </span>
       </el-col>
     </el-row>
   </div>
@@ -74,5 +76,17 @@ defineExpose({
 
 
 <style scoped lang="less">
-
+.behavior-property {
+  width: 100%;
+  &__handle {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background: #013849;
+    }
+  }
+}
 </style>

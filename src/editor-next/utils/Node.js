@@ -5,6 +5,7 @@ export class Node {
     this.title = null;
     this.category = null;
     this.description = null;
+    this.parent = '';
     this.properties = {};
     this.DMNRefs = [];
     this.isDefault = !!isDefault;
@@ -21,6 +22,7 @@ export class Node {
     n.spec = this.spec;
     n.name = this.name;
     n.title = this.title;
+    n.parent = this.parent;
     n.category = this.category;
     n.description = this.description;
     n.properties = this.properties;
