@@ -6,6 +6,8 @@
       <div id="behavior-box" @dragover.prevent></div>
       <behavior-right />
     </div>
+    <behavior-export v-if="exportDialogShow" :type="exportType" v-model:is-show="exportDialogShow"  />
+    <behavior-import :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow" />
   </div>
 </template>
 
@@ -18,6 +20,8 @@ import { useCreateProject } from './use-create-project.ts';
 import './utils/functions';
 import BehaviorHeader from './components/behavior-header.vue';
 import {EditorInstance} from "./use-editor-hook.ts";
+import BehaviorExport from "./components/behavior-export.vue";
+import BehaviorImport from "./components/behavior-import.vue";
 
 defineOptions({
   name: 'Behavior3Vue'
@@ -62,6 +66,17 @@ onMounted(() => {
   createProject();
   bindDropEvent(editor1);
 });
+
+
+const exportDialogShow = ref(false)
+const exportType = ref('project');
+const setExportDialogShow = (type: 'project' | 'tree' | 'node') => {
+  exportType.value = type;
+  exportDialogShow.value = true
+  console.log('show')
+}
+
+provide('exportProvide', {setExportDialogShow})
 
 </script>
 

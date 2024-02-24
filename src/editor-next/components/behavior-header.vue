@@ -183,7 +183,7 @@ const handleSelectCommand = (command: keyof typeof selectHook) => {
   selectHook[command]?.()
 }
 
-
+const {setExportDialogShow} = inject('exportProvide') as any
 const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
   {
     key: 'allProject',
@@ -198,7 +198,7 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
     label: '保存项目',
     props: {
       onClick(){
-        const p = toValue(editor).project.get();
+        setExportDialogShow('project')
       }
     }
   },
@@ -212,15 +212,30 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
     children: [
       {
         key: 'exportProjectJson',
-        label: 'Project as Json'
+        label: 'Project as Json',
+        props: {
+          onClick() {
+            setExportDialogShow('project')
+          }
+        }
       },
       {
         key: 'exportTreeJson',
-        label: 'Tree as Json'
+        label: 'Tree as Json',
+        props: {
+          onClick() {
+            setExportDialogShow('tree')
+          }
+        }
       },
       {
         key: 'exportNodeJson',
-        label: 'Node as Json'
+        label: 'Node as Json',
+        props: {
+          onClick() {
+            setExportDialogShow('node')
+          }
+        }
       }
     ]
   },
@@ -230,15 +245,30 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
     children: [
       {
         key: 'importProjectJson',
-        label: 'Project as Json'
+        label: 'Project as Json',
+        props: {
+          onClick() {
+            setExportDialogShow('project')
+          }
+        }
       },
       {
         key: 'importTreeJson',
-        label: 'Tree as Json'
+        label: 'Tree as Json',
+        props: {
+          onClick() {
+            setExportDialogShow('tree')
+          }
+        }
       },
       {
         key: 'importNodeJson',
-        label: 'Node as Json'
+        label: 'Node as Json',
+        props: {
+          onClick() {
+            setExportDialogShow('node')
+          }
+        }
       }
     ]
   },
