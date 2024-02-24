@@ -27,7 +27,7 @@ const getId = () => {
   return ++id;
 }
 
-const properties = defineModel({default: () => ({})})
+const properties = defineModel<Record<string, any>>({default: () => ({})})
 
 interface RowsType {
   key: string;
@@ -41,15 +41,16 @@ const addProperty = (key: string, value: string, fixed: boolean) => {
   rows.value.push({key, value, fixed, id: getId()})
 }
 
-const resolvePropertiesToList = (property: Record<string, any>) => {
+const resolvePropertiesToList = () => {
+  const property = properties.value
   const result: RowsType[] = []
-  for (const key in property) {
+  for (const key in properties.value) {
     result.push({key, value: property[key], fixed: false, id: getId()})
   }
   rows.value = result
 }
 
-resolvePropertiesToList(properties.value)
+resolvePropertiesToList()
 
 const removeProperty = (index: number) => {
   rows.value.splice(index, 1)
@@ -69,7 +70,8 @@ const change = () => {
 }
 
 defineExpose({
-  add: addProperty
+  add: addProperty,
+  reset: resolvePropertiesToList
 })
 
 </script>

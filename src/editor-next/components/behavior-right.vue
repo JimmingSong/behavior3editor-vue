@@ -18,21 +18,9 @@
       </div>
       <div>
         <span>属性</span>
-        <span @click="addProperty('', '', false)">+</span>
+        <span @click="addProperty">+</span>
       </div>
-      <el-form>
-        <el-form-item v-for="(item, index) in properties" :key="index">
-          <el-col :span="10">
-            <el-input v-model="item.key" @change="changePropertyKey" />
-          </el-col>
-          <el-col :span="10" :offset="1">
-            <el-input v-model="item.value" @change="changePropertyValue"/>
-          </el-col>
-          <el-col :span="1" :offset="1">
-            <span @click="removeProperty(index)">-</span>
-          </el-col>
-        </el-form-item>
-      </el-form>
+      <behavior-property v-model="block.properties" ref="behaviorPropertyRef" @change="update" />
     </div>
   </div>
 </template>
@@ -40,6 +28,7 @@
 <script setup lang="ts">
 import {useEditorHook} from "../use-editor-hook.ts";
 import {onBeforeUnmount} from "vue";
+import BehaviorProperty from "./behavior-propert.vue";
 
 defineOptions({
   name: 'BehaviorRight'
@@ -50,20 +39,13 @@ const {editor} = useEditorHook()
 
 const original = shallowRef<any>(null)
 const block = ref<null | any>(null);
-const properties = ref<any[]>([]);
+const behaviorPropertyRef = ref<InstanceType<typeof BehaviorProperty>>()
+const addProperty = () => {
+  behaviorPropertyRef.value?.add('','', false)
+}
 
-const addProperty = (key: string, value: string, fixed: boolean) => {
-  properties.value.push({key, value, fixed});
-}
-const parseProperties = (property?: any) => {
-  if (!property) {
-    return;
-  }
-  for (const propertiesKey in property) {
-    addProperty(propertiesKey, property[propertiesKey], false)
-  }
-}
 const _active = () => {
+  behaviorPropertyRef.value?.reset()
   const p = editor.value.project.get();
   const t = p.trees.getSelected();
   const s = t.blocks.getSelected();
@@ -74,46 +56,21 @@ const _active = () => {
     block.value = {
       title: _original.title,
       description: _original.description,
-      //@ts-ignore
-      // properties: tine.merge({name: '111'}, _original.properties)
+      properties
     }
-    parseProperties(properties)
     return
   }
   block.value = null
 }
 
-const parsePropertiesToObject = () => {
-  return toValue(properties).reduce((acc: any, cur: any) => {
-    acc[cur.key] = cur.value;
-    return acc;
-  }, {} as any)
-}
 const update = () => {
   const p = editor.value.project.get();
   const t = p.trees.getSelected();
-  t.blocks.update(toValue(original), {
-    ...toValue(block),
-    properties: parsePropertiesToObject()
-  })
-}
-
-const changePropertyKey = (propertyKey: string) => {
-  console.log(propertyKey)
-  update()
-}
-const changePropertyValue = (propertyValue: string) => {
-  console.log(propertyValue)
-  update()
-}
-
-const removeProperty = (index: number) => {
-  properties.value.splice(index, 1);
+  t.blocks.update(toValue(original), toValue(block))
 }
 
 const _events = () => {
   setTimeout(() => {
-    properties.value = []
     _active();
   }, 0)
 }
