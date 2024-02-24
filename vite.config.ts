@@ -14,8 +14,5 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver(), NaiveUiResolver()],
     })
-  ],
-  define: {
-    'b3e': JSON.stringify({editor: {}, project: {}, draw: {}, tree: {}})
-  }
+  ]
 })
