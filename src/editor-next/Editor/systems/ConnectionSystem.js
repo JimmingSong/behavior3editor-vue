@@ -110,6 +110,7 @@ export function ConnectionSystem(editor) {
       var _new = [tree.connections, tree.connections.add, [connection._inBlock, block]];
       project.history._add(new Command(_old, _new));
 
+      editor.trigger('blockconnected', block)
       connection._redraw();
     }
     project.history._endBatch();
