@@ -4,7 +4,7 @@
       <span class="header-title">{{title}} </span>
       <span class="header-tool">
         <slot name="tool" />
-        <span>folder</span>
+        <span @click="handleFolder">folder</span>
       </span>
     </div>
     <div>
@@ -23,6 +23,10 @@ defineProps({
     default: ''
   }
 })
+const emits = defineEmits(['folder'])
+const handleFolder = (e: MouseEvent) => {
+  emits('folder', e)
+}
 </script>
 
 <style scoped lang="less">

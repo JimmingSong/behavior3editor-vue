@@ -10,9 +10,9 @@
     </div>
     <div>
       <behavior-tree />
-        <left-type-box :title="item.name"  v-for="(item) in listDataComputed" :key="item.id">
-          <n-tree block-line :data="item.children" label-field="name" key-field="id" draggable @dragstart="handleDragStart" :allow-drop="nodeAllowDrop" />
-        </left-type-box>
+      <left-type-box :title="item.name"  v-for="(item) in listDataComputed" :key="item.id" @folder="setFolderDialogShow(item.id)">
+        <n-tree block-line :data="item.children" label-field="name" key-field="id" draggable @dragstart="handleDragStart" :allow-drop="nodeAllowDrop" />
+      </left-type-box>
     </div>
   </div>
 </template>
