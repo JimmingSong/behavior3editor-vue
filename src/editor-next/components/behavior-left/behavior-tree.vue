@@ -1,13 +1,6 @@
 <template>
   <left-type-box title="Tree">
-    <el-tree :data="behaviorTreeData" node-key="id" :props="{label: 'name'}" :current-node-key="selectedId" highlight-current>
-      <template #default="{data}">
-        <span>
-          <span>{{data.name}}</span>
-          <span>编辑</span>
-        </span>
-      </template>
-    </el-tree>
+    <n-tree block-line :data="behaviorTreeData" key-field="id" label-field="name" :selected-keys="selectedId" @update:selected-keys="updateSelectedId" :cancelable="false" />
   </left-type-box>
 </template>
 
@@ -19,8 +12,9 @@ defineOptions({
   name: "BehaviorTree"
 })
 
-const behaviorTreeData = ref([])
-const selectedId = ref('')
+const behaviorTreeData = ref<any[]>([])
+const selectedId = ref<string[]>([])
+const updateSelectedId = (keys: string[]) => selectedId.value = keys
 
 const { editor } = useEditorHook()
 const active = () => {
@@ -29,11 +23,9 @@ const active = () => {
     return;
   }
 
-  const result = []
-
+  const result: any[] = []
   const selected = p.trees.getSelected();
-
-  selectedId.value = selected._id
+  selectedId.value = [selected._id]
 
   p.trees.each(function (tree: any) {
     const root = tree.blocks.getRoot();
@@ -46,7 +38,7 @@ const active = () => {
       isDefault: false
     })
   });
-  p.folders.each(folder => {
+  p.folders.each((folder: any) => {
     if (folder.category !== 'tree') return;
     result.push({
       id: folder.name,
