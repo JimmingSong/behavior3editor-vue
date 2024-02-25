@@ -3,15 +3,19 @@ import {useEditorHook} from "../../use-editor-hook.ts";
 
 export function useDragEvent() {
     const {editor} = useEditorHook()
-    const nodeAllowDrop = (draggingNode: any, dropNode: any, type: string) => {
+    const nodeAllowDrop = (info: any) => {
+        const type = info.dropPosition;
+        const dropNode = info.node;
         if (['prev','next'].includes(type)) return false
         if (dropNode.type === 'folder') return true;
-        if (draggingNode.isDefault || dropNode.isDefault) {
-            return false
-        }
+        // if (draggingNode.isDefault || dropNode.isDefault) {
+        //     return false
+        // }
+        return false
     }
-    const handleDragStart = (node: any, e: DragEvent) => {
-        const attrs = node.data;
+    const handleDragStart = (data: any) => {
+        const attrs = data.node;
+        const e = data.event;
         if (attrs.type !== 'folder') {
             let canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
             const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;

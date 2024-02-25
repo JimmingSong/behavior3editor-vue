@@ -8,39 +8,23 @@
         <n-button text type="primary" size="small" @click="setFolderDialogShow()">Folder</n-button>
       </n-space>
     </div>
-    <behavior-tree />
-    <template v-for="(item) in listDataComputed" :key="item.id">
-      <div class="behavior-left__category">{{ item.name }}</div>
-
-      <el-tree :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="nodeAllowDrop" empty-text="空" @node-drop="handleNodeDrop" @node-drag-leave="handleDragStart">
-        <template #default="{ data }">
-          <div class="custom-node">
-            <span>
-              <el-icon v-if="data.type === 'folder'" class="folder-icon">
-              <FolderOpened />
-            </el-icon>
-            <span>{{data.name}}</span>
-            </span>
-            <span v-if="!data.isDefault" class="custom-node__right">
-              <span>编辑</span>
-              <span>新建</span>
-              <span>删除</span>
-            </span>
-          </div>
-        </template>
-      </el-tree>
-    </template>
+    <div>
+      <behavior-tree />
+        <left-type-box :title="item.name"  v-for="(item) in listDataComputed" :key="item.id">
+          <n-tree block-line :data="item.children" label-field="name" key-field="id" draggable @dragstart="handleDragStart" :allow-drop="nodeAllowDrop" />
+        </left-type-box>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditorHook } from '../../use-editor-hook.ts';
 import { useCreateFolder } from "../use-create-folder.ts";
-import { FolderOpened } from '@element-plus/icons-vue'
 import { cloneFnJSON } from '@vueuse/core'
 import { useDragEvent } from "./use-drag-event.ts";
 import BehaviorTree from "./behavior-tree.vue";
 import {useBehaviorInject} from "../../use-behavior-inject.ts";
+import LeftTypeBox from "./left-type-box.vue";
 
 defineOptions({
   name: 'BehaviorLeft'
