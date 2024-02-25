@@ -12,48 +12,13 @@
         <ArrowRedoOutline/>
       </n-icon>
       <n-config-provider :theme="darkTheme">
-       <n-dropdown :options="projectOptions">项目</n-dropdown>
+        <n-space>
+          <n-dropdown :options="projectOptions">项目</n-dropdown>
+          <n-dropdown :options="editOptions">编辑</n-dropdown>
+          <n-dropdown :options="viewOptions">视图</n-dropdown>
+          <n-dropdown :options="selectOptions">选择</n-dropdown>
+        </n-space>
       </n-config-provider>
-      <el-dropdown @command="handleEditCommand" placement="bottom-start">
-        <span>编辑</span>
-        <template #dropdown>
-          <el-dropdown-menu class="behavior-header__tool">
-            <el-dropdown-item v-for="item in editMenuOption" :key="item.command" :command="item.command"
-                              :divided="item.divided">
-              <div class="menu-label">
-                <span>{{ item.label }}</span>
-                <span>{{ item.keyboard }}</span>
-              </div>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-      <el-dropdown @command="handleViewCommand" placement="bottom-start">
-        <span>视图</span>
-        <template #dropdown>
-          <el-dropdown-menu class="behavior-header__tool">
-            <el-dropdown-item v-for="item in viewMenuOption" :key="item.command" :command="item.command">
-              <div class="menu-label">
-                <span>{{ item.label }}</span>
-                <span>{{ item.keyboard }}</span>
-              </div>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-      <el-dropdown @command="handleSelectCommand" placement="bottom-start">
-        <span>选择</span>
-        <template #dropdown>
-          <el-dropdown-menu class="behavior-header__tool">
-            <el-dropdown-item v-for="item in selectMenuOption" :key="item.command" :command="item.command">
-              <div class="menu-label">
-                <span>{{ item.label }}</span>
-                <span>{{ item.keyboard }}</span>
-              </div>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
     </n-space>
   </div>
 </template>
@@ -65,6 +30,7 @@ import {useCreateProject} from '../use-create-project.ts';
 import {useViewHook} from "../use-view-hook.ts";
 import {useSelectHook} from "../use-select-hook.ts";
 import {DropdownDividerOption, DropdownOption, darkTheme} from "naive-ui";
+import {useBehaviorInject} from "../use-behavior-inject.ts";
 
 defineOptions({
   name: 'BehaviorHeader'
@@ -76,120 +42,31 @@ const projectHandle = useCreateProject(editor);
 
 projectHandle.bindKeyboardEvent();
 
-const editMenuOption = [
-  {
-    command: 'handleUndo',
-    label: '撤销',
-    keyboard: 'ctrl+z'
-  },
-  {
-    command: 'handleRedo',
-    label: '回撤',
-    keyboard: 'ctrl+shift+z'
-  },
-  {
-    divided: true,
-    command: 'handleCopy',
-    label: '复制',
-    keyboard: 'ctrl+c'
-  },
-  {
-    command: 'handleCut',
-    label: '剪切',
-    keyboard: 'ctrl+x'
-  },
-  {
-    command: 'handlePaste',
-    label: '粘贴',
-    keyboard: 'ctrl+v'
-  },
-  {
-    command: 'handleDelete',
-    label: '删除',
-    keyboard: 'delete'
-  },
-  {
-    divided: true,
-    command: 'handleDeleteAllConns',
-    label: '删除全部连线',
-  },
-  {
-    command: 'handleDeleteAllInConns',
-    label: '删除全部输入连线',
-  },
-  {
-    command: 'handleDeleteAllOutConns',
-    label: '删除全部输出联系',
-  }
-];
-
-const viewMenuOption = [
-  {
-    command: 'onAutoOrganize',
-    label: '自动组织',
-    keyboard: 'a'
-  },
-  {
-    command: 'handleZoomIn',
-    label: '放大',
-    keyboard: 'ctrl+up'
-  },
-  {
-    command: 'handleZoomOut',
-    label: '缩小',
-    keyboard: 'ctrl+down'
-  }
-]
-
-const handleEditCommand = (command: keyof Omit<typeof projectHandle, 'handleImportFile'>) => {
-  projectHandle[command]?.();
-};
 
 const viewCommandMap = useViewHook(editor)
-
+const selectHook = useSelectHook(editor)
+selectHook.bindSelectMousetrap()
 
 viewCommandMap.bindViewMousetrap()
 
 onBeforeUnmount(() => {
   viewCommandMap.unbindViewMousetrap();
-})
-const handleViewCommand = (command: keyof typeof viewCommandMap) => {
-  viewCommandMap[command]?.()
-}
-
-
-onBeforeUnmount(() => {
   projectHandle.unbindKeyboardEvent();
-});
+  selectHook.unbindSelectMousetrap()
+})
 
-const selectMenuOption = [
-  {
-    command: 'onSelectAll',
-    label: '选中全部',
-    keyboard: 'ctrl+a'
-  },
-  {
-    command: 'onDeselectAll',
-    label: '取消全部',
-    keyboard: 'ctrl+i'
-  },
-  {
-    command: 'onInvertSelection',
-    label: '反选',
-    keyboard: 'esc'
-  }
-]
-const selectHook = useSelectHook(editor)
 
-const handleSelectCommand = (command: keyof typeof selectHook) => {
-  selectHook[command]?.()
-}
-
-const {setExportDialogShow, setImportDialogShow} = inject('exportProvide') as any
-const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
+const {setExportDialogShow, setImportDialogShow, setProjectDialogShow} = useBehaviorInject()
+type DropdownOptions = Array<DropdownOption | DropdownDividerOption>
+const projectOptions: DropdownOptions = [
   {
     key: 'allProject',
-    label: '所有项目'
+    label: '所有项目',
+    props: {
+      onClick() {
+        setProjectDialogShow()
+      }
+    }
   },
   {
     key: 'closeProject',
@@ -199,7 +76,7 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
     key: 'saveProject',
     label: '保存项目',
     props: {
-      onClick(){
+      onClick() {
         setExportDialogShow('project')
       }
     }
@@ -286,6 +163,156 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
     key: 'nodeNode',
     label: 'new Node',
   },
+]
+const editOptions: DropdownOptions = [
+  {
+    key: 'handleUndo',
+    label: '撤销 ctrl+z',
+    props: {
+      onClick() {
+        projectHandle.handleUndo()
+      }
+    }
+  },
+  {
+    key: 'handleRedo',
+    label: '回撤 ctrl+shift+z',
+    props: {
+      onClick() {
+        projectHandle.handleRedo()
+      }
+    }
+  },
+  {
+    key: 'divider-1',
+    type: 'divider'
+  },
+  {
+    key: 'handleCopy',
+    label: '复制 ctrl+c',
+    props: {
+      onClick() {
+        projectHandle.handleCopy()
+      }
+    }
+  },
+  {
+    key: 'handleCut',
+    label: '剪切 ctrl+x',
+    props: {
+      onClick() {
+        projectHandle.handleCut()
+      }
+    }
+  },
+  {
+    key: 'handlePaste',
+    label: '粘贴 ctrl+v',
+    props: {
+      onClick() {
+        projectHandle.handlePaste()
+      }
+    }
+  },
+  {
+    key: 'handleDelete',
+    label: '删除 delete',
+    props: {
+      onClick() {
+        projectHandle.handleDelete()
+      }
+    }
+  },
+  {
+    type: 'divider'
+  },
+  {
+    key: 'handleDeleteAllConns',
+    label: '删除全部连线',
+    props: {
+      onClick() {
+        projectHandle.handleDeleteAllConns()
+      }
+    }
+  },
+  {
+    key: 'handleDeleteAllInConns',
+    label: '删除全部输入连线',
+    props: {
+      onClick() {
+        projectHandle.handleDeleteAllInConns()
+      }
+    }
+  },
+  {
+    key: 'handleDeleteAllOutConns',
+    label: '删除全部输出连线',
+    props: {
+      onClick() {
+        projectHandle.handleDeleteAllOutConns()
+      }
+    }
+  }
+]
+const viewOptions: DropdownOptions = [
+  {
+    key: 'onAutoOrganize',
+    label: '自动组织 a',
+    props: {
+      onClick() {
+        viewCommandMap.onAutoOrganize()
+      }
+    }
+  },
+  {
+    key: 'handleZoomIn',
+    label: '放大 ctrl+up',
+    props: {
+      onClick() {
+        viewCommandMap.handleZoomIn()
+      }
+    }
+  },
+  {
+    key: 'handleZoomOut',
+    label: '缩小 ctrl+down',
+    props: {
+      onClick() {
+        viewCommandMap.handleZoomOut()
+      }
+    }
+  }
+]
+
+const selectOptions: DropdownOptions = [
+  {
+    key: 'onSelectAll',
+    label: '选中全部 ctrl+a',
+    props: {
+      onClick() {
+        selectHook.onSelectAll()
+      }
+    }
+  },
+  {
+    key: 'onDeselectAll',
+    label: '取消全部 ctrl+i',
+    props: {
+      onClick() {
+        selectHook.onDeselectAll()
+      }
+    }
+  },
+  {
+    key: 'onInvertSelection',
+    label: '反选 esc',
+    props: {
+      onClick() {
+
+        selectHook.onInvertSelection()
+      }
+    }
+  }
 ]
 </script>
 
