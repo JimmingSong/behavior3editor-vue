@@ -1,19 +1,19 @@
 <template>
-  <el-dialog model-value title="导出" width="700px" @close="isShow = false">
-    <el-input type="textarea" v-model="showJsonData" :rows="20" />
-    <template #footer>
-      <el-button @click="handleCopy">复制</el-button>
-      <el-button @click="handlePretty">{{  isCompact ? '紧凑' : '美化' }}</el-button>
-      <el-button @click="handleSave" type="primary">保存</el-button>
+  <n-modal preset="dialog" show title="导出" style="width: 700px" @close="isShow = false" display-directive="if">
+    <n-input type="textarea" v-model:value="showJsonData" :rows="20" />
+    <template #action>
+      <n-button @click="handleCopy">复制</n-button>
+      <n-button @click="handlePretty">{{  isCompact ? '紧凑' : '美化' }}</n-button>
+      <n-button @click="handleSave" type="primary">保存</n-button>
     </template>
-  </el-dialog>
+  </n-modal>
 </template>
 
 <script setup lang="ts">
 import {PropType} from "vue";
 import {useEditorHook} from "../use-editor-hook.ts";
 import { useClipboard } from '@vueuse/core'
-import {ElMessage} from "element-plus";
+import {useMessage} from "naive-ui";
 
 defineOptions({
   name: "behaviorExport"
@@ -54,9 +54,11 @@ const showJsonData = computed(() => {
 })
 
 const { copy } = useClipboard({legacy: true})
+
+const {success} = useMessage()
 const handleCopy = () => {
   copy(showJsonData.value).then(() => {
-    ElMessage.success('复制成功')
+    success('复制成功')
   })
 }
 

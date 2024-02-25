@@ -1,15 +1,15 @@
 <template>
-  <el-dialog model-value title="导出" width="700px" @close="handleClose">
+  <n-modal preset="dialog" show title="导出" style="width: 700px" @close="handleClose">
     <el-input type="textarea" v-model="importData" :rows="20" />
-    <template #footer>
-      <el-button @click="handleLoadLocalFile">
+    <template #action>
+      <n-button @click="handleLoadLocalFile">
         加载本地文件
         <input ref="fileInputRef" type="file" v-show="false" @change="fileChange" accept=".b3" />
-      </el-button>
-      <el-button @click="handleClose">取消</el-button>
-      <el-button @click="handleImport" type="primary">导入</el-button>
+      </n-button>
+      <n-button @click="handleClose">取消</n-button>
+      <n-button @click="handleImport" type="primary">导入</n-button>
     </template>
-  </el-dialog>
+  </n-modal>
 </template>
 
 <script setup lang="ts">

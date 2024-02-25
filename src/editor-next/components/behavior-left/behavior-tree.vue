@@ -1,5 +1,5 @@
 <template>
-  <left-type-box title="Tree">
+  <left-type-box title="Tree" @folder="setFolderDialogShow()">
     <n-tree block-line :data="behaviorTreeData" key-field="id" label-field="name" :selected-keys="selectedId" @update:selected-keys="updateSelectedId" :cancelable="false" />
   </left-type-box>
 </template>
@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import LeftTypeBox from "./left-type-box.vue";
 import {useEditorHook} from "../../use-editor-hook.ts";
+import {useBehaviorInject} from "../../use-behavior-inject.ts";
 
 defineOptions({
   name: "BehaviorTree"
@@ -15,7 +16,7 @@ defineOptions({
 const behaviorTreeData = ref<any[]>([])
 const selectedId = ref<string[]>([])
 const updateSelectedId = (keys: string[]) => selectedId.value = keys
-
+const { setFolderDialogShow } = useBehaviorInject()
 const { editor } = useEditorHook()
 const active = () => {
   const p = toValue(editor).project.get();

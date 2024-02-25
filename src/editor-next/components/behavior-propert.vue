@@ -1,19 +1,19 @@
 <template>
-  <div class="behavior-property">
-    <el-row v-for="(item, dex) in rows" :key="item.id">
-      <el-col :span="9">
-        <el-input v-model="item.key" placeholder="属性名" @change="change" />
-      </el-col>
-      <el-col :span="9" :offset="1">
-        <el-input v-model="item.value" placeholder="属性名" @change="change" />
-      </el-col>
-      <el-col :span="4" :offset="1">
+  <n-space class="behavior-property" vertical>
+    <n-row v-for="(item, dex) in rows" :key="item.id">
+      <n-col :span="9">
+        <n-input v-model="item.key" placeholder="属性名" @change="change" />
+      </n-col>
+      <n-col :span="9" :offset="1">
+        <n-input v-model="item.value" placeholder="属性名" @change="change" />
+      </n-col>
+      <n-col :span="4" :offset="1">
         <span class="behavior-property__handle">
           <el-icon @click="removeProperty(dex)"><Minus /></el-icon>
         </span>
-      </el-col>
-    </el-row>
-  </div>
+      </n-col>
+    </n-row>
+  </n-space>
 </template>
 
 <script setup lang="ts">

@@ -107,6 +107,8 @@ onBeforeUnmount(() => {
 .behavior-right {
   width: var(--b3-right-width, 300px);
   height: 100%;
+  padding: 3px 6px;
+  box-sizing: border-box;
   &__properties {
     display: flex;
 

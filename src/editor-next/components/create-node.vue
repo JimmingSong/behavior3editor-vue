@@ -1,22 +1,22 @@
 <template>
-  <el-dialog model-value title="新建Node" @close="handleClose" width="600px">
-    <el-form :model="nodeForm" label-width="100px" label-position="top">
-      <el-form-item label="名称">
-        <el-input v-model="nodeForm.name" />
-      </el-form-item>
-      <el-form-item label="标题">
-        <el-input v-model="nodeForm.title" />
-      </el-form-item>
-      <el-form-item label="类型">
-        <behavior-category v-model="nodeForm.category" />
-      </el-form-item>
-      <el-form-item label="所属分类">
-        <behavior-folder-select :category="nodeForm.category" v-model="nodeForm.parent" />
-      </el-form-item>
-      <el-form-item label="描述">
-        <el-input type="textarea" :rows="5" v-model="nodeForm.description" />
-      </el-form-item>
-      <el-form-item label="属性">
+  <n-modal show title="新建Node" @close="handleClose" style="width: 40%" preset="dialog">
+    <n-form :model="nodeForm" label-width="100px" label-position="top" :rules="nodeRules" ref="nodeFormRef">
+      <n-form-item label="名称" path="name">
+        <n-input v-model:value="nodeForm.name" />
+      </n-form-item>
+      <n-form-item label="标题" path="title">
+        <n-input v-model:value="nodeForm.title" />
+      </n-form-item>
+      <n-form-item label="类型" path="category">
+        <behavior-category v-model:value="nodeForm.category" />
+      </n-form-item>
+      <n-form-item label="所属分类">
+        <behavior-folder-select :category="nodeForm.category" v-model:value="nodeForm.parent" />
+      </n-form-item>
+      <n-form-item label="描述">
+        <n-input type="textarea" :rows="5" v-model:value="nodeForm.description" />
+      </n-form-item>
+      <n-form-item label="属性">
         <template #label>
           <div>
             <span>属性</span>
@@ -24,13 +24,13 @@
           </div>
         </template>
         <behavior-property v-model="nodeForm.properties" ref="behaviorPropertyRef" />
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <el-button @click="handleClose">取消</el-button>
-      <el-button type="primary" @click="handleSure">确定</el-button>
+      </n-form-item>
+    </n-form>
+    <template #action>
+      <n-button @click="handleClose">取消</n-button>
+      <n-button type="primary" @click="handleSure">确定</n-button>
     </template>
-  </el-dialog>
+  </n-modal>
 </template>
 
 <script setup lang="ts">
@@ -40,11 +40,24 @@ import {Plus} from "@element-plus/icons-vue";
 import {useEditorHook} from "../use-editor-hook.ts";
 import { Node } from '../utils/Node'
 import BehaviorFolderSelect from "./behavior-folder-select.vue";
+import {FormInst} from "naive-ui";
 
 defineOptions({
   name: "CreateNode"
 })
 
+const nodeFormRef = ref<FormInst>()
+const props = defineProps({
+  type:  {
+    type: String,
+    default: ''
+  }
+})
+const nodeRules = {
+  name: [{required: true, message: 'name为必填项', trigger: 'blur'}],
+  title: [{required: true, message: 'title为必填项', trigger: 'blur'}],
+  category: [{required: true, message: 'category为必填项', trigger: 'blur'}]
+}
 const nodeData = defineModel<Node | null>('node', { default: null})
 const isShow = defineModel('isShow', { default: false})
 
@@ -64,7 +77,7 @@ const active = () => {
     nodeForm.value = nodeData.value?.copy()
     return
   }
-  nodeForm.value.category = 'condition'
+  nodeForm.value.category = props.type ?? 'condition'
 }
 
 active()
@@ -72,16 +85,19 @@ active()
 
 const { editor } = useEditorHook()
 const handleSure = () => {
-  const p = toValue(editor).project.get()
-  const formValue = toValue(nodeForm)
-  if (isUpdate) {
-    p.nodes.update(toValue(nodeData), formValue)
+  nodeFormRef.value?.validate((errors) => {
+    if (errors) return
+    const p = toValue(editor).project.get()
+    const formValue = toValue(nodeForm)
+    if (isUpdate) {
+      p.nodes.update(toValue(nodeData), formValue)
+      nodeData.value = null
+      return
+    }
+    p.nodes.add(formValue)
     nodeData.value = null
-    return
-  }
-  p.nodes.add(formValue)
-  nodeData.value = null
-  handleClose()
+    handleClose()
+  })
 }
 </script>
 

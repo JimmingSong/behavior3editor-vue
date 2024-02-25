@@ -1,7 +1,5 @@
 <template>
-  <el-select v-bind="$attrs">
-    <el-option v-for="item in folders" :key="item.name" :label="item.title" :value="item.name" />
-  </el-select>
+  <n-select v-bind="$attrs" :options="folders" label-field="title" value-field="name"/>
 </template>
 
 <script setup lang="ts">

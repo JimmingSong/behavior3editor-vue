@@ -1,6 +1,6 @@
 <template>
-  <n-modal show title="所有项目" preset="dialog" @close="handleClose">
-    <n-data-table :data="projectList" :columns="projectColumns" />
+  <n-modal show title="所有项目" preset="dialog" @close="handleClose" style="width: 60%;" type="info">
+    <n-data-table class="project-table" :data="projectList" :columns="projectColumns" min-height="400px" max-height="400px" />
   </n-modal>
 </template>
 
