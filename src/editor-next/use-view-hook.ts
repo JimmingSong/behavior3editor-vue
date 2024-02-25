@@ -7,6 +7,7 @@ export function useViewHook(editor: Ref<EditorInstance>) {
 
   const getEditor = () => toRaw(editor.value)
   const onAutoOrganize = () => {
+    console.log("a ------")
     getTree(getEditor()).organize.organize();
   }
     const handleZoomIn = () => {

@@ -1,5 +1,6 @@
 <template>
-  <div class="behavior" ref="behaviorBoxRef">
+  <n-config-provider :abstract="true" :theme="darkTheme">
+  <div class="behavior" ref="behaviorBoxRef" @keydown.ctrl.a.prevent>
     <behavior-header class="behavior__header" />
     <div class="behavior-container">
       <behavior-left />
@@ -8,7 +9,9 @@
     </div>
     <behavior-export :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow"  />
     <behavior-import :type="importType" v-if="importDialogShow" v-model:is-show="importDialogShow" />
+    <behavior-project v-if="projectDialogShow" v-model:is-show="projectDialogShow" />
   </div>
+  </n-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +25,9 @@ import BehaviorHeader from './components/behavior-header.vue';
 import {EditorInstance} from "./use-editor-hook.ts";
 import BehaviorExport from "./components/behavior-export.vue";
 import BehaviorImport from "./components/behavior-import.vue";
+import BehaviorProject from "./components/behavior-project.vue";
+import {behaviorProviderKey} from "./use-behavior-inject.ts";
+import {darkTheme} from "naive-ui";
 
 defineOptions({
   name: 'Behavior3Vue'
@@ -70,6 +76,7 @@ onMounted(() => {
 
 const exportDialogShow = ref(false)
 const exportType = ref('project');
+
 const setExportDialogShow = (type: 'project' | 'tree' | 'node') => {
   exportType.value = type;
   exportDialogShow.value = true
@@ -83,7 +90,12 @@ const  setImportDialogShow = (type: 'project' | 'tree' | 'node') => {
   importDialogShow.value = true;
 }
 
-provide('exportProvide', {setExportDialogShow, setImportDialogShow})
+const projectDialogShow = ref(false)
+const setProjectDialogShow = () => {
+  projectDialogShow.value = true
+}
+
+provide(behaviorProviderKey, {setExportDialogShow, setImportDialogShow, setProjectDialogShow})
 
 </script>
 
