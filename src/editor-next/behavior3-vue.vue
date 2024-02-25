@@ -9,6 +9,8 @@
     </div>
     <behavior-export :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow"  />
     <behavior-import :type="importType" v-if="importDialogShow" v-model:is-show="importDialogShow" />
+    <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" />
+    <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" />
     <behavior-project v-if="projectDialogShow" v-model:is-show="projectDialogShow" />
   </div>
   </n-config-provider>
@@ -26,8 +28,10 @@ import {EditorInstance} from "./use-editor-hook.ts";
 import BehaviorExport from "./components/behavior-export.vue";
 import BehaviorImport from "./components/behavior-import.vue";
 import BehaviorProject from "./components/behavior-project.vue";
-import {behaviorProviderKey} from "./use-behavior-inject.ts";
+import {BehaviorProjectType, behaviorProviderKey} from "./use-behavior-inject.ts";
 import {darkTheme} from "naive-ui";
+import CreateNode from "./components/create-node.vue";
+import CreateFolder from "./components/create-folder.vue";
 
 defineOptions({
   name: 'Behavior3Vue'
@@ -95,7 +99,26 @@ const setProjectDialogShow = () => {
   projectDialogShow.value = true
 }
 
-provide(behaviorProviderKey, {setExportDialogShow, setImportDialogShow, setProjectDialogShow})
+const folderDialogShow = ref(false)
+const folderType = ref<BehaviorProjectType>('project')
+const setFolderDialogShow = (type: BehaviorProjectType) => {
+  folderDialogShow.value = true
+  folderType.value = type
+}
+const nodeDialogShow = ref(false)
+const nodeType = ref<BehaviorProjectType>('project')
+const setNodeDialogShow = (type: BehaviorProjectType) => {
+  folderDialogShow.value = true
+  nodeType.value = type
+}
+
+provide(behaviorProviderKey, {
+  setExportDialogShow,
+  setImportDialogShow,
+  setProjectDialogShow,
+  setFolderDialogShow,
+  setNodeDialogShow
+})
 
 </script>
 

@@ -2,11 +2,11 @@
   <div class="behavior-left">
     <div class="behavior-left__header">
       <span>编辑</span>
-      <span>
-        <el-button text type="primary" size="small">Tree</el-button>
-        <el-button text type="primary" size="small" @click="nodeDialogShow = true">Node</el-button>
-        <el-button text type="primary" size="small" @click="folderDialogShow = true">Folder</el-button>
-      </span>
+      <n-space>
+        <n-button text type="primary" size="small">Tree</n-button>
+        <n-button text type="primary" size="small" @click="setNodeDialogShow()">Node</n-button>
+        <n-button text type="primary" size="small" @click="setFolderDialogShow()">Folder</n-button>
+      </n-space>
     </div>
     <behavior-tree />
     <template v-for="(item) in listDataComputed" :key="item.id">
@@ -30,20 +30,17 @@
         </template>
       </el-tree>
     </template>
-    <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" />
-    <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditorHook } from '../../use-editor-hook.ts';
 import { useCreateFolder } from "../use-create-folder.ts";
-import CreateFolder from "../create-folder.vue";
-import CreateNode from "../create-node.vue";
 import { FolderOpened } from '@element-plus/icons-vue'
 import { cloneFnJSON } from '@vueuse/core'
 import { useDragEvent } from "./use-drag-event.ts";
 import BehaviorTree from "./behavior-tree.vue";
+import {useBehaviorInject} from "../../use-behavior-inject.ts";
 
 defineOptions({
   name: 'BehaviorLeft'
@@ -51,6 +48,7 @@ defineOptions({
 const { editor } = useEditorHook();
 
 const { handleDragStart, nodeAllowDrop, handleNodeDrop } = useDragEvent()
+const {setFolderDialogShow, setNodeDialogShow} = useBehaviorInject()
 
 interface ListDataType {
   id: string;
@@ -203,7 +201,6 @@ onBeforeUnmount(() => {
 .behavior-left {
   width: var(--b3-left-width);
   overflow-y: auto;
-  --el-color-primary-light-9: #00c1fa;
   .folder-icon {
     margin-right: 6px;
   }
@@ -224,7 +221,7 @@ onBeforeUnmount(() => {
     align-items: center;
     height: 30px;
     border-bottom: 1px solid #7d7d7d;
-    padding: 3px 0;
+    padding: 3px 6px;
     box-sizing: border-box;
   }
   &__category {
