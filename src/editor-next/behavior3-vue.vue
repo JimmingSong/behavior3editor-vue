@@ -7,14 +7,14 @@
       <behavior-right />
     </div>
     <behavior-export :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow"  />
-    <behavior-import :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow" />
+    <behavior-import :type="importType" v-if="importDialogShow" v-model:is-show="importDialogShow" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { Editor } from './Editor/Editor';
-import BehaviorLeft from './components/behavior-left.vue';
+import BehaviorLeft from './components/behavior-left/behavior-left.vue';
 import BehaviorRight from './components/behavior-right.vue';
 import { useCreateProject } from './use-create-project.ts';
 import './utils/functions';
@@ -76,7 +76,14 @@ const setExportDialogShow = (type: 'project' | 'tree' | 'node') => {
   console.log('show')
 }
 
-provide('exportProvide', {setExportDialogShow})
+const importDialogShow = ref(false)
+const importType = ref('project')
+const  setImportDialogShow = (type: 'project' | 'tree' | 'node') => {
+  importType.value =  type
+  importDialogShow.value = true;
+}
+
+provide('exportProvide', {setExportDialogShow, setImportDialogShow})
 
 </script>
 

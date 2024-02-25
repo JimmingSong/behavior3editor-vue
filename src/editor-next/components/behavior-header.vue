@@ -185,7 +185,7 @@ const handleSelectCommand = (command: keyof typeof selectHook) => {
   selectHook[command]?.()
 }
 
-const {setExportDialogShow} = inject('exportProvide') as any
+const {setExportDialogShow, setImportDialogShow} = inject('exportProvide') as any
 const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
   {
     key: 'allProject',
@@ -250,7 +250,7 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
         label: 'Project as Json',
         props: {
           onClick() {
-            setExportDialogShow('project')
+            setImportDialogShow('project')
           }
         }
       },
@@ -259,7 +259,7 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
         label: 'Tree as Json',
         props: {
           onClick() {
-            setExportDialogShow('tree')
+            setImportDialogShow('tree')
           }
         }
       },
@@ -268,7 +268,7 @@ const projectOptions: Array<DropdownOption | DropdownDividerOption> = [
         label: 'Node as Json',
         props: {
           onClick() {
-            setExportDialogShow('node')
+            setImportDialogShow('node')
           }
         }
       }

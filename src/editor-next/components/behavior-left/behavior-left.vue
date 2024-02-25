@@ -8,15 +8,25 @@
         <el-button text type="primary" size="small" @click="folderDialogShow = true">Folder</el-button>
       </span>
     </div>
+    <behavior-tree />
     <template v-for="(item) in listDataComputed" :key="item.id">
       <div class="behavior-left__category">{{ item.name }}</div>
-      <el-tree v-if="item.id === 'tree'" :data="item.children" :props="{ label: 'name' }" node-key="id" :current-node-key="selectedTreeId" highlight-current></el-tree>
-      <el-tree v-else :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="nodeAllowDrop" empty-text="空" @node-drop="handleNodeDrop" @node-drag-leave="handleDragStart">
+
+      <el-tree :data="item.children" :props="{ label: 'name' }" node-key="id" draggable @node-drag-start="handleDragStart" :allow-drop="nodeAllowDrop" empty-text="空" @node-drop="handleNodeDrop" @node-drag-leave="handleDragStart">
         <template #default="{ data }">
-          <el-icon v-if="data.type === 'folder'" class="folder-icon">
-            <FolderOpened />
-          </el-icon>
-          <span>{{data.name}}</span>
+          <div class="custom-node">
+            <span>
+              <el-icon v-if="data.type === 'folder'" class="folder-icon">
+              <FolderOpened />
+            </el-icon>
+            <span>{{data.name}}</span>
+            </span>
+            <span v-if="!data.isDefault" class="custom-node__right">
+              <span>编辑</span>
+              <span>新建</span>
+              <span>删除</span>
+            </span>
+          </div>
         </template>
       </el-tree>
     </template>
@@ -26,17 +36,21 @@
 </template>
 
 <script setup lang="ts">
-import { useEditorHook } from '../use-editor-hook.ts';
-import {useCreateFolder} from "./use-create-folder.ts";
-import CreateFolder from "./create-folder.vue";
-import CreateNode from "./create-node.vue";
+import { useEditorHook } from '../../use-editor-hook.ts';
+import { useCreateFolder } from "../use-create-folder.ts";
+import CreateFolder from "../create-folder.vue";
+import CreateNode from "../create-node.vue";
 import { FolderOpened } from '@element-plus/icons-vue'
 import { cloneFnJSON } from '@vueuse/core'
+import { useDragEvent } from "./use-drag-event.ts";
+import BehaviorTree from "./behavior-tree.vue";
 
 defineOptions({
   name: 'BehaviorLeft'
 });
 const { editor } = useEditorHook();
+
+const { handleDragStart, nodeAllowDrop, handleNodeDrop } = useDragEvent()
 
 interface ListDataType {
   id: string;
@@ -57,19 +71,9 @@ const listDataToTreeData = (data: any[]) => {
     dataMap[item.id] = item;
   })
   const typeMap: Record<string, any> = {
-    tree: {
-      name: 'tree',
-      id: 'tree',
-      children: []
-    },
-    condition: {
-      name: 'condition',
-      id: 'condition',
-      children: []
-    },
-    action: {
-      name: 'action',
-      id: 'action',
+    composite: {
+      name: 'composite',
+      id: 'composite',
       children: []
     },
     decorator: {
@@ -77,9 +81,14 @@ const listDataToTreeData = (data: any[]) => {
       id: 'decorator',
       children: []
     },
-    composite: {
-      name: 'composite',
-      id: 'composite',
+    action: {
+      name: 'action',
+      id: 'action',
+      children: []
+    },
+    condition: {
+      name: 'condition',
+      id: 'condition',
       children: []
     }
   }
@@ -112,8 +121,6 @@ function _getTitle(node: any) {
   return title;
 }
 
-const selectedTreeId = ref('')
-
 const _activate = () => {
   const result: ListDataType[] = []
   const p = toValue(editor).project.get();
@@ -132,26 +139,10 @@ const _activate = () => {
       parent: node.parent,
       isDefault: node.isDefault
     })
-
-  });
-
-  const selected = p.trees.getSelected();
-
-  selectedTreeId.value = selected._id
-
-  p.trees.each(function (tree: any) {
-    const root = tree.blocks.getRoot();
-    result.push({
-      id: tree._id,
-      name: root.title || 'A behavior tree',
-      title: root.title,
-      category: 'tree',
-      hostFOMObject: root.hostFOMObject,
-      isDefault: false
-    })
   });
 
   p.folders.each((folder: any) => {
+    if (folder.category === 'tree') return
     result.push({
       id: folder.name,
       name: _getTitle(folder),
@@ -165,43 +156,7 @@ const _activate = () => {
   })
   listData.value = result
 };
-const nodeAllowDrop = (draggingNode: any, dropNode: any, type: string) => {
-  if (['prev','next'].includes(type)) return false
-  if (dropNode.type === 'folder') return true;
-  if (draggingNode.isDefault || dropNode.isDefault) {
-    return false
-  }
-}
-const handleDragStart = (node: any, e: DragEvent) => {
-  const attrs = node.data;
-  if (attrs.type !== 'folder') {
-    let canvas = toValue(editor).preview(attrs.name) as HTMLCanvasElement;
-    const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-    if (isChrome) {
-      const img = document.createElement('img');
-      img.src = canvas.toDataURL();
 
-      // 10ms delay in order to proper create the image object
-      // ugly hack =(
-      let time = new Date().getTime();
-      const delay = time + 10;
-      while (time < delay) {
-        time = new Date().getTime();
-      }
-      //@ts-ignore
-      canvas = img;
-    }
-    e.dataTransfer!.setDragImage(canvas, canvas.width / 2, canvas.height / 2);
-  }
-
-  e.dataTransfer!.setData('name', attrs.name);
-  e.dataTransfer!.setData('type', attrs.type);
-};
-
-
-const handleNodeDrop = (dragNode: any, node: any) => {
-  dragNode.data.parent = node.data.parent
-}
 
 const _event = () => {
   setTimeout(function () {
@@ -214,11 +169,8 @@ const _create = () => {
   edit.on('nodechanged', _event);
   edit.on('noderemoved', _event);
   edit.on('nodeadded', _event);
-  edit.on('treeadded', _event);
   edit.on('blockchanged', _event);
-  edit.on('treeselected', _event);
-  edit.on('treeremoved', _event);
-  edit.on('treeimported', _event);
+
 
   edit.on('folderremoved', _event)
   edit.on('folderadded', _event)
@@ -230,11 +182,7 @@ function _destroy() {
   edit.off('nodechanged', _event);
   edit.off('noderemoved', _event);
   edit.off('nodeadded', _event);
-  edit.off('treeadded', _event);
   edit.off('blockchanged', _event);
-  edit.off('treeselected', _event);
-  edit.off('treeremoved', _event);
-  edit.off('treeimported', _event);
 
   edit.off('folderremoved', _event)
   edit.off('folderadded', _event)
@@ -258,6 +206,17 @@ onBeforeUnmount(() => {
   --el-color-primary-light-9: #00c1fa;
   .folder-icon {
     margin-right: 6px;
+  }
+  .custom-node {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__right {
+      &>span + span {
+         margin-left: 4px;
+       }
+    }
   }
   &__header{
     display: flex;
