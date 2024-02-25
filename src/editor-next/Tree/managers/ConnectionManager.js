@@ -16,7 +16,7 @@ export function ConnectionManager(editor, project, tree) {
       connection._inBlock = inBlock;
       inBlock._outConnections.push(connection);
 
-      editor.trigger('blockconnected', inBlock, {
+      editor.trigger('blockconnectstart', inBlock, {
         connection: connection,
         type: 'outConnection',
         other: outBlock
@@ -27,7 +27,7 @@ export function ConnectionManager(editor, project, tree) {
       connection._outBlock = outBlock;
       outBlock._inConnection = connection;
 
-      editor.trigger('blockconnected', outBlock, {
+      editor.trigger('blockconnectstart', outBlock, {
         connection: connection,
         type: 'inConnection',
         other: inBlock
