@@ -1,3 +1,5 @@
+import {NodeFolderPartialType} from "./use-node-folder.ts";
+import {Ref} from "vue";
 
 
 export const behaviorProviderKey = Symbol('behaviorProviderKey');
@@ -7,8 +9,16 @@ interface BehaviorProviderInjectType {
     setExportDialogShow: (type: BehaviorProjectType) => void,
     setImportDialogShow: (type: BehaviorProjectType) => void,
     setProjectDialogShow: () => void,
-    setFolderDialogShow: (type?: BehaviorProjectType) => void,
-    setNodeDialogShow: (type?: BehaviorProjectType) => void,
+    setFolderDialogShow: (data?: NodeFolderPartialType) => void,
+    setNodeDialogShow: (data?: NodeFolderPartialType) => void,
+
+    projectDetail: Ref<ProjectDetailType>
+    setProjectDetail: (data: ProjectDetailType) => void
+}
+
+export interface ProjectDetailType {
+    name: string
+    description: string
 }
 
 export function useBehaviorInject() {
