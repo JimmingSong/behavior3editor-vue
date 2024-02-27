@@ -1,5 +1,5 @@
 <template>
-  <n-modal show title="新建Node" @close="handleClose" style="width: 40%" preset="dialog">
+  <n-modal show title="新建Node" display-directive="if" @close="handleClose" style="width: 40%" preset="dialog">
     <n-form :model="nodeForm" label-width="100px" label-position="top" :rules="nodeRules" ref="nodeFormRef">
       <n-form-item label="名称" path="name">
         <n-input v-model:value="nodeForm.name" />
@@ -41,24 +41,21 @@ import {useEditorHook} from "../use-editor-hook.ts";
 import { Node } from '../utils/Node'
 import BehaviorFolderSelect from "./behavior-folder-select.vue";
 import {FormInst} from "naive-ui";
+import {NodeFolderPartialType} from "../use-node-folder.ts";
+import {getProject} from "../use-create-project.ts";
 
 defineOptions({
   name: "CreateNode"
 })
 
 const nodeFormRef = ref<FormInst>()
-const props = defineProps({
-  type:  {
-    type: String,
-    default: ''
-  }
-})
+
 const nodeRules = {
   name: [{required: true, message: 'name为必填项', trigger: 'blur'}],
   title: [{required: true, message: 'title为必填项', trigger: 'blur'}],
   category: [{required: true, message: 'category为必填项', trigger: 'blur'}]
 }
-const nodeData = defineModel<Node | null>('node', { default: null})
+const nodeData = defineModel<NodeFolderPartialType | null>('node', { default: null})
 const isShow = defineModel('isShow', { default: false})
 
 const behaviorPropertyRef = ref<InstanceType<typeof BehaviorProperty>>()
@@ -70,14 +67,18 @@ const handleClose = () => {
   isShow.value = false
 }
 const nodeForm = ref<Node>(new Node())
+const originalNode = shallowRef<Node>()
 
 const isUpdate = !!nodeData.value
 const active = () => {
   if (isUpdate) {
-    nodeForm.value = nodeData.value?.copy()
+    const p = getProject(toValue(editor)).project.get()
+    const node = p.nodes.get(nodeData.value?.name)
+    originalNode.value = node
+    nodeForm.value = node?.copy()
     return
   }
-  nodeForm.value.category = props.type ?? 'condition'
+  nodeForm.value.category = toValue(nodeData)?.category ?? 'condition'
 }
 
 active()

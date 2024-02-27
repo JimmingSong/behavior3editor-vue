@@ -10,8 +10,8 @@
         </div>
         <behavior-export :type="exportType" v-if="exportDialogShow" v-model:is-show="exportDialogShow"/>
         <behavior-import :type="importType" v-if="importDialogShow" v-model:is-show="importDialogShow"/>
-        <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" :type="folderType"/>
-        <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" :type="nodeType"/>
+        <create-folder v-if="folderDialogShow" v-model:is-show="folderDialogShow" :folder-data="updateFolderData"/>
+        <create-node v-if="nodeDialogShow" v-model:is-show="nodeDialogShow" :node-data="updateNodeData"/>
         <behavior-project v-if="projectDialogShow" v-model:is-show="projectDialogShow"/>
       </div>
     </n-message-provider>
@@ -23,17 +23,18 @@ import {onMounted} from 'vue';
 import {Editor} from './Editor/Editor';
 import BehaviorLeft from './components/behavior-left/behavior-left.vue';
 import BehaviorRight from './components/behavior-right.vue';
-import {useCreateProject} from './use-create-project.ts';
+import {defaultProjectConfig} from './use-create-project.ts';
 import './utils/functions';
 import BehaviorHeader from './components/behavior-header.vue';
 import {EditorInstance} from "./use-editor-hook.ts";
 import BehaviorExport from "./components/behavior-export.vue";
 import BehaviorImport from "./components/behavior-import.vue";
 import BehaviorProject from "./components/behavior-project.vue";
-import {BehaviorProjectType, behaviorProviderKey} from "./use-behavior-inject.ts";
+import {behaviorProviderKey, ProjectDetailType} from "./use-behavior-inject.ts";
 import {darkTheme} from "naive-ui";
 import CreateNode from "./components/create-node.vue";
 import CreateFolder from "./components/create-folder.vue";
+import {useNodeFolder} from "./use-node-folder.ts";
 
 defineOptions({
   name: 'Behavior3Vue'
@@ -42,7 +43,20 @@ const behaviorBoxRef = ref();
 const editor = shallowRef();
 provide('editor', editor);
 
-const {createProject} = useCreateProject(editor);
+
+const projectDetail = ref<ProjectDetailType>({
+  name: 'projectName',
+  description: ''
+})
+
+const setProjectDetail = (data: ProjectDetailType) => {
+  projectDetail.value = data;
+}
+
+const createProject = (initialData?: any) => {
+  toValue(editor).project.open(initialData ?? defaultProjectConfig);
+};
+
 
 /**
  * 绑定拖拽事件
@@ -105,25 +119,17 @@ const setProjectDialogShow = () => {
   projectDialogShow.value = true
 }
 
-const folderDialogShow = ref(false)
-const folderType = ref<BehaviorProjectType>('project')
-const setFolderDialogShow = (type: BehaviorProjectType) => {
-  folderDialogShow.value = true
-  folderType.value = type
-}
-const nodeDialogShow = ref(false)
-const nodeType = ref<BehaviorProjectType>('project')
-const setNodeDialogShow = (type: BehaviorProjectType) => {
-  nodeDialogShow.value = true
-  nodeType.value = type
-}
+const { show: folderDialogShow, state: updateFolderData, setState: setFolderDialogShow } = useNodeFolder()
+const { show: nodeDialogShow, state: updateNodeData, setState: setNodeDialogShow } = useNodeFolder()
 
 provide(behaviorProviderKey, {
   setExportDialogShow,
   setImportDialogShow,
   setProjectDialogShow,
   setFolderDialogShow,
-  setNodeDialogShow
+  setNodeDialogShow,
+  projectDetail,
+  setProjectDetail
 })
 
 </script>

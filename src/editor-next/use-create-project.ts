@@ -1,6 +1,9 @@
 import { Ref } from 'vue';
 import * as Mousetrap from 'mousetrap'
 import {EditorInstance} from "./use-editor-hook.ts";
+import {projectStore} from "./project-store.ts";
+import {useBehaviorInject} from "./use-behavior-inject.ts";
+import {useMessage} from "naive-ui";
 
 export const defaultProjectConfig = {
   version: '0.3.0',
@@ -11,7 +14,7 @@ export const defaultProjectConfig = {
       version: '0.3.0',
       scope: 'tree',
       id: '410970e0-3121-4cf8-b1c0-26de8dea7291',
-      title: 'bbb333',
+      title: 'A Behavior Tree',
       description: '',
       root: null,
       properties: {},
@@ -28,17 +31,23 @@ export const defaultProjectConfig = {
   custom_nodes: []
 } as any;
 export function useCreateProject(editor: Ref<any>) {
+
+  const { projectDetail } = useBehaviorInject()
   const getEditor = () => toValue(editor);
   const getProject = () => getEditor().project.get();
 
   const getTree = () => getProject().trees.getSelected();
-  const createProject = (initialData?: any) => {
-    getEditor().project.open(initialData ?? defaultProjectConfig);
-  };
 
+
+  const {success} = useMessage()
   const handleSaveProject = () => {
     const data = getEditor().export.projectToData();
-    console.log('use-create-project 36 -> data', data);
+    const detail = toValue(projectDetail)
+    const name = detail.name;
+    const description = detail.description
+    projectStore.setItem(projectDetail.value.name, {name,description, data}).then(() => {
+      success('保存成功')
+    })
   };
 
   const handleImportFile = async (files: FileList) => {
@@ -112,7 +121,6 @@ export function useCreateProject(editor: Ref<any>) {
     getProject,
     getEditor,
 
-    createProject,
     handleSaveProject,
     handleImportFile,
 

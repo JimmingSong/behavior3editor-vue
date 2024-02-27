@@ -9,30 +9,42 @@
       </n-space>
     </div>
     <div>
-      <behavior-tree />
-      <left-type-box :title="item.name"  v-for="(item) in listDataComputed" :key="item.id" @folder="setFolderDialogShow(item.id)">
-        <n-tree block-line :data="item.children" label-field="name" key-field="id" draggable @dragstart="handleDragStart" :allow-drop="nodeAllowDrop" />
+      <behavior-tree/>
+      <left-type-box :title="item.name" v-for="(item) in listDataComputed" :key="item.id"
+                     @folder="setFolderDialogShow({category: item.id})">
+        <n-tree
+            block-line
+            :data="item.children"
+            label-field="title"
+            key-field="id"
+            draggable
+            @dragstart="handleDragStart"
+            :allow-drop="nodeAllowDrop"
+            :render-prefix="renderPrefix"
+            :render-suffix="renderSuffix"
+        />
       </left-type-box>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useEditorHook } from '../../use-editor-hook.ts';
-import { useCreateFolder } from "../use-create-folder.ts";
-import { cloneFnJSON } from '@vueuse/core'
-import { useDragEvent } from "./use-drag-event.ts";
+import {useEditorHook} from '../../use-editor-hook.ts';
+import {cloneFnJSON} from '@vueuse/core'
+import {useDragEvent} from "./use-drag-event.ts";
 import BehaviorTree from "./behavior-tree.vue";
 import {useBehaviorInject} from "../../use-behavior-inject.ts";
 import LeftTypeBox from "./left-type-box.vue";
+import {useTreeRender} from "./use-tree-render.ts";
 
 defineOptions({
   name: 'BehaviorLeft'
 });
-const { editor } = useEditorHook();
+const {editor} = useEditorHook();
 
-const { handleDragStart, nodeAllowDrop, handleNodeDrop } = useDragEvent()
+const {handleDragStart, nodeAllowDrop, handleNodeDrop} = useDragEvent()
 const {setFolderDialogShow, setNodeDialogShow} = useBehaviorInject()
+const { renderPrefix, renderSuffix } = useTreeRender()
 
 interface ListDataType {
   id: string;
@@ -95,8 +107,6 @@ const listDataComputed = computed(() => {
   return listDataToTreeData(cloneFnJSON(listData.value))
 })
 
-const { folderDialogShow } = useCreateFolder()
-const nodeDialogShow = ref(false)
 function _getTitle(node: any) {
   let title = node.title || node.name;
   title = title.replace(/(<\w+>)/g, () => '@');
@@ -179,27 +189,33 @@ nextTick(() => {
 onBeforeUnmount(() => {
   _destroy();
 });
+
+
 </script>
 
 <style scoped lang="less">
 .behavior-left {
   width: var(--b3-left-width);
   overflow-y: auto;
+
   .folder-icon {
     margin-right: 6px;
   }
+
   .custom-node {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     &__right {
-      &>span + span {
-         margin-left: 4px;
-       }
+      & > span + span {
+        margin-left: 4px;
+      }
     }
   }
-  &__header{
+
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -208,6 +224,7 @@ onBeforeUnmount(() => {
     padding: 3px 6px;
     box-sizing: border-box;
   }
+
   &__category {
     cursor: pointer;
     display: block;

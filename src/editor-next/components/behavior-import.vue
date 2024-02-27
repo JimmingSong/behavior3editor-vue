@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import {PropType} from "vue";
 import {useEditorHook} from "../use-editor-hook.ts";
+import {useBehaviorInject} from "../use-behavior-inject.ts";
 
 defineOptions({
   name: "behaviorImport"
@@ -30,6 +31,8 @@ const isShow = defineModel('isShow', {default: false})
 
 const importData = ref('')
 const { editor } = useEditorHook()
+
+const { setProjectDetail } = useBehaviorInject()
 
 
 const fileInputRef =ref<HTMLInputElement>()
@@ -55,16 +58,19 @@ const handleLoadLocalFile = () => {
 }
 const handleImport = () => {
   try {
-    const data = JSON.parse(importData.value);
+    const project = JSON.parse(importData.value);
 
     const i = toValue(editor).import;
-
+    setProjectDetail({
+      name: project.name,
+      description: project.description
+    })
     if (props.type === 'project') {
-      i.projectAsData(data.data)
+      i.projectAsData(project.data)
     } else if (props.type === 'tree') {
-      i.treeAsData(data)
+      i.treeAsData(project)
     } else {
-      i.nodesAsData(data)
+      i.nodesAsData(project)
     }
     handleClose()
   } catch (e) {

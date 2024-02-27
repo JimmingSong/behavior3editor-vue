@@ -17,6 +17,7 @@
     "createjs": "^1.0.1",
     "element-plus": "^2.5.5",
     "less": "^4.2.0",
+    "localforage": "^1.10.0",
     "mousetrap": "^1.6.5",
     "naive-ui": "^2.35.0",
     "nanoid": "^5.0.6",

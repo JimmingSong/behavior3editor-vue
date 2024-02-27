@@ -16,7 +16,6 @@ export function TreeManager(editor, project) {
     } else {
       project.history._beginBatch();
       tree = new Tree(editor, project);
-      console.log('tree', tree);
       let root = tree.blocks.getRoot();
       project.addChild(tree);
       editor.trigger('treeadded', tree);
