@@ -18,7 +18,7 @@ export class Folder {
     }
 
     copy() {
-        var n = new b3e.Folder(this.isDefault);
+        const n = new Folder(this.isDefault);
         n.spec = this.spec;
         n.name = this.name;
         n.title = this.title;

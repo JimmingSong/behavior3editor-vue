@@ -137,7 +137,7 @@ const _activate = () => {
     if (folder.category === 'tree') return
     result.push({
       id: folder.name,
-      name: _getTitle(folder),
+      name: folder.name,
       title: _getTitle(folder),
       category: folder.category,
       parent: folder.parent,

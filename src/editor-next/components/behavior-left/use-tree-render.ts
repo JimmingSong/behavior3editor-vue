@@ -36,7 +36,11 @@ export function useTreeRender() {
         const edit = h(NButton, {
             text: true,
             onClick() {
-                setFolderDialogShow({name: option.name, category, parent: isFolder ? option.name : undefined})
+                if (isFolder) {
+                    setFolderDialogShow({name: option.name, category, parent: isFolder ? option.name : undefined})
+                    return
+                }
+                setNodeDialogShow({name: option.name, category, parent: option.parent ?? ''})
             }
         }, {
             default: () => 'edit'
