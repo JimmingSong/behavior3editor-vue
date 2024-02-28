@@ -69,10 +69,11 @@ const handleClose = () => {
 const nodeForm = ref<Node>(new Node())
 const originalNode = shallowRef<Node>()
 
-const isUpdate = !!nodeData.value
+const isUpdate = !!nodeData.value?.name
 const active = () => {
   if (isUpdate) {
     const p = getProject(toValue(editor)).project.get()
+    console.log("nodeData.value?.name ------", nodeData.value?.name)
     const node = p.nodes.get(nodeData.value?.name)
     originalNode.value = node
     nodeForm.value = node?.copy()

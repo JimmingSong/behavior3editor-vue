@@ -11,14 +11,10 @@
       <n-icon size="22px" @click="projectHandle.handleRedo">
         <ArrowRedoOutline/>
       </n-icon>
-      <n-config-provider :theme="darkTheme">
-        <n-space>
-          <n-dropdown :options="projectOptions">项目</n-dropdown>
-          <n-dropdown :options="editOptions">编辑</n-dropdown>
-          <n-dropdown :options="viewOptions">视图</n-dropdown>
-          <n-dropdown :options="selectOptions">选择</n-dropdown>
-        </n-space>
-      </n-config-provider>
+      <n-dropdown :options="projectOptions">项目</n-dropdown>
+      <n-dropdown :options="editOptions">编辑</n-dropdown>
+      <n-dropdown :options="viewOptions">视图</n-dropdown>
+      <n-dropdown :options="selectOptions">选择</n-dropdown>
     </n-space>
   </div>
 </template>
@@ -29,7 +25,7 @@ import {SaveOutline, ArrowUndoOutline, ArrowRedoOutline} from '@vicons/ionicons5
 import {useCreateProject} from '../use-create-project.ts';
 import {useViewHook} from "../use-view-hook.ts";
 import {useSelectHook} from "../use-select-hook.ts";
-import {DropdownDividerOption, DropdownOption, darkTheme} from "naive-ui";
+import {DropdownDividerOption, DropdownOption} from "naive-ui";
 import {useBehaviorInject} from "../use-behavior-inject.ts";
 
 defineOptions({

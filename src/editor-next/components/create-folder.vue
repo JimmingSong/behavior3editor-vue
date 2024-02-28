@@ -48,8 +48,10 @@ const isShow = defineModel('isShow', {
 const folderForm = ref(new Folder())
 const originalFolder = shallowRef()
 
+const isUpdate = folderData.value.name
+
 const active = () => {
-  if (folderData.value.name) {
+  if (isUpdate) {
 
     const p = getProject(toValue(editor))
 
